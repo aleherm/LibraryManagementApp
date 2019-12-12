@@ -10,16 +10,16 @@ namespace DomainModel
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "The first name cannot be null.")]
-        [StringLength(100, MinimumLength = 5, ErrorMessage = "The length must be between 5 and 100.")]
+        [Required(ErrorMessage = ErrorMessages.AuthorFirstNameRequired)]
+        [MaxLength(50, ErrorMessage = ErrorMessages.FirstNameMaxLength)]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = "The last name cannot be null.")]
-        [StringLength(100, MinimumLength = 5, ErrorMessage = "The length must be between 5 and 100.")]
+        [Required(ErrorMessage = "The author's last name cannot be null.")]
+        [MaxLength(50, ErrorMessage = "The author's last name must have less that 50 characters.")]
         public string LastName { get; set; }
 
-        [Required(ErrorMessage = "The language cannot be null.")]
-        [StringLength(50, MinimumLength = 5, ErrorMessage = "The length must be between 5 and 50.")]
+        [Required(ErrorMessage = "The author's language cannot be null.")]
+        [MaxLength(50, ErrorMessage = "The author's language must have less than 50 characters.")]
         public string Language { get; set; }
         
         public DateTime DateOfBirth { get; set; }

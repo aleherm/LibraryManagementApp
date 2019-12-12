@@ -10,17 +10,17 @@ namespace DomainModel
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "The name cannot be null.")]
-        [StringLength(100, MinimumLength = 2, ErrorMessage = "The length must be between 2 and 100.")]
+        [Required(ErrorMessage = "The Book Title must be provided.")]
+        [MaxLength(100, ErrorMessage = "The Book Title length must have less than 100 characters.")]
         public string Title { get; set; }
 
-        [Required(ErrorMessage = "The book must have at least one edition.")]
+        [Required(ErrorMessage = "The book must have at least one Edition.")]
         public IList<Edition> Editions { get; set; }
 
-        [Required(ErrorMessage = "The book must have at least one author.")]
+        [Required(ErrorMessage = "The book must have at least one Author.")]
         public IList<Author> Authors { get; set; }
 
-        [Required(ErrorMessage = "The book must cover at least one domain.")]
+        [Required(ErrorMessage = "The Book must cover at least one domain / cannot be null.")]
         public IList<Domain> Domains { get; set; }
 
         public Book()

@@ -1,33 +1,79 @@
 ﻿using DomainModel;
 using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace TestDomainModel
 {
     [TestFixture]
     public class AuthorTest
     {
-        [TestCase]
-        public void AuthorFirstNameShouldHaveAtLeast5Characters()
+        private Author author;
+
+        [SetUp]
+        public void AuthorSetUp()
         {
-            Author author = new Author();
-            author.FirstName = "Alexandra";
-            Assert.IsTrue(author.FirstName.Length >= 5);
+            author = new Author()
+            {
+                FirstName = "John",
+                LastName = "Smith",
+                Language = "English",
+                DateOfBirth = new DateTime(1989, 10, 10),
+                DateOfDeath = new DateTime(2010, 1, 1)
+            };
         }
 
-        [TestCase]
-        public void AuthorLastNameShouldHaveAtLeast5Characters()
+        [Test]
+        public void FirstNameShouldNotBeNull()
         {
-            Author author = new Author();
-            author.LastName = "Hermeneanu";
-            Assert.IsTrue(author.LastName.Length >= 5);
+            author.FirstName = null;
+
+            var context = new ValidationContext(author, serviceProvider: null, items: null);
+            var results = new List<ValidationResult>();
+
+            bool isValid = Validator.TryValidateObject(author, context, results);
+
+            Assert.IsFalse(isValid);
         }
 
-        [TestCase]
-        public void AuthorLanguageShouldHaveAtLeast5Characters()
+        [Test]
+        public void LastNameShouldNotBeNull()
         {
-            Author author = new Author();
-            author.Language = "Romanian";
-            Assert.IsTrue(author.Language.Length >= 5);
+            author.LastName = null;
+
+            var context = new ValidationContext(author, serviceProvider: null, items: null);
+            var results = new List<ValidationResult>();
+
+            bool isValid = Validator.TryValidateObject(author, context, results);
+
+            Assert.IsFalse(isValid);
+        }
+
+        [Test]
+        public void LanguageShouldNotBeNull()
+        {
+            author.Language = null;
+
+            var context = new ValidationContext(author, serviceProvider: null, items: null);
+            var results = new List<ValidationResult>();
+
+            bool isValid = Validator.TryValidateObject(author, context, results);
+
+            Assert.IsFalse(isValid);
+        }
+
+        [Test]
+        public void FirstNameShouldHaveLessThan50Chars()
+        {
+            author.FirstName = new string('a', 51);
+
+            var context = new ValidationContext(author, serviceProvider: null, items: null);
+            var results = new List<ValidationResult>();
+
+            bool isValid = Validator.TryValidateObject(author, context, results);
+
+            Assert.IsFalse(isValid);
         }
     }
 }

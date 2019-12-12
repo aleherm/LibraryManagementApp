@@ -1,10 +1,7 @@
 ﻿using DomainModel;
-using Microsoft.Practices.EnterpriseLibrary.Validation;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace LibraryManagementApp
 {
@@ -14,28 +11,36 @@ namespace LibraryManagementApp
         {
             Edition edition = new Edition
             {
-                PageNumber = 100,
+                Id = 1,
+                PageNumber = -100,
                 Year = 2019,
                 BookType = EBookType.EHardCover,
-                Publisher = "aa",
+                Publisher = "",
                 NoTotal = 10,
                 NoForLibrary = 2,
                 NoForLoan = 8
             };
 
-            var validationResults = Validation.Validate(edition);
-            if (validationResults.Count > 0)
+
+            Borrower borrower = new Borrower()
             {
-                foreach (var result in validationResults)
+                FirstName = "a",
+                LastName = "b",
+                Email = "abc"
+            };
+
+            var context = new ValidationContext(borrower);
+            var results = new List<ValidationResult>();
+
+            var isValid = Validator.TryValidateObject(borrower, context, results);
+
+            if (!isValid)
+            {
+                foreach (var validationResult in results)
                 {
-                    Console.WriteLine("Validation error: " + result.Message);
+                    Console.WriteLine(validationResult.ErrorMessage);
                 }
             }
-            else
-            {
-                Console.WriteLine("The object is valid");
-            }
-
         }
     }
 }

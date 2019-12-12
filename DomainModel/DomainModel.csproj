@@ -59,6 +59,7 @@
     <Compile Include="Author.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="Borrower.cs" />
+    <Compile Include="Constants\ErrorMessages.cs" />
     <Compile Include="Domain.cs" />
     <Compile Include="Edition.cs" />
     <Compile Include="Enums\EBookType.cs" />

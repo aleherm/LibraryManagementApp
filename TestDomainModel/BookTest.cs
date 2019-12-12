@@ -1,42 +1,64 @@
 ﻿using DomainModel;
 using NUnit.Framework;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace TestDomainModel
 {
     [TestFixture]
     public class BookTest
     {
-        [TestCase]
-        public void BookTitleShouldHaveAtLeast2Characters()
+        private Book book;
+        private ValidationContext context;
+        private IList<ValidationResult> results;
+
+        [SetUp]
+        public void BookSetUp()
         {
-            Book book = new Book();
-            string title = "Zelda";
-            book.Title = title;
-            Assert.IsTrue(book.Title.Length >= 2);
+            book = new Book()
+            {
+                Id = 1,
+                Title = "I don't like you"
+            };
+
+            context = new ValidationContext(book, serviceProvider: null, items: null);
+            results = new List<ValidationResult>();
         }
 
         [TestCase]
-        public void BookTitleShouldNotHaveLessThan2Characters()
+        public void BookTitleShouldNotBeNull()
         {
-            Book book = new Book();
-            book.Title = "Z";
-            Assert.IsFalse(book.Title.Length >= 2);
+            book.Title = null;
+           
+            bool isValid = Validator.TryValidateObject(book, context, results);
+
+            Assert.IsFalse(isValid);
         }
 
         [TestCase]
-        public void BookShouldHaveAtLeast1Edition()
+        public void BookEditionListShouldNotBeNull()
         {
-            Book book = new Book();
-            book.Editions.Add(new Edition());
             Assert.NotNull(book.Editions);
         }
 
         [TestCase]
-        public void BookShouldHaveAtLeast1Author()
+        public void BookAuthorListShouldNotBeNull()
         {
-            Book book = new Book();
-            book.Authors.Add(new Author());
-            Assert.NotNull(book.Authors);
+            book.Authors = null;
+
+            bool isValid = Validator.TryValidateObject(book, context, results);
+
+            Assert.IsFalse(isValid);
+        }
+
+        [TestCase]
+        public void BookDomainListShouldNotBeNull()
+        {
+            book.Domains = null;
+
+            bool isValid = Validator.TryValidateObject(book, context, results);
+
+            Assert.IsFalse(isValid);
         }
     }
 }

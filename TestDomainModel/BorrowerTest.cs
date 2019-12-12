@@ -1,11 +1,7 @@
 ﻿using DomainModel;
 using NUnit.Framework;
-using System;
-using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace TestDomainModel
 {
@@ -13,6 +9,9 @@ namespace TestDomainModel
     public class BorrowerTest
     {
         private Borrower borrower;
+        private ValidationContext context;
+        private IList<ValidationResult> results;
+
         [SetUp]
         public void SetUpBorrower()
         {
@@ -20,35 +19,61 @@ namespace TestDomainModel
             {
                 Id = 1,
                 FirstName = "Alexandra",
-                LastName = "Hermeneanu"
-
+                LastName = "Hermeneanu",
+                Email = "ale.herm@email.com",
+                Gender = EGenderType.EFemale,
+                Address = new Address(),
+                Loans = new List<Loan> { new Loan() },
+                ReaderFlg = 1,
+                LibrarianFlg = 0
             };
+
+            context = new ValidationContext(borrower, serviceProvider: null, items: null);
+            results = new List<ValidationResult>();
         }
 
         [Test]
-        public void FirstNameShouldHaveMoreThan2Characters()
+        public void FirstNameShouldNotBeEmpty()
         {
-            Assert.GreaterOrEqual(borrower.FirstName.Length, 2);
+            Assert.IsNotEmpty(borrower.FirstName);
         }
 
         [Test]
-        public void FirstNameShouldNotHaveLessThan2Characters()
+        public void LastNameShouldNotBeEmpty()
         {
-            borrower.FirstName = "Jo";
-            Assert.IsFalse(borrower.FirstName.Length > 2);
+            Assert.IsNotEmpty(borrower.LastName);
         }
 
         [Test]
-        public void LastNameShouldHaveMoreThan2Characters()
+        public void FirstNameShouldNotBeNull()
         {
-            Assert.GreaterOrEqual(borrower.LastName.Length, 2);
+            borrower.FirstName = null;
+
+            bool isValid = Validator.TryValidateObject(borrower, context, results);
+
+            Assert.IsFalse(isValid);
         }
 
         [Test]
-        public void LastNameShouldNotHaveLessThan2Characters()
+        public void LastNameShouldNotBeNull()
         {
-            borrower.LastName = "Mo";
-            Assert.IsFalse(borrower.LastName.Length > 2);
+            borrower.LastName = null;
+
+            bool isValid = Validator.TryValidateObject(borrower, context, results);
+
+            Assert.IsFalse(isValid);
         }
+
+        //[Test]
+        //public void FirstNameShouldHaveLessThan50Characters()
+        //{
+        //    borrower.FirstName = "Ctdurrsxouepqyxywgbxauksyoyrphtmqclmuekmuhwpkuznqpqaa";
+        //    var context = new ValidationContext(borrower, serviceProvider: null, items: null);
+        //    var results = new List<ValidationResult>();
+
+        //    bool isValid = Validator.TryValidateObject(borrower, context, results);
+
+        //    Assert.IsFalse(isValid);
+        //}
     }
 }
