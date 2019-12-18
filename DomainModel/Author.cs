@@ -25,5 +25,10 @@ namespace DomainModel
         public DateTime DateOfBirth { get; set; }
 
         public DateTime DateOfDeath { get; set; }
+
+        public Author()
+        {
+
+        }
     }
 }

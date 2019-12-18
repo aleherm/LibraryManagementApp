@@ -33,7 +33,7 @@ namespace DomainModel
         public const string PublisherMaxLength = "The Publisher name must have less than 50 characters.";
 
         // Range
-        public const string PageNumberRange = "The Page Number must be between 0 an 5000.";
+        public const string PageNumberRange = "The Page Number must be between 5 an 5000.";
 
     }
 }

@@ -1,7 +1,9 @@
-﻿using DomainModel;
+﻿using DataMapper;
+using DomainModel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.Validation;
 
 namespace LibraryManagementApp
 {
@@ -12,33 +14,34 @@ namespace LibraryManagementApp
             Edition edition = new Edition
             {
                 Id = 1,
-                PageNumber = -100,
+                PageNumber = 10,
                 Year = 2019,
                 BookType = EBookType.EHardCover,
-                Publisher = "",
+                Publisher = "Al",
                 NoTotal = 10,
                 NoForLibrary = 2,
                 NoForLoan = 8
             };
-
-
-            Borrower borrower = new Borrower()
+            
+            try
             {
-                FirstName = "a",
-                LastName = "b",
-                Email = "abc"
-            };
-
-            var context = new ValidationContext(borrower);
-            var results = new List<ValidationResult>();
-
-            var isValid = Validator.TryValidateObject(borrower, context, results);
-
-            if (!isValid)
-            {
-                foreach (var validationResult in results)
+                using (var ctx = new LibraryDBContext())
                 {
-                    Console.WriteLine(validationResult.ErrorMessage);
+                    ctx.Editions.Add(edition);
+                    ctx.SaveChanges();
+                }
+            }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
                 }
             }
         }

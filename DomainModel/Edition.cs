@@ -11,7 +11,7 @@ namespace DomainModel
     {
         public int Id { get; set; }
 
-        [Range(0, 5000, ErrorMessage = ErrorMessages.PageNumberRange)]
+        [Range(5, 5000, ErrorMessage = ErrorMessages.PageNumberRange)]
         public int PageNumber { get; set; }
         
         public int Year { get; set; }
@@ -19,7 +19,8 @@ namespace DomainModel
         public EBookType BookType { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.PublisherRequired)]
-        [MaxLength(50, ErrorMessage = ErrorMessages.PublisherMaxLength)]
+        //[MaxLength(50, ErrorMessage = ErrorMessages.PublisherMaxLength)]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = "The length must be between 3 and 100")]
         public string Publisher { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.NoBooksForLibraryRequired)]
@@ -30,5 +31,10 @@ namespace DomainModel
 
         [Required(ErrorMessage = ErrorMessages.NoTotalBooksRequired)]
         public int NoTotal { get; set; }
+
+        public Edition()
+        {
+
+        }
     }
 }

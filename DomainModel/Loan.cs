@@ -19,5 +19,10 @@ namespace DomainModel
 
         [Required(ErrorMessage = "The name of the borrower must pe provided")]
         public Borrower Borrower { get; set; }
+
+        public Loan()
+        {
+
+        }
     }
 }

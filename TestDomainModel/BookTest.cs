@@ -60,5 +60,23 @@ namespace TestDomainModel
 
             Assert.IsFalse(isValid);
         }
+
+        //[TestCase]
+        //public void CheckEntityValidationErrors()
+        //{
+        //    MyEntityObject myEntityObject = new MyEntityObject();
+        //    myEntityObject.myProperty = "1234567890";
+
+        //    var dbContext = new DbContext(MyEntityObject, true);
+
+        //    int errors = dbContext.GetValidationErrors().Count();
+
+        //    IEnumerable<DbEntityValidationResult> validationResults =
+        //                                             dbContext.GetValidationErrors();
+        //    DbValidationError validationError = validationResults.First().ValidationErrors.First();
+
+        //    Assert.AreEqual(1, errors);
+        //    Assert.AreEqual("myProperty", validationError.PropertyName);
+        //}
     }
 }
