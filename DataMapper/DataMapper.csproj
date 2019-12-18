@@ -55,7 +55,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LibraryDBContext.cs" />
+    <Compile Include="DAL\BaseRepository.cs" />
+    <Compile Include="DAL\LibraryDBContext.cs" />
+    <Compile Include="DAL\EditionRepository.cs" />
+    <Compile Include="Interfaces\DataAccess\IEditionRepository.cs" />
+    <Compile Include="Interfaces\DataAccess\IRepository.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

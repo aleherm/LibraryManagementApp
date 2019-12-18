@@ -1,8 +1,6 @@
 ﻿using DataMapper;
 using DomainModel;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Data.Entity.Validation;
 
 namespace LibraryManagementApp
@@ -13,22 +11,25 @@ namespace LibraryManagementApp
         {
             Edition edition = new Edition
             {
-                Id = 1,
-                PageNumber = 10,
-                Year = 2019,
-                BookType = EBookType.EHardCover,
-                Publisher = "Al",
-                NoTotal = 10,
-                NoForLibrary = 2,
-                NoForLoan = 8
+                PageNumber = 150,
+                Year = 2016,
+                BookType = EBookType.EPaperBack,
+                Publisher = "Humanitas",
+                NoTotal = 2,
+                NoForLibrary = 1,
+                NoForLoan = 1
             };
-            
+
             try
             {
-                using (var ctx = new LibraryDBContext())
+                IEditionRepository editionRepo = new EditionRepository();
+                editionRepo.Insert(edition);
+                
+                var items = editionRepo.Get();
+
+                foreach (var item in items)
                 {
-                    ctx.Editions.Add(edition);
-                    ctx.SaveChanges();
+                    Console.WriteLine(item.Publisher);
                 }
             }
             catch (DbEntityValidationException e)
