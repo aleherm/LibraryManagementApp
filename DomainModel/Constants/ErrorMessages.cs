@@ -9,31 +9,51 @@ namespace DomainModel
     public static class ErrorMessages
     {
         // Required
-        public const string AuthorFirstNameRequired = "The author's First Name must be provided.";
-        public const string AuthorLastNameRequired = "The author's Last Name must be provided.";
-        public const string BorrowerFirstNameRequired = "The borrower's First Name must be provided.";
-        public const string BorrowerLastNameRequired = "The borrower's Last Name must be provided.";
+        public const string BookTitleRequired = "The Book Title must be provided.";
+        public const string BorrowerFirstNameRequired = "The borrower's FirstName must be provided.";
+        public const string BorrowerLastNameRequired = "The borrower's LastName must be provided.";
+        public const string CityNameRequired = "The City name must be provided.";
+        public const string DomainNameRequired = "The DomainName must be provided";
         public const string EmailRequired = "The borrower's Email must be provided";
-        public const string DomainNameRequired = "The Domain Name must be provided";
-        public const string NoBooksForLibraryRequired = "The Number of Books available for library reading must be provided";
-        public const string NoBooksForLoanRequired = "The Number of Books available for loan purposes must be provided";
-        public const string NoTotalBooksRequired = "The Total Number of books must be provided";
-        public const string LoanDateRequired = "The Loan Date must be provided";
-        public const string PublisherRequired = "The Publisher Name must be provided.";
+        public const string FirstNameRequired = "The person's First Name must be provided.";
+        public const string HouseNumberRequired = "The house Number must be provided.";
+        public const string LanguageRequired = "The Language must be provided.";
+        public const string LastNameRequired = "The person's Last Name must be provided.";
+        public const string LoanDateRequired = "The LoanDate must be provided";
+        public const string NoBooksForLibraryRequired = "The NoBooks available for library reading must be provided";
+        public const string NoBooksForLoanRequired = "The NoBooks available for loan purposes must be provided";
+        public const string NoTotalBooksRequired = "The NoTotal of books must be provided";
+        public const string PublisherRequired = "The PublisherName must be provided.";
+        public const string StreetNameRequired = "The Street name must be provided.";
 
+        public const string AuthorRequired = "The Author list cannot be null.";
+        public const string DomainRequired = "The Domain list cannot be null.";
         public const string LoanRequired = "The Loan list cannot be null.";
-        public const string ReaderFlagRequired = "The Reader Flag cannot be null.";
-        public const string LibrarianFlagRequired = "The Librarian Flag cannot be null.";
+        public const string EditionRequired = "The Edition list cannot be null.";
+        public const string ReaderFlagRequired = "The ReaderFlag cannot be null.";
+        public const string LibrarianFlagRequired = "The LibrarianFlag cannot be null.";
+
+        public const string AuthorsListRequireAtLeastOneObject = "The Authors list must have at least one object of type Author.";
+        public const string DomainsListRequireAtLeastOneObject = "The Domains list must have at least one object of type Domain.";
+        public const string EditionsListRequireAtLeastOneObject = "The Editions list must have at least one object of type Edition.";
 
         // Length
-        public const string FirstNameMaxLength = "The First Name must have less that 50 characters.";
-        public const string LastNameMaxLength = "The Last Name must have less that 50 characters.";
-        public const string EmailMaxLength = "The borrower's email must have less than 50 characters";
-        public const string DomainMaxLength = "The Domain Name must have less than 100 characters";
-        public const string PublisherMaxLength = "The Publisher name must have less than 50 characters.";
+        public const string BookTitleRangeLength = "The Book Title must have between 2 and 100 characters.";
+        public const string FirstNameRangeLength = "The person's First Name must have between 2 and 50 characters.";
+        public const string LastNameRangeLength = "The person's Last Name must have between 2 and 50 characters.";
+        public const string EmailMaxLength = "The borrower's Email must have less than 50 characters";
+        public const string DomainMaxLength = "The DomainName must have less than 100 characters";
+        public const string PublisherMaxLength = "The Publisher must have less than 50 characters.";
+        public const string StreetLength = "The Street name must have between 2 and 50 characters.";
+        public const string LanguageRangeLength = "The Language name must have between 2 and 50 characters.";
 
         // Range
-        public const string PageNumberRange = "The Page Number must be between 5 an 5000.";
+        public const string PageNumberRange = "The PageNumber must be between 5 an 5000.";
+        public const string HouseNumberRange = "The Number of the house must be between 1 an 5000.";
+        public const string CityRangeLength = "The City name must have between 5 and 50 characters.";
 
+        // other
+        public const string InvalidDate = "Invalid date";
+        public const string InvalidEmail = "Invalid email";
     }
 }

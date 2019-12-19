@@ -8,16 +8,16 @@ namespace DomainModel
     {
         public int Id { get; set; }
 
-        [Required(ErrorMessage = ErrorMessages.BorrowerFirstNameRequired)]
-        [MaxLength(50, ErrorMessage = ErrorMessages.FirstNameMaxLength)]
+        [Required(ErrorMessage = ErrorMessages.FirstNameRequired)]
+        [MaxLength(50, ErrorMessage = ErrorMessages.FirstNameRangeLength)]
         public string FirstName { get; set; }
 
-        [Required(ErrorMessage = ErrorMessages.BorrowerLastNameRequired)]
-        [MaxLength(50, ErrorMessage = ErrorMessages.LastNameMaxLength)]
+        [Required(ErrorMessage = ErrorMessages.LastNameRequired)]
+        [MaxLength(50, ErrorMessage = ErrorMessages.LastNameRangeLength)]
         public string LastName { get; set; }
         
         [Required(ErrorMessage = ErrorMessages.EmailRequired)]
-        [MaxLength(50, ErrorMessage = ErrorMessages.EmailMaxLength)]
+        [EmailAddress(ErrorMessage = ErrorMessages.InvalidEmail)]
         public string Email { get; set; }
 
         public EGenderType Gender { get; set; }
@@ -30,10 +30,10 @@ namespace DomainModel
         public IList<Loan> Loans { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.ReaderFlagRequired)]
-        public int ReaderFlg { get; set; }
+        public int? ReaderFlg { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.LibrarianFlagRequired)]
-        public int LibrarianFlg { get; set; }
+        public int? LibrarianFlg { get; set; }
 
         public Borrower()
         {

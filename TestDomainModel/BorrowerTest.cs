@@ -8,9 +8,25 @@ namespace TestDomainModel
     [TestFixture]
     public class BorrowerTest
     {
+        #region [ Declarations ]
+        /// <summary>
+        /// Borrower object to test.
+        /// </summary>
         private Borrower borrower;
+
+        /// <summary>
+        /// The BOrrower validation context.
+        /// </summary>
         private ValidationContext context;
-        private IList<ValidationResult> results;
+
+        /// <summary>
+        /// Validation errors returned.
+        /// </summary>
+        private IList<ValidationResult> validationResults;
+
+        #endregion
+
+        #region [ Setup ]
 
         [SetUp]
         public void SetUpBorrower()
@@ -28,9 +44,13 @@ namespace TestDomainModel
                 LibrarianFlg = 0
             };
 
-            context = new ValidationContext(borrower, serviceProvider: null, items: null);
-            results = new List<ValidationResult>();
+            context = new ValidationContext(borrower);
+            validationResults = new List<ValidationResult>();
         }
+
+        #endregion
+
+        #region [ Not Empty Tests ]
 
         [Test]
         public void FirstNameShouldNotBeEmpty()
@@ -44,14 +64,22 @@ namespace TestDomainModel
             Assert.IsNotEmpty(borrower.LastName);
         }
 
+        #endregion
+
+        #region [ Required Tests ]
+
         [Test]
         public void FirstNameShouldNotBeNull()
         {
             borrower.FirstName = null;
 
-            bool isValid = Validator.TryValidateObject(borrower, context, results);
+            var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
 
-            Assert.IsFalse(isValid);
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.FirstNameRequired, msg.ErrorMessage);
         }
 
         [Test]
@@ -59,21 +87,75 @@ namespace TestDomainModel
         {
             borrower.LastName = null;
 
-            bool isValid = Validator.TryValidateObject(borrower, context, results);
+            var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
 
-            Assert.IsFalse(isValid);
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.LastNameRequired, msg.ErrorMessage);
         }
 
-        //[Test]
-        //public void FirstNameShouldHaveLessThan50Characters()
-        //{
-        //    borrower.FirstName = "Ctdurrsxouepqyxywgbxauksyoyrphtmqclmuekmuhwpkuznqpqaa";
-        //    var context = new ValidationContext(borrower, serviceProvider: null, items: null);
-        //    var results = new List<ValidationResult>();
+        [Test]
+        public void EmailShouldNotBeNull()
+        {
+            borrower.Email = null;
 
-        //    bool isValid = Validator.TryValidateObject(borrower, context, results);
+            var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
 
-        //    Assert.IsFalse(isValid);
-        //}
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.EmailRequired, msg.ErrorMessage);
+        }
+
+        [Test]
+        public void LoanListShouldNotBeNull()
+        {
+            borrower.Loans = null;
+
+            var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.LoanRequired, msg.ErrorMessage);
+        }
+
+        [Test]
+        public void ReaderFlagShouldNotBeNull()
+        {
+            borrower.ReaderFlg = null;
+
+            var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.ReaderFlagRequired, msg.ErrorMessage);
+        }
+
+        [Test]
+        public void LibrarianFlagShouldNotBeNull()
+        {
+            borrower.LibrarianFlg = null;
+
+            var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.LibrarianFlagRequired, msg.ErrorMessage);
+        }
+
+        #endregion
+
+        #region [ First Name Tests ]
+
+        #endregion
     }
 }

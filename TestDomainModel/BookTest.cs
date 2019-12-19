@@ -1,5 +1,6 @@
 ﻿using DomainModel;
 using NUnit.Framework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -8,37 +9,106 @@ namespace TestDomainModel
     [TestFixture]
     public class BookTest
     {
+        #region [ Declarations ]
+        /// <summary>
+        /// Book object to test.
+        /// </summary>
         private Book book;
+
+        /// <summary>
+        /// The Address validation context.
+        /// </summary>
         private ValidationContext context;
-        private IList<ValidationResult> results;
+
+        /// <summary>
+        /// Validation errors returned.
+        /// </summary>
+        private IList<ValidationResult> validationResults;
+
+        #endregion
+
+        #region [ Setup }
 
         [SetUp]
         public void BookSetUp()
         {
             book = new Book()
             {
-                Id = 1,
-                Title = "I don't like you"
+                Title = "Something",
+                Authors = new List<Author>
+                {
+                    new Author()
+                    {
+                        FirstName = "John",
+                        LastName = "Smith",
+                        Language = "English",
+                        DateOfBirth = new DateTime(1989, 10, 10),
+                        DateOfDeath = new DateTime(2010, 1, 1)
+                    }
+                },
+                Editions = new List<Edition>
+                {
+                    new Edition()
+                    {
+                        PageNumber = 100,
+                        Year = 2019,
+                        BookType = EBookType.EHardCover,
+                        Publisher = "Humanitas",
+                        NoTotal = 10,
+                        NoForLibrary = 2,
+                        NoForLoan = 8
+                    }
+                },
+                Domains = new List<Domain>
+                {
+                    new Domain()
+                    {
+                        DomainName = "Math",
+                        ParentDomain = new Domain()
+                        {
+                            DomainName = "Science",
+                            ParentDomain = null
+                        }
+                    }
+                }
             };
 
-            context = new ValidationContext(book, serviceProvider: null, items: null);
-            results = new List<ValidationResult>();
+            context = new ValidationContext(book);
+            validationResults = new List<ValidationResult>();
         }
+
+        #endregion
+
+        #region [ Required ]
 
         [TestCase]
         public void BookTitleShouldNotBeNull()
         {
             book.Title = null;
-           
-            bool isValid = Validator.TryValidateObject(book, context, results);
 
-            Assert.IsFalse(isValid);
+            var actual = Validator.TryValidateObject(book, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.BookTitleRequired, msg.ErrorMessage);
         }
 
         [TestCase]
         public void BookEditionListShouldNotBeNull()
         {
-            Assert.NotNull(book.Editions);
+            book.Editions = null;
+
+            var actual = Validator.TryValidateObject(book, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.EditionRequired, msg.ErrorMessage);
+
+            Assert.IsNull(book.Editions, "Edition list expected to be null");
         }
 
         [TestCase]
@@ -46,9 +116,15 @@ namespace TestDomainModel
         {
             book.Authors = null;
 
-            bool isValid = Validator.TryValidateObject(book, context, results);
+            var actual = Validator.TryValidateObject(book, context, validationResults, true);
 
-            Assert.IsFalse(isValid);
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.AuthorRequired, msg.ErrorMessage);
+
+            Assert.IsNull(book.Authors, "Authors list expected to be null");
         }
 
         [TestCase]
@@ -56,10 +132,113 @@ namespace TestDomainModel
         {
             book.Domains = null;
 
-            bool isValid = Validator.TryValidateObject(book, context, results);
+            var actual = Validator.TryValidateObject(book, context, validationResults, true);
 
-            Assert.IsFalse(isValid);
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.DomainRequired, msg.ErrorMessage);
+
+            Assert.IsNull(book.Domains, "Domains lsit expected to be null");
         }
+
+        #endregion
+
+        #region [ Title Tests ] 
+
+        [Test]
+        public void BookShouldNotHaveLessThan2Characters()
+        {
+            book.Title = "X";
+
+            bool actual = Validator.TryValidateObject(book, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void TitleBetween2And50CharactersShouldBeValid()
+        {
+            bool actual = Validator.TryValidateObject(book, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void TitleShouldNotHaveMoreThan100Characters()
+        {
+            book.Title = new string('x', 101);
+
+            bool actual = Validator.TryValidateObject(book, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        #endregion
+
+        #region [ Authors Tests ]
+
+        [Test]
+        public void AuthorListShouldHaveAtLeastOneAuthor()
+        {
+            book.Authors = new List<Author>();
+
+            bool actual = Validator.TryValidateObject(book, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.AuthorsListRequireAtLeastOneObject, msg.ErrorMessage);
+        }
+
+        #endregion
+
+        #region [ Domains Tests ]
+
+        [Test]
+        public void DomainListShouldHaveAtLeastOneAuthor()
+        {
+            book.Domains = new List<Domain>();
+
+            bool actual = Validator.TryValidateObject(book, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.DomainsListRequireAtLeastOneObject, msg.ErrorMessage);
+        }
+
+        #endregion
+
+        #region [ Editions Tests ]
+
+        [Test]
+        public void EditionListShouldHaveAtLeastOneAuthor()
+        {
+            book.Editions = new List<Edition>();
+
+            bool actual = Validator.TryValidateObject(book, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.EditionsListRequireAtLeastOneObject, msg.ErrorMessage);
+        }
+
+        #endregion
 
         //[TestCase]
         //public void CheckEntityValidationErrors()
