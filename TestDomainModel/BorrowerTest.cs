@@ -15,7 +15,7 @@ namespace TestDomainModel
         private Borrower borrower;
 
         /// <summary>
-        /// The BOrrower validation context.
+        /// The Borrower validation context.
         /// </summary>
         private ValidationContext context;
 
@@ -40,8 +40,8 @@ namespace TestDomainModel
                 Gender = EGenderType.EFemale,
                 Address = new Address(),
                 Loans = new List<Loan> { new Loan() },
-                ReaderFlg = 1,
-                LibrarianFlg = 0
+                ReaderFlg = true,
+                LibrarianFlg = false
             };
 
             context = new ValidationContext(borrower);
@@ -83,7 +83,7 @@ namespace TestDomainModel
         }
 
         [Test]
-        public void LastNameShouldNotBeNull()
+        public void LastNameShouldNotBeValid()
         {
             borrower.LastName = null;
 
@@ -124,10 +124,14 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LoanRequired, msg.ErrorMessage);
         }
 
+        #endregion
+
+        #region [ FirstName Tests ]
+
         [Test]
-        public void ReaderFlagShouldNotBeNull()
+        public void FirstNameShouldNotHaveMoreThan50Chars()
         {
-            borrower.ReaderFlg = null;
+            borrower.FirstName = new string('a', 51);
 
             var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
 
@@ -135,13 +139,13 @@ namespace TestDomainModel
             Assert.IsFalse(actual, "Expected validation to fail.");
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
             var msg = validationResults[0];
-            Assert.AreEqual(ErrorMessages.ReaderFlagRequired, msg.ErrorMessage);
+            Assert.AreEqual(ErrorMessages.FirstNameRangeLength, msg.ErrorMessage);
         }
 
-        [Test]
-        public void LibrarianFlagShouldNotBeNull()
+        [Test, Sequential]
+        public void FirstNameShouldNotHaveNoCharsOutsideRange([Values("A", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")] string name)
         {
-            borrower.LibrarianFlg = null;
+            borrower.FirstName = name;
 
             var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
 
@@ -149,12 +153,49 @@ namespace TestDomainModel
             Assert.IsFalse(actual, "Expected validation to fail.");
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
             var msg = validationResults[0];
-            Assert.AreEqual(ErrorMessages.LibrarianFlagRequired, msg.ErrorMessage);
+            Assert.AreEqual(ErrorMessages.FirstNameRangeLength, msg.ErrorMessage);
         }
 
         #endregion
 
-        #region [ First Name Tests ]
+        #region [ Email Tests ] 
+
+        [Test]
+        public void EmailShouldNotBeEmpty()
+        {
+            borrower.Email = "";
+
+            var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void EmailShouldBeValid()
+        {
+            var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void EmailShouldNotBeValid()
+        {
+            borrower.Email = "ale.herm";
+
+            var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.InvalidEmail, msg.ErrorMessage);
+        }
 
         #endregion
     }

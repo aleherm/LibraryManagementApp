@@ -9,11 +9,11 @@ namespace DomainModel
         public int Id { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.FirstNameRequired)]
-        [MaxLength(50, ErrorMessage = ErrorMessages.FirstNameRangeLength)]
+        [StringLength(50, ErrorMessage = ErrorMessages.FirstNameRangeLength, MinimumLength = 2)]
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.LastNameRequired)]
-        [MaxLength(50, ErrorMessage = ErrorMessages.LastNameRangeLength)]
+        [StringLength(50, ErrorMessage = ErrorMessages.FirstNameRangeLength, MinimumLength = 2)]
         public string LastName { get; set; }
         
         [Required(ErrorMessage = ErrorMessages.EmailRequired)]
@@ -30,10 +30,10 @@ namespace DomainModel
         public IList<Loan> Loans { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.ReaderFlagRequired)]
-        public int? ReaderFlg { get; set; }
+        public bool ReaderFlg { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.LibrarianFlagRequired)]
-        public int? LibrarianFlg { get; set; }
+        public bool LibrarianFlg { get; set; }
 
         public Borrower()
         {

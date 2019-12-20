@@ -32,20 +32,24 @@ namespace DomainModel
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if(Authors != null  && Authors.Count == 0)
+            List<string> memberNames = new List<string>();
+
+            if (Authors != null && Authors.Count == 0)
             {
-                yield return new ValidationResult(ErrorMessages.AuthorsListRequireAtLeastOneObject, new List<string> { "Authors" });
+                memberNames.Add("Authors");
             }
 
             if (Domains != null && Domains.Count == 0)
             {
-                yield return new ValidationResult(ErrorMessages.DomainsListRequireAtLeastOneObject, new List<string> { "Domains" });
+                memberNames.Add("Domains");
             }
 
             if (Editions != null && Editions.Count == 0)
             {
-                yield return new ValidationResult(ErrorMessages.EditionsListRequireAtLeastOneObject, new List<string> { "Editions" });
+                memberNames.Add("Editions");
             }
+
+            yield return new ValidationResult(ErrorMessages.AuthorsListRequireAtLeastOneObject, memberNames);
         }
     }
 }

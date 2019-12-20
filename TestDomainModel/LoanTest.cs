@@ -26,28 +26,28 @@ namespace TestDomainModel
                 Id = 1,
                 DueDate = new DateTime(2019, 2, 1),
                 ReturnDate = new DateTime(),
-                Borrower = new Borrower()
-                {
-                    FirstName = "Ioan",
-                    LastName = "Marian",
-                    Email = "ioan@marian.com",
-                    Gender = EGenderType.EMale,
-                    Loans = new List<Loan>()
-                }
+                //Borrower = new Borrower()
+                //{
+                //    FirstName = "Ioan",
+                //    LastName = "Marian",
+                //    Email = "ioan@marian.com",
+                //    Gender = EGenderType.EMale,
+                //    Loans = new List<Loan>()
+                //}
             };
 
             context = new ValidationContext(loan, serviceProvider: null, items: null);
             results = new List<ValidationResult>();
         }
 
-        [Test]
-        public void BorrowerShouldNotBeNull()
-        {
-            loan.Borrower = null;
+        //[Test]
+        //public void BorrowerShouldNotBeNull()
+        //{
+        //    loan.Borrower = null;
 
-            bool isValid = Validator.TryValidateObject(loan, context, results);
+        //    bool isValid = Validator.TryValidateObject(loan, context, results);
 
-            Assert.IsFalse(isValid);
-        }
+        //    Assert.IsFalse(isValid);
+        //}
     }
 }

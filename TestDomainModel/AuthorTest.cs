@@ -3,6 +3,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace TestDomainModel
 {
@@ -114,7 +115,7 @@ namespace TestDomainModel
         }
 
         [Test, Sequential]
-        public void FirstNameShouldNotHaveNoCharsOutsideRange([Values("A", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")] string name)
+        public void FirstNameShouldNotHaveNoCharsOutsideRange([Values("A", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")] string name)
         {
             author.FirstName = name;
 
@@ -139,7 +140,10 @@ namespace TestDomainModel
             // Assert
             Assert.IsTrue(actual, "Expected validation to pass.");
             Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+
             var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.InvalidDate, msg.ErrorMessage);
+            Assert.AreEqual(1, msg.MemberNames.Where(item => item == "DateOfBirth").Count());
         }
 
         [Test]
@@ -153,13 +157,10 @@ namespace TestDomainModel
             // Assert
             Assert.IsFalse(actual, "Expected validation to fail.");
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+
             var msg = validationResults[0];
             Assert.AreEqual(ErrorMessages.InvalidDate, msg.ErrorMessage);
-
-            foreach (string member in msg.MemberNames)
-            {
-                Assert.AreEqual("DateOfBirth", member, "Expected DateOfBirth to be invalid related to DateOfDeath.");
-            }
+            Assert.AreEqual(1, msg.MemberNames.Where(item => item == "DateOfBirth").Count());
         }
 
         #endregion
