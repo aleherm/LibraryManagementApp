@@ -32,7 +32,9 @@ namespace DomainModel
         public const string EditionRequired = "The Edition list cannot be null.";
         public const string ReaderFlagRequired = "The ReaderFlag cannot be null.";
         public const string LibrarianFlagRequired = "The LibrarianFlag cannot be null.";
+        public const string SubdomainRequired = "The Subdomain list cannot be null.";
 
+        public const string ListRequireAtLeastOneObject = "The list must have at least one object.";
         public const string AuthorsListRequireAtLeastOneObject = "The Authors list must have at least one object of type Author.";
         public const string DomainsListRequireAtLeastOneObject = "The Domains list must have at least one object of type Domain.";
         public const string EditionsListRequireAtLeastOneObject = "The Editions list must have at least one object of type Edition.";
@@ -42,8 +44,8 @@ namespace DomainModel
         public const string FirstNameRangeLength = "The person's First Name must have between 2 and 50 characters.";
         public const string LastNameRangeLength = "The person's Last Name must have between 2 and 50 characters.";
         public const string EmailMaxLength = "The borrower's Email must have less than 50 characters";
-        public const string DomainMaxLength = "The DomainName must have less than 100 characters";
-        public const string PublisherMaxLength = "The Publisher must have less than 50 characters.";
+        public const string DomainNameRangeLength = "The DomainName must have between 5 and 100 characters";
+        public const string PublisherRangeLength = "The Publisher must have between 3 and 50 characters.";
         public const string StreetLength = "The Street name must have between 2 and 50 characters.";
         public const string LanguageRangeLength = "The Language name must have between 2 and 50 characters.";
 
@@ -52,8 +54,13 @@ namespace DomainModel
         public const string HouseNumberRange = "The Number of the house must be between 1 an 5000.";
         public const string CityRangeLength = "The City name must have between 5 and 50 characters.";
 
+        public const string LibraryBooksRangeNumber = "The number of books for library must be  between 0 and 50.";
+        public const string LoanBooksRangeNumber = "The number of books for loan must be  between 0 and 50.";
+        public const string TotalBooksRangeNumber = "The total number of books must be  between 0 and 100.";
+
         // other
         public const string InvalidDate = "Invalid date";
         public const string InvalidEmail = "Invalid email";
+        public const string InvalidYear = "Invalid year";
     }
 }

@@ -49,7 +49,12 @@ namespace DomainModel
                 memberNames.Add("Editions");
             }
 
-            yield return new ValidationResult(ErrorMessages.AuthorsListRequireAtLeastOneObject, memberNames);
+            if (memberNames.Count != 0)
+            {
+                yield return new ValidationResult(ErrorMessages.ListRequireAtLeastOneObject, memberNames);
+            }
+
+            yield return null;
         }
     }
 }

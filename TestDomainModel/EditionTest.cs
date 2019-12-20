@@ -3,16 +3,37 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace TestDomainModel
 {
     [TestFixture]
     public class EditionTest
     {
-        private Edition edition;
-        private ValidationContext context;
-        private IList<ValidationResult> results;
+        #region [ Declarations ]
 
+        /// <summary>
+        /// Edition object to test.
+        /// </summary>
+        private Edition edition;
+
+        /// <summary>
+        /// The Borrower validation context.
+        /// </summary>
+        private ValidationContext context;
+
+        /// <summary>
+        /// Validation errors returned.
+        /// </summary>
+        private IList<ValidationResult> validationResults;
+
+        #endregion
+
+        #region [ Setup ]
+
+        /// <summary>
+        /// Sets up valid properties for the object to be tested.
+        /// </summary>
         [SetUp]
         public void SetUpEdition()
         {
@@ -27,67 +48,143 @@ namespace TestDomainModel
                 NoForLoan = 8
             };
 
-            context = new ValidationContext(edition, serviceProvider: null, items: null);
-            results = new List<ValidationResult>();
+            context = new ValidationContext(edition);
+            validationResults = new List<ValidationResult>();
         }
 
-        [Test]
-        public void PageNumberShouldBeGreaterThatZero()
-        {
-            Assert.Greater(edition.PageNumber, 0);
-        }
+        #endregion
 
-        [Test]
-        public void PageNumberShouldNotBeLessOrEqualThatZero()
-        {
-            edition.PageNumber = -1;
-            Assert.IsFalse(edition.PageNumber >= 0);
-        }
-
-        [Test]
-        public void YearShouldBeLessOrEqualThanCurrentYear()
-        {
-            Assert.LessOrEqual(edition.Year, DateTime.Now.Year);
-        }
-
-        [Test]
-        public void YearShouldNotBeLessOrEqualThatZero()
-        {
-            Assert.Greater(edition.Year, 0);
-        }
+        #region [ Required Tests ]
 
         [TestCase]
         public void PublisherNameShouldNotBeNull()
         {
             edition.Publisher = null;
 
-            bool isValid = Validator.TryValidateObject(edition, context, results);
+            bool isValid = Validator.TryValidateObject(edition, context, validationResults);
 
             Assert.IsFalse(isValid);
         }
 
-        [TestCase]
-        public void PublisherNameShouldNotHaveLessThan3Characters()
+        #endregion
+
+        #region [ Year Tests ]
+
+        [Test]
+        public void YearShouldNotBeLessOrEqualThatZero([Values(-50, -1, 0)] int year)
         {
-            //edition.Publisher = "a";
+            edition.Year = year;
 
-            //var dbContext = new DbContext(MyEntityObject, true);
+            var actual = Validator.TryValidateObject(edition, context, validationResults, true);
 
-            //int errors = dbContext.GetValidationErrors().Count();
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
 
-            //IEnumerable<DbEntityValidationResult> validationResults =
-            //                                         dbContext.GetValidationErrors();
-            //DbValidationError validationError = validationResults.First().ValidationErrors.First();
-
-            //Assert.AreEqual(1, errors);
-            //Assert.AreEqual("myProperty", validationError.PropertyName);
-
-            var actual = Validator.TryValidateObject(edition, context, results, validateAllProperties: true);
-
-            bool isValid = Validator.TryValidateObject(edition, context, results);
-
-            Assert.IsFalse(isValid);
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.InvalidYear, msg.ErrorMessage);
+            Assert.AreEqual(1, msg.MemberNames.Where(item => item == "Year").Count());
         }
+
+        [Test]
+        public void YearShouldNotBeBiggerThanCurrent()
+        {
+            edition.Year = DateTime.Now.Year + 1;
+
+            var actual = Validator.TryValidateObject(edition, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.InvalidYear, msg.ErrorMessage);
+            Assert.AreEqual(1, msg.MemberNames.Where(item => item == "Year").Count());
+        }
+
+        #endregion
+
+        #region [ PageNumber Tests ]
+        
+        [Test]
+        public void PageNumberWithinRangeShouldBeValid([Values(5, 100, 4000)] int pages)
+        {
+            edition.PageNumber = pages;
+
+            var actual = Validator.TryValidateObject(edition, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to fail.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void PageNumberShouldNotBeSmallerThan5([Values(-1, 0, 4)] int pages)
+        {
+            edition.PageNumber = pages;
+
+            var actual = Validator.TryValidateObject(edition, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        #endregion
+
+        #region [ Publisher Tests ]
+
+        [Test]
+        public void PublisherNameShouldNotHaveLessThan3Characters([Values("x", "xx")] string name)
+        {
+            edition.Publisher = name;
+
+            var actual = Validator.TryValidateObject(edition, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.PublisherRangeLength, msg.ErrorMessage);
+        }
+
+        [Test]
+        public void PublisherNameShouldBevalidWithNoCharsWithinRange([Values("Amintiri din copilarie", "Morometii", "XoXo")] string name)
+        {
+            edition.Publisher = name;
+
+            var actual = Validator.TryValidateObject(edition, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void PublisherShouldNotHaveMoreThan100Chars()
+        {
+            edition.Publisher = new string('x', 101);
+
+            var actual = Validator.TryValidateObject(edition, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.PublisherRangeLength, msg.ErrorMessage);
+        }
+
+        #endregion
+
+        #region [ NoForLibrary ]
+
+        #endregion
+
+        #region [ NoForLoan ]
+
+        #endregion
+
+        #region [ NoTotal ]
 
         [TestCase]
         public void NoTotalShouldNotBeSumOfLoanAndLibraryBooksNumber()
@@ -98,5 +195,7 @@ namespace TestDomainModel
 
             Assert.AreEqual(edition.NoForLibrary + edition.NoForLoan, edition.NoTotal);
         }
+
+        #endregion
     }
 }

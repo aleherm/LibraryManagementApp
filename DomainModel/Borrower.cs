@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace DomainModel
 {
-    public class Borrower
+    public class Borrower : IValidatableObject
     {
         public int Id { get; set; }
 
@@ -13,7 +13,7 @@ namespace DomainModel
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.LastNameRequired)]
-        [StringLength(50, ErrorMessage = ErrorMessages.FirstNameRangeLength, MinimumLength = 2)]
+        [StringLength(50, ErrorMessage = ErrorMessages.LastNameRangeLength, MinimumLength = 2)]
         public string LastName { get; set; }
         
         [Required(ErrorMessage = ErrorMessages.EmailRequired)]
@@ -38,6 +38,14 @@ namespace DomainModel
         public Borrower()
         {
             Loans = new List<Loan>();
+        }
+
+        public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
+        {
+            if(DateOfBirth != null && DateOfBirth > DateTime.Now)
+            {
+                yield return new ValidationResult(ErrorMessages.InvalidDate, new List<string> { "DateOfBirth" });
+            }
         }
     }
 }

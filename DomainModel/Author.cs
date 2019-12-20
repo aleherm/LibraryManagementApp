@@ -16,7 +16,7 @@ namespace DomainModel
         public string FirstName { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.LastNameRequired)]
-        [StringLength(50, ErrorMessage = ErrorMessages.FirstNameRangeLength, MinimumLength = 2)]
+        [StringLength(50, ErrorMessage = ErrorMessages.LastNameRangeLength, MinimumLength = 2)]
         public string LastName { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.LanguageRequired)]
@@ -33,6 +33,12 @@ namespace DomainModel
         {
             IList<string> dataMembers = new List<string>();
 
+            if(DateOfBirth != null && DateOfDeath != null && DateOfBirth > DateOfDeath)
+            {
+                dataMembers.Add("DateOfBirth");
+                dataMembers.Add("DateOfDeath");
+            }
+
             if (DateOfBirth != null && DateOfBirth > DateTime.Now)
             {
                 dataMembers.Add("DateOfBirth");
@@ -43,7 +49,10 @@ namespace DomainModel
                 dataMembers.Add("DateOfDeath");
             }
 
-            yield return new ValidationResult(ErrorMessages.InvalidDate, dataMembers);
+            if (dataMembers.Count != 0)
+                yield return new ValidationResult(ErrorMessages.InvalidDate, dataMembers);
+
+            yield return null;
         }
     }
 }

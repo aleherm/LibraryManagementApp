@@ -130,6 +130,38 @@ namespace TestDomainModel
 
         #endregion
 
+        #region [ LastName Tests ]
+
+        [Test]
+        public void LastNameShouldNotHaveMoreThan50Chars()
+        {
+            author.LastName = new string('a', 51);
+
+            var actual = Validator.TryValidateObject(author, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.LastNameRangeLength, msg.ErrorMessage);
+        }
+
+        [Test, Sequential]
+        public void LastNameShouldNotHaveNoCharsOutsideRange([Values("A", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")] string name)
+        {
+            author.LastName = name;
+
+            var actual = Validator.TryValidateObject(author, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.LastNameRangeLength, msg.ErrorMessage);
+        }
+
+        #endregion
+
         #region [ DateOfBirth Tests ]
 
         [Test]
@@ -140,10 +172,18 @@ namespace TestDomainModel
             // Assert
             Assert.IsTrue(actual, "Expected validation to pass.");
             Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
 
-            var msg = validationResults[0];
-            Assert.AreEqual(ErrorMessages.InvalidDate, msg.ErrorMessage);
-            Assert.AreEqual(1, msg.MemberNames.Where(item => item == "DateOfBirth").Count());
+        [Test]
+        public void DateOfBirthShouldNotBeValidWithFutureDate()
+        {
+            author.DateOfBirth = new DateTime(2050, 10, 10);
+
+            var actual = Validator.TryValidateObject(author, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
         }
 
         [Test]
@@ -165,7 +205,33 @@ namespace TestDomainModel
 
         #endregion
 
-        #region [ DateOfBirth Tests ]
+        #region [ DateOfDeath Tests ]
+
+        [Test]
+        public void DateOfDeathShouldBeValid()
+        {
+            var actual = Validator.TryValidateObject(author, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void DateOfDeathShouldNotBeValidWithFutureDate()
+        {
+            author.DateOfDeath = new System.DateTime(2050, 10, 10);
+
+            var actual = Validator.TryValidateObject(author, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.InvalidDate, msg.ErrorMessage);
+            Assert.AreEqual(1, msg.MemberNames.Where(item => item == "DateOfDeath").Count());
+        }
 
         #endregion
     }

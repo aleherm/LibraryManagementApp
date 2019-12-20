@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace TestDomainModel
 {
@@ -83,7 +84,7 @@ namespace TestDomainModel
         }
 
         [Test]
-        public void LastNameShouldNotBeValid()
+        public void LastNameShouldNotBeNull()
         {
             borrower.LastName = null;
 
@@ -143,7 +144,7 @@ namespace TestDomainModel
         }
 
         [Test, Sequential]
-        public void FirstNameShouldNotHaveNoCharsOutsideRange([Values("A", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")] string name)
+        public void FirstNameShouldNotHaveNoCharsOutsideRange([Values("x", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")] string name)
         {
             borrower.FirstName = name;
 
@@ -154,6 +155,38 @@ namespace TestDomainModel
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
             var msg = validationResults[0];
             Assert.AreEqual(ErrorMessages.FirstNameRangeLength, msg.ErrorMessage);
+        }
+
+        #endregion
+
+        #region [ LastName Tests ]
+
+        [Test]
+        public void LastNameShouldNotHaveMoreThan50Chars()
+        {
+            borrower.LastName = new string('x', 51);
+
+            var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.LastNameRangeLength, msg.ErrorMessage);
+        }
+
+        [Test, Sequential]
+        public void LastNameShouldNotHaveNoCharsOutsideRange([Values("x", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")] string name)
+        {
+            borrower.LastName = name;
+
+            var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.LastNameRangeLength, msg.ErrorMessage);
         }
 
         #endregion
@@ -195,6 +228,36 @@ namespace TestDomainModel
 
             var msg = validationResults[0];
             Assert.AreEqual(ErrorMessages.InvalidEmail, msg.ErrorMessage);
+        }
+
+        #endregion
+
+        #region [ DateOfBirth Tests ]
+
+        [Test]
+        public void DateOfBirthShouldBeValid()
+        {
+            var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void DateOfBirthShouldNotBeValidWithFutureDate()
+        {
+            borrower.DateOfBirth = new System.DateTime(2050, 10, 10);
+
+            var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.InvalidDate, msg.ErrorMessage);
+            Assert.AreEqual(1, msg.MemberNames.Where(item => item == "DateOfBirth").Count());
         }
 
         #endregion

@@ -11,11 +11,12 @@ namespace DomainModel
         public int Id { get; set; }
 
         [Required(ErrorMessage = ErrorMessages.DomainNameRequired)]
-        [MaxLength(100, ErrorMessage = ErrorMessages.DomainMaxLength)]
+        [StringLength(100, ErrorMessage = ErrorMessages.DomainNameRangeLength, MinimumLength = 5)]
         public string DomainName { get; set; }
 
         public Domain ParentDomain { get; set; }
-        
+
+        [Required(ErrorMessage = ErrorMessages.SubdomainRequired)]
         public IList<Domain> Subdomains { get; set; }
 
         public Domain()

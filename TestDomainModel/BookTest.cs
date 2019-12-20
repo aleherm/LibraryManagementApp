@@ -198,7 +198,7 @@ namespace TestDomainModel
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
 
             var msg = validationResults[0];
-            Assert.AreEqual(ErrorMessages.AuthorsListRequireAtLeastOneObject, msg.ErrorMessage);
+            Assert.AreEqual(ErrorMessages.ListRequireAtLeastOneObject, msg.ErrorMessage);
 
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "Authors").Count());
         }
@@ -219,7 +219,7 @@ namespace TestDomainModel
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
 
             var msg = validationResults[0];
-            Assert.AreEqual(ErrorMessages.DomainsListRequireAtLeastOneObject, msg.ErrorMessage);
+            Assert.AreEqual(ErrorMessages.ListRequireAtLeastOneObject, msg.ErrorMessage);
 
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "Domains").Count());
         }
@@ -240,7 +240,7 @@ namespace TestDomainModel
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
 
             var msg = validationResults[0];
-            Assert.AreEqual(ErrorMessages.EditionsListRequireAtLeastOneObject, msg.ErrorMessage);
+            Assert.AreEqual(ErrorMessages.ListRequireAtLeastOneObject, msg.ErrorMessage);
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "Editions").Count());
         }
 
