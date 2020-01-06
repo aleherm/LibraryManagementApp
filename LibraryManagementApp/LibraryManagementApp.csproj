@@ -59,6 +59,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Constants\MenuErrors.cs" />
+    <Compile Include="Constants\MenuOutput.cs" />
+    <Compile Include="Enums\EMenuType.cs" />
+    <Compile Include="Helpers\MenuHelper.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
