@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AddressService.cs" />
+    <Compile Include="AuthorService.cs" />
     <Compile Include="BookService.cs" />
     <Compile Include="BorrowerService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

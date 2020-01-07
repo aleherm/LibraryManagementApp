@@ -56,13 +56,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\AddressRepository.cs" />
+    <Compile Include="DAL\AuthorRepository.cs" />
     <Compile Include="DAL\BaseRepository.cs" />
     <Compile Include="DAL\BookRepository.cs" />
     <Compile Include="DAL\BorrowerRepository.cs" />
+    <Compile Include="DAL\DomainRepository.cs" />
     <Compile Include="DAL\LibraryDBContext.cs" />
     <Compile Include="DAL\EditionRepository.cs" />
+    <Compile Include="DAL\LoanRepository.cs" />
+    <Compile Include="Interfaces\DataAccess\IAuthorRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IBorrowerRepository.cs" />
+    <Compile Include="Interfaces\DataAccess\IDomainRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IEditionRepository.cs" />
+    <Compile Include="Interfaces\DataAccess\ILoanRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IAddressRepository.cs" />
     <Compile Include="Program.cs" />

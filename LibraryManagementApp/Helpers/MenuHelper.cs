@@ -57,12 +57,18 @@ namespace LibraryManagementApp
                     menu.Add(7, MenuOutput.BookSearch);
                     menu.Add(8, MenuOutput.Back);
                     break;
+
                 case EMenuType.EBorrowerMenu:
                     menu.Add(1, MenuOutput.AddNew);
                     menu.Add(2, MenuOutput.BorrowerEdit);
                     menu.Add(3, MenuOutput.BorrowerDelete);
                     menu.Add(4, MenuOutput.BorrowerShowAll);
                     menu.Add(5, MenuOutput.Back);
+                    break;
+                case EMenuType.EBookAuthorMenu:
+                    menu.Add(1, MenuOutput.AddNewAuthor);
+                    menu.Add(2, MenuOutput.AddExistingAuthor);
+                    menu.Add(3, MenuOutput.Back);
                     break;
                 default:
                     Console.WriteLine("ERROR 404! Page not found!");
@@ -271,6 +277,24 @@ namespace LibraryManagementApp
             }
         }
 
+        public void BookAuthorMenuProcessing(int option)
+        {
+            switch(option)
+            {
+                case 1:
+                    // show Author dashboard
+                    break;
+                case 2:
+                    // show all authors
+                    // choose one
+                    // add to list, go back to book add new process
+                    break;
+                default:
+                    Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
+                    break;
+            }
+        }
+
         public void BookMenuProcessing(int option)
         {
             switch (option)
@@ -281,9 +305,24 @@ namespace LibraryManagementApp
                     Console.Write(MenuOutput.BookTitle);
                     string title = Console.ReadLine();
 
-                    Console.WriteLine("Author(s):");
-                    Console.WriteLine("1. Add Existing Author");
-                    Console.WriteLine("2. Add New Author");
+                    Console.Write(MenuOutput.BookAuthors);
+                    ShowMenu(EMenuType.EBookAuthorMenu);
+                    int choice;
+                    while (!int.TryParse(Console.ReadLine(), out choice))
+                    {
+                        Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
+                    }
+
+                    //if(1)
+                    //ShowAvailableAuthors();
+                    //if(2)
+                    //AddNewAuthor();
+
+                    //int pages;
+                    //while (!int.TryParse(Console.ReadLine(), out pages))
+                    //{
+                    //    Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
+                    //}
                     break;
                 case 2:
                     // TODO: EditBorrower()

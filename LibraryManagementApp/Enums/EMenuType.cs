@@ -10,6 +10,12 @@ namespace LibraryManagementApp
     {
         EMainMenu,
         EBorrowerMenu,
-        EBookMenu
+        EBookMenu,
+        EBookAuthorMenu,
+        EAuthorMenu,
+        EAddressMenu,
+        EEditionMenu,
+        ELoanMenu,
+        EDomainMenu
     }
 }

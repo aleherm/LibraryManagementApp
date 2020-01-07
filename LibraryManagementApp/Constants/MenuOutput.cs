@@ -38,6 +38,10 @@ namespace LibraryManagementApp
         public static string BookSearch = "Search book by title";
         public static string BookTitle = "Book title: ";
 
+        public static string AddNewAuthor = "Add new author";
+        public static string AddExistingAuthor = "Add existing author(s)";
+        public static string BookAuthors = "Author(s): ";
+
         // general
         public static string AddNew = "Add new...";
         public static string TryAgain = " Try Again!";
