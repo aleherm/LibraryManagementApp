@@ -60,5 +60,12 @@ namespace Services
 
             return false;
         }
+
+        public IEnumerable<Borrower> GetAllBorrowers()
+        {
+            return borrowerRepository.Get(
+                orderBy: q => q.OrderBy(c => c.FirstName),
+                includeProperties: "Address");
+        }
     }
 }

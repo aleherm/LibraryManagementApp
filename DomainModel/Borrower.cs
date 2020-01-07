@@ -54,10 +54,26 @@ namespace DomainModel
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
-            if(DateOfBirth != null && DateOfBirth > DateTime.Now)
+            List<string> memberNames = new List<string>();
+            if (DateOfBirth != null && DateOfBirth > DateTime.Now)
             {
-                yield return new ValidationResult(ErrorMessages.InvalidDate, new List<string> { "DateOfBirth" });
+                memberNames.Add("DateOfBirth");
             }
+
+            if(!(ReaderFlg || LibrarianFlg))
+            {
+                memberNames.Add("ReaderFlg");
+                memberNames.Add("LibrarianFlg");
+            }
+
+            if (memberNames.Count != 0)
+                yield return new ValidationResult(ErrorMessages.InvalidData, memberNames);
+            yield return null;
+        }
+
+        public override string ToString()
+        {
+            return $"{Id} | {FirstName} | {LastName} | {Email} | {DateOfBirth.Value.ToString("dd/MM/yyyy")} | {Address} ";
         }
     }
 }

@@ -38,5 +38,10 @@ namespace DomainModel
                 yield return new ValidationResult(ErrorMessages.HouseNumberRequired, new List<string> { "Number" });
             }
         }
+
+        public override string ToString()
+        {
+            return $"{City} | str {Street} | nr {Number}";
+        }
     }
 }

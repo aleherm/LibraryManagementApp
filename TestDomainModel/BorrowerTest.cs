@@ -256,7 +256,6 @@ namespace TestDomainModel
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
 
             var msg = validationResults[0];
-            Assert.AreEqual(ErrorMessages.InvalidDate, msg.ErrorMessage);
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "DateOfBirth").Count());
         }
 

@@ -160,6 +160,8 @@ namespace LibraryManagementApp
 
         public void BorrowerMenuProcessing(int option)
         {
+            BorrowerService borrowerService = new BorrowerService();
+
             switch (option)
             {
                 case 1:
@@ -237,15 +239,13 @@ namespace LibraryManagementApp
                             librarianFlg = false;
                             break;
                     }
-
-                    BorrowerService borrowerService = new BorrowerService();
-                    AddressService addressService = new AddressService();
+                    
                     bool isInsertSuccessful = borrowerService.AddNewBorrower(firstName, lastName, email, dateOfBirth, readerFlg, librarianFlg, city, street, number);
 
                     if(isInsertSuccessful)
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("New borrower with address added successfuly!");
+                        Console.WriteLine(MenuSuccess.BorrowerAddSuccess);
                         Console.ForegroundColor = ConsoleColor.White;
                     }
                     else
@@ -266,8 +266,11 @@ namespace LibraryManagementApp
                     Console.WriteLine("DeleteBorrower()");
                     break;
                 case 4:
-                    // TODO: ShowAll()
-                    Console.WriteLine("ShowAll()");
+                    var borrowers = borrowerService.GetAllBorrowers();
+                    foreach (var borrower in borrowers)
+                    {
+                        Console.WriteLine(borrower.ToString());
+                    }
                     break;
                 case 5:
                     ShowMenu(EMenuType.EMainMenu);

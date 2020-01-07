@@ -61,6 +61,7 @@
   <ItemGroup>
     <Compile Include="Constants\MenuErrors.cs" />
     <Compile Include="Constants\MenuOutput.cs" />
+    <Compile Include="Constants\MenuSuccess.cs" />
     <Compile Include="Enums\EMenuType.cs" />
     <Compile Include="Helpers\DateHelper.cs" />
     <Compile Include="Helpers\MenuHelper.cs" />
