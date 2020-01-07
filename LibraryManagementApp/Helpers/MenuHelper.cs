@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Services;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -159,6 +160,14 @@ namespace LibraryManagementApp
 
                     Console.Write(MenuOutput.BorrowerDOB);
                     string dob = Console.ReadLine();
+                    DateTime? dateOfBirth = DateHelper.ConvertStringToDate(dob);
+
+                    while(dateOfBirth == null)
+                    {
+                        Console.WriteLine(MenuErrors.WrongInputFormatError + MenuOutput.TryAgain);
+                        dob = Console.ReadLine();
+                        dateOfBirth = DateHelper.ConvertStringToDate(dob);
+                    }
 
                     Console.Write(MenuOutput.BorrowerAddressCity);
                     string city = Console.ReadLine();
@@ -194,10 +203,42 @@ namespace LibraryManagementApp
                     }
 
                     Console.WriteLine(MenuOutput.BorrowerLibrarian);
+                    input = Console.ReadLine().ToUpper();
+                    bool librarianFlg;
 
-                    // TODO: Finish Add New Borrower
+                    switch (input)
+                    {
+                        case "YES":
+                        case "Y":
+                            librarianFlg = true;
+                            break;
+                        case "NO":
+                        case "N":
+                            librarianFlg = false;
+                            break;
+                        default:
+                            Console.WriteLine(MenuErrors.InvalidInputError);
+                            librarianFlg = false;
+                            break;
+                    }
 
-                    //Console.WriteLine(firstName+lastName+email+dob+city+street+number);
+                    BorrowerService borrowerService = new BorrowerService();
+                    AddressService addressService = new AddressService();
+                    bool isInsertSuccessful = borrowerService.AddNewBorrower(firstName, lastName, email, dateOfBirth, readerFlg, librarianFlg) && addressService.AddNewAddress(city, street, number);
+
+                    if(isInsertSuccessful)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("New borrower with address added successfuly!");
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(MenuErrors.FailedBorrowerInsert);
+                        Console.ForegroundColor = ConsoleColor.White;
+                    }
+
+                    ShowBorrowerMenu();
                     break;
                 case 2:
                     // TODO: EditBorrower()
@@ -232,8 +273,8 @@ namespace LibraryManagementApp
                     string title = Console.ReadLine();
 
                     Console.WriteLine("Author(s):");
-                    Console.WriteLine("1. AddExistingAuthor");
-                    Console.WriteLine("2. AddNewAuthor");
+                    Console.WriteLine("1. Add Existing Author");
+                    Console.WriteLine("2. Add New Author");
 
                     //int choice;
                     //while (!int.TryParse(Console.ReadLine(), out choice))

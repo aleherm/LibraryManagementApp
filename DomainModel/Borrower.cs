@@ -22,7 +22,7 @@ namespace DomainModel
 
         public EGenderType Gender { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         public Address Address { get; set; }
         
@@ -38,6 +38,17 @@ namespace DomainModel
         public Borrower()
         {
             Loans = new List<Loan>();
+        }
+
+        public Borrower(string firstName, string lastName, string email, DateTime? dob, bool readerFlg, bool librarianFlg)
+        {
+            Loans = new List<Loan>();
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            DateOfBirth = dob;
+            ReaderFlg = readerFlg;
+            LibrarianFlg = librarianFlg;
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

@@ -2,7 +2,7 @@
 
 namespace DataMapper
 {
-    public class BookRepository : BaseRepository<Book>
+    interface IBorrowerRepository : IRepository<Borrower>
     {
     }
 }

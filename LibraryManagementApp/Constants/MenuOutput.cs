@@ -19,7 +19,7 @@ namespace LibraryManagementApp
         public static string BorrowerLastName = "Last name: ";
         public static string BorrowerEmail = "Email: ";
         public static string BorrowerGender = "Gender: ";
-        public static string BorrowerDOB = "Date of birth: ";
+        public static string BorrowerDOB = "Date of birth (DD/MM/YYYY): ";
         public static string BorrowerAddressCity = "City: ";
         public static string BorrowerAddressStreet = "Street: ";
         public static string BorrowerAddressNumber = "Number: ";

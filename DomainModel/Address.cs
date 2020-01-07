@@ -19,6 +19,13 @@ namespace DomainModel
         [Range(1, 5000, ErrorMessage = ErrorMessages.HouseNumberRange)]
         public int? Number { get; set; }
 
+        public Address(string city, string street, int? number)
+        {
+            City = city;
+            Street = street;
+            Number = number;
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             if (Number.HasValue && Number <= 0)

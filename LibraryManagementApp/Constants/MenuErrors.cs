@@ -10,5 +10,7 @@ namespace LibraryManagementApp
     {
         public static string InvalidInputError = "Invalid input.";
         public static string WrongInputFormatError = "Wrong input format.";
+
+        public static string FailedBorrowerInsert = "Could not add the new borrower with the given data.";
     }
 }

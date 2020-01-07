@@ -1,16 +1,26 @@
 ﻿using DataMapper;
 using DomainModel;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace ServiceLayer
+namespace Services
 {
     public class BookService
     {
-        private BaseRepository<Book> bookRepository;
+        private BookRepository bookRepository;
 
-        private bool isValidBook()
+        public BookService()
         {
-            throw new NotImplementedException();
+            bookRepository = new BookRepository();
+        }
+
+        private bool IsValidBook(Book book)
+        {
+            ValidationContext context = new ValidationContext(book);
+            IList<ValidationResult> validationResults = new List<ValidationResult>();
+
+            return Validator.TryValidateObject(book, context, validationResults, true);
         }
 
         public void AddNewBook()
