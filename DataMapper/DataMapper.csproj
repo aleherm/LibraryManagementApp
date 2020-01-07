@@ -71,6 +71,19 @@
     <Compile Include="Interfaces\DataAccess\ILoanRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IAddressRepository.cs" />
+    <Compile Include="Migrations\201912200728046_InitialCreate.cs" />
+    <Compile Include="Migrations\201912200728046_InitialCreate.designer.cs">
+      <DependentUpon>201912200728046_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001072012183_validations_props-ctors.cs" />
+    <Compile Include="Migrations\202001072012183_validations_props-ctors.designer.cs">
+      <DependentUpon>202001072012183_validations_props-ctors.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202001072047113_borrower_ctor-change.cs" />
+    <Compile Include="Migrations\202001072047113_borrower_ctor-change.designer.cs">
+      <DependentUpon>202001072047113_borrower_ctor-change.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -83,6 +96,17 @@
       <Project>{a728c6f8-46a4-4d0a-9a85-b0b90b5b9710}</Project>
       <Name>DomainModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201912200728046_InitialCreate.resx">
+      <DependentUpon>201912200728046_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001072012183_validations_props-ctors.resx">
+      <DependentUpon>202001072012183_validations_props-ctors.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001072047113_borrower_ctor-change.resx">
+      <DependentUpon>202001072047113_borrower_ctor-change.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

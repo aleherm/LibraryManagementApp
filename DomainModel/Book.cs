@@ -30,6 +30,14 @@ namespace DomainModel
             Editions = new List<Edition>();
         }
 
+        public Book(string title, List<Author> authors, List<Domain> domains, List<Edition> editions)
+        {
+            Title = title;
+            Authors = authors;
+            Domains = domains;
+            Editions = editions;
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             List<string> memberNames = new List<string>();

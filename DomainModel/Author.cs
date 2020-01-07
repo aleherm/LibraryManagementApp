@@ -27,6 +27,11 @@ namespace DomainModel
 
         public DateTime? DateOfDeath { get; set; }
 
+        public Author()
+        {
+
+        }
+
         public Author(string firstName, string lastName, string language, DateTime? dateOfBirth, DateTime? dateOfDeath)
         {
             FirstName = firstName;

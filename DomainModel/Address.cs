@@ -19,6 +19,11 @@ namespace DomainModel
         [Range(1, 5000, ErrorMessage = ErrorMessages.HouseNumberRange)]
         public int? Number { get; set; }
 
+        public Address()
+        {
+
+        }
+
         public Address(string city, string street, int? number)
         {
             City = city;

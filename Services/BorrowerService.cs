@@ -47,9 +47,10 @@ namespace Services
         /// <param name="readerFlg"></param>
         /// <param name="librarianFlg"></param>
         /// <returns></returns>
-        public bool AddNewBorrower(string firstName, string lastName, string email, DateTime? dob, bool readerFlg, bool librarianFlg)
+        public bool AddNewBorrower(string firstName, string lastName, string email, DateTime? dob, bool readerFlg, bool librarianFlg, string city, string street, int number)
         {
-            Borrower newBorrower = new Borrower(firstName, lastName, email, dob, readerFlg, librarianFlg);
+            Address address = new Address(city, street, number);
+            Borrower newBorrower = new Borrower(firstName, lastName, email, dob, address, readerFlg, librarianFlg);
             
             if(IsValidBorrower(newBorrower))
             {

@@ -240,12 +240,13 @@ namespace LibraryManagementApp
 
                     BorrowerService borrowerService = new BorrowerService();
                     AddressService addressService = new AddressService();
-                    bool isInsertSuccessful = borrowerService.AddNewBorrower(firstName, lastName, email, dateOfBirth, readerFlg, librarianFlg) && addressService.AddNewAddress(city, street, number);
+                    bool isInsertSuccessful = borrowerService.AddNewBorrower(firstName, lastName, email, dateOfBirth, readerFlg, librarianFlg, city, street, number);
 
                     if(isInsertSuccessful)
                     {
                         Console.ForegroundColor = ConsoleColor.Green;
                         Console.WriteLine("New borrower with address added successfuly!");
+                        Console.ForegroundColor = ConsoleColor.White;
                     }
                     else
                     {

@@ -40,13 +40,14 @@ namespace DomainModel
             Loans = new List<Loan>();
         }
 
-        public Borrower(string firstName, string lastName, string email, DateTime? dob, bool readerFlg, bool librarianFlg)
+        public Borrower(string firstName, string lastName, string email, DateTime? dob, Address address, bool readerFlg, bool librarianFlg)
         {
             Loans = new List<Loan>();
             FirstName = firstName;
             LastName = lastName;
             Email = email;
             DateOfBirth = dob;
+            Address = address;
             ReaderFlg = readerFlg;
             LibrarianFlg = librarianFlg;
         }
