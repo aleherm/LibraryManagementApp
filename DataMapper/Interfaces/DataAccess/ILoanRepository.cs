@@ -2,7 +2,7 @@
 
 namespace DataMapper
 {
-    interface IAddressRepository : IRepository<Address>
+    interface ILoanRepository : IRepository<Loan>
     {
     }
 }

@@ -20,7 +20,7 @@ namespace LibraryManagementApp
             {
                 return new DateTime(int.Parse(nums[2]), int.Parse(nums[1]), int.Parse(nums[0]));
             }
-            catch (ArgumentOutOfRangeException ex)
+            catch (Exception ex)
             {
                 return null;
             }

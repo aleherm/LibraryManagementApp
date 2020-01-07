@@ -23,11 +23,18 @@ namespace DomainModel
         [StringLength(50, ErrorMessage = ErrorMessages.LanguageRangeLength, MinimumLength = 2)]
         public string Language { get; set; }
 
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
-        public DateTime DateOfDeath { get; set; }
+        public DateTime? DateOfDeath { get; set; }
 
-        public Author() { }
+        public Author(string firstName, string lastName, string language, DateTime? dateOfBirth, DateTime? dateOfDeath)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Language = language;
+            DateOfBirth = dateOfBirth;
+            DateOfDeath = dateOfDeath;
+        }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

@@ -12,23 +12,26 @@ namespace LibraryManagementApp
     /// </summary>
     public class MenuHelper
     {
+        /// <summary>
+        /// The input option given by the user.
+        /// </summary>
         private int option;
 
+        /// <summary>
+        /// The dinamic list of the menu displaied in the console.
+        /// </summary>
         private Dictionary<int, string> menu;
 
-        public MenuHelper()
-        {
-            
-        }
+        #region [ Show Menu methods ]
 
         private void ShowMenu(EMenuType menuType)
         {
             menu = new Dictionary<int, string>();
-
-
+            
             switch (menuType)
             {
                 case EMenuType.EMainMenu:
+                    Console.Clear();
                     Console.WriteLine(@" _       ___   ____    ____       _      ____   __   __");
                     Console.WriteLine(@"| |     |_ _| | __ )  |  _ \     / \    |  _ \  \ \ / /");
                     Console.WriteLine(@"| |      | |  |  _ \  | |_) |   / _ \   | |_) |  \ V / ");
@@ -49,7 +52,10 @@ namespace LibraryManagementApp
                     menu.Add(2, MenuOutput.BookEdit);
                     menu.Add(3, MenuOutput.BookDelete);
                     menu.Add(4, MenuOutput.BookShowAll);
-                    menu.Add(5, MenuOutput.Back);
+                    menu.Add(5, MenuOutput.BookShowAllForLibrary);
+                    menu.Add(6, MenuOutput.BookShowAllForLoan);
+                    menu.Add(7, MenuOutput.BookSearch);
+                    menu.Add(8, MenuOutput.Back);
                     break;
                 case EMenuType.EBorrowerMenu:
                     menu.Add(1, MenuOutput.AddNew);
@@ -59,7 +65,7 @@ namespace LibraryManagementApp
                     menu.Add(5, MenuOutput.Back);
                     break;
                 default:
-                    Console.WriteLine("ERROR");
+                    Console.WriteLine("ERROR 404! Page not found!");
                     break;
             }
 
@@ -114,6 +120,10 @@ namespace LibraryManagementApp
 
             BookMenuProcessing(option);
         }
+
+        #endregion
+
+        #region [ Menu Processing methods ]
 
         public void MainMenuProcessing(int option)
         {
@@ -253,8 +263,7 @@ namespace LibraryManagementApp
                     Console.WriteLine("ShowAll()");
                     break;
                 case 5:
-                    Console.Clear();
-                    ShowMainMenu();
+                    ShowMenu(EMenuType.EMainMenu);
                     break;
                 default:
                     Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
@@ -275,23 +284,6 @@ namespace LibraryManagementApp
                     Console.WriteLine("Author(s):");
                     Console.WriteLine("1. Add Existing Author");
                     Console.WriteLine("2. Add New Author");
-
-                    //int choice;
-                    //while (!int.TryParse(Console.ReadLine(), out choice))
-                    //{
-                    //    Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
-                    //}
-
-                    //if(1)
-                    //ShowAvailableAuthors();
-                    //if(2)
-                    //AddNewAuthor();
-
-                    //int pages;
-                    //while (!int.TryParse(Console.ReadLine(), out pages))
-                    //{
-                    //    Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
-                    //}
                     break;
                 case 2:
                     // TODO: EditBorrower()
@@ -307,12 +299,25 @@ namespace LibraryManagementApp
                     break;
                 case 5:
                     // TODO: ShowAll()
-                    Console.WriteLine("ShowMainMenu()");
+                    Console.WriteLine("ShowAllForLibrary()");
+                    break;
+                case 6:
+                    // TODO: ShowAll()
+                    Console.WriteLine("ShowAllForLoan()");
+                    break;
+                case 7:
+                    // TODO: SearchByTitle()
+                    Console.WriteLine("SearchByTitle()");
+                    break;
+                case 8:
+                    ShowMenu(EMenuType.EMainMenu);
                     break;
                 default:
                     Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
                     break;
             }
         }
+
+        #endregion
     }
 }

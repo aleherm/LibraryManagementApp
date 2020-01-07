@@ -32,7 +32,10 @@ namespace LibraryManagementApp
         public static string BookEntries = "::(NEW) Book info::";
         public static string BookEdit = "Edit existing book";
         public static string BookDelete = "Delete existing book";
-        public static string BookShowAll = "Show all...";
+        public static string BookShowAll = "Show all books";
+        public static string BookShowAllForLibrary = "Show all available books for library reading";
+        public static string BookShowAllForLoan = "Show all available books for loan purposes";
+        public static string BookSearch = "Search book by title";
         public static string BookTitle = "Book title: ";
 
         // general
