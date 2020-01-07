@@ -44,18 +44,23 @@ namespace DomainModel
                 memberNames.Add("Year");
             }
 
-            if(NoForLoan > NoTotal)
+            if (NoForLibrary > NoTotal || NoForLibrary < 0 || NoForLibrary > 50)
+            {
+                memberNames.Add("NoForLibrary");
+            }
+
+            if (NoForLoan > NoTotal || NoForLoan < 0 || NoForLoan > 50)
             {
                 memberNames.Add("NoForLoan");
             }
 
-            if (NoForLibrary > NoTotal)
+            if (NoTotal < 0 || NoForLoan > 100)
             {
-                memberNames.Add("NoForLibrary");
+                memberNames.Add("NoTotal");
             }
-            
+
             if (memberNames.Count != 0)
-                yield return new ValidationResult(ErrorMessages.InvalidYear, memberNames);
+                yield return new ValidationResult(ErrorMessages.InvalidNumber, memberNames);
             yield return null;
         }
     }

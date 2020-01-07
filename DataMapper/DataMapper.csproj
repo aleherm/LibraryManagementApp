@@ -56,6 +56,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DAL\BaseRepository.cs" />
+    <Compile Include="DAL\BookRepository.cs" />
     <Compile Include="DAL\LibraryDBContext.cs" />
     <Compile Include="DAL\EditionRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IEditionRepository.cs" />

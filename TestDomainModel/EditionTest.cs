@@ -71,7 +71,7 @@ namespace TestDomainModel
         #region [ Year Tests ]
 
         [Test]
-        public void YearShouldNotBeLessOrEqualThatZero([Values(-50, -1, 0)] int year)
+        public void YearShouldNotBeNegativeOrZero([Values(-50, -1, 0)] int year)
         {
             edition.Year = year;
 
@@ -82,7 +82,7 @@ namespace TestDomainModel
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
 
             var msg = validationResults[0];
-            Assert.AreEqual(ErrorMessages.InvalidYear, msg.ErrorMessage);
+            Assert.AreEqual(ErrorMessages.InvalidNumber, msg.ErrorMessage);
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "Year").Count());
         }
 
@@ -98,7 +98,7 @@ namespace TestDomainModel
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
 
             var msg = validationResults[0];
-            Assert.AreEqual(ErrorMessages.InvalidYear, msg.ErrorMessage);
+            Assert.AreEqual(ErrorMessages.InvalidNumber, msg.ErrorMessage);
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "Year").Count());
         }
 
@@ -178,20 +178,100 @@ namespace TestDomainModel
 
         #region [ NoForLibrary ]
 
+        [Test]
+        public void NoForLibraryShouldBeBeValidWithPositiveValue()
+        {
+            edition.NoForLibrary = 1;
+
+            var actual = Validator.TryValidateObject(edition, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void NoForLibraryShouldNotBeNegative()
+        {
+            edition.NoForLibrary = -5;
+
+            var actual = Validator.TryValidateObject(edition, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.LibraryBooksRangeNumber, msg.ErrorMessage);
+            Assert.AreEqual(1, msg.MemberNames.Where(item => item == "NoForLibrary").Count());
+        }
+
         #endregion
 
         #region [ NoForLoan ]
+
+        [Test]
+        public void NoForLoanShouldBeValidWithPositiveValue()
+        {
+            edition.NoForLoan = 1;
+
+            var actual = Validator.TryValidateObject(edition, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void NoForLoanShouldNotBeNegative()
+        {
+            edition.NoForLoan = -5;
+
+            var actual = Validator.TryValidateObject(edition, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.LoanBooksRangeNumber, msg.ErrorMessage);
+            Assert.AreEqual(1, msg.MemberNames.Where(item => item == "NoForLoan").Count());
+        }
 
         #endregion
 
         #region [ NoTotal ]
 
-        [TestCase]
-        public void NoTotalShouldNotBeSumOfLoanAndLibraryBooksNumber()
+        [Test]
+        public void NoTotalShouldBeValidWithPositiveValue()
         {
-            edition.NoForLibrary = 5;
-            edition.NoForLoan = 10;
-            edition.NoTotal = 15;
+            edition.NoTotal = 11;
+
+            var actual = Validator.TryValidateObject(edition, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void NoTotalShouldNotBeNegative()
+        {
+            edition.NoTotal = -5;
+
+            var actual = Validator.TryValidateObject(edition, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test, Sequential]
+        public void NoTotalShouldNotBeSumOfLoanAndLibraryBooksNumber([Values(2, 5, 10)] int noLib, [Values(0, 4, 11)] int noLoan, [Values(2, 9, 21)] int noTotal)
+        {
+            edition.NoForLibrary = noLib;
+            edition.NoForLoan = noLoan;
+            edition.NoTotal = noTotal;
 
             Assert.AreEqual(edition.NoForLibrary + edition.NoForLoan, edition.NoTotal);
         }

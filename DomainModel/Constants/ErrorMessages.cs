@@ -62,5 +62,7 @@ namespace DomainModel
         public const string InvalidDate = "Invalid date";
         public const string InvalidEmail = "Invalid email";
         public const string InvalidYear = "Invalid year";
+
+        public static string InvalidNumber = "Invalid number";
     }
 }
