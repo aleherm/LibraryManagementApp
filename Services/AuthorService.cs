@@ -26,7 +26,7 @@ namespace Services
             return Validator.TryValidateObject(author, context, validationResults, true);
         }
 
-        public bool AddNewAuthor(string firstName, string lastName, string language, DateTime dateOfBirth, DateTime dateOfDeath)
+        public bool AddNewAuthor(string firstName, string lastName, string language, DateTime? dateOfBirth, DateTime? dateOfDeath)
         {
             Author newAuthor = new Author(firstName, lastName, language, dateOfBirth, dateOfDeath);
             if (IsValidAuthor(newAuthor))

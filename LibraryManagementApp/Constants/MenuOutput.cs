@@ -27,6 +27,13 @@ namespace LibraryManagementApp
         public static string BorrowerReader = "Is he/she a reader? (yes/no)";
         public static string BorrowerLibrarian = "Is he/she a librarian? (yes/no)";
 
+        // author 
+        public static string AuthorFirstName = "First name: ";
+        public static string AuthorLastName = "Last name: ";
+        public static string AuthorLanguage = "Language: ";
+        public static string AuthorDOB = "Date of birth(DD/MM/YYYY): ";
+        public static string AuthorDOD = "Date of death(DD/MM/YYYY): ";
+
         // book
         public static string BookMenuTitle = "--Book Menu Entries--";
         public static string BookEntries = "::(NEW) Book info::";

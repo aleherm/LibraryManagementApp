@@ -286,16 +286,78 @@ namespace LibraryManagementApp
             switch(option)
             {
                 case 1:
-                    // show Author dashboard
-                    break;
-                case 2:
-                    // show all authors
-                    // choose one
-                    // add to list, go back to book add new process
-                    break;
-                default:
-                    Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
-                    break;
+                    // show add new Author
+                    // add it
+                    // add it to book's Authors list
+                    // add more? repeat until doesn't
+                    Console.Write(MenuOutput.AuthorFirstName);
+                    string firstName = Console.ReadLine();
+
+                    Console.Write(MenuOutput.AuthorLastName);
+                    string lastName = Console.ReadLine();
+
+                    Console.Write(MenuOutput.AuthorLanguage);
+                    string language = Console.ReadLine();
+
+                    Console.Write(MenuOutput.AuthorDOB);
+                    string dob = Console.ReadLine();
+                    DateTime? dateOfBirth = DateHelper.ConvertStringToDate(dob);
+
+                    while (dateOfBirth == null && dob != String.Empty)
+                    {
+                        Console.WriteLine(MenuErrors.WrongInputFormatError + MenuOutput.TryAgain);
+                        dob = Console.ReadLine();
+                        dateOfBirth = DateHelper.ConvertStringToDate(dob);
+                    }
+
+                    Console.Write(MenuOutput.AuthorDOD);
+                    string dod = Console.ReadLine();
+                    DateTime? dateOfDeath = DateHelper.ConvertStringToDate(dod);
+
+                    while (dateOfDeath == null && dod != String.Empty)
+                    {
+                        Console.WriteLine(MenuErrors.WrongInputFormatError + MenuOutput.TryAgain);
+                        dod = Console.ReadLine();
+                        dateOfDeath = DateHelper.ConvertStringToDate(dod);
+                    }
+
+                    // insert new Author in DB
+                    AuthorService authorService = new AuthorService();
+                    authorService.AddNewAuthor(firstName, lastName, language, dateOfBirth, dateOfDeath);
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(MenuSuccess.BookAuthorSavedInputs);
+                    Console.ForegroundColor = ConsoleColor.White;
+
+                    ShowMenu(EMenuType.EBookAuthorMenu);
+                    while (!int.TryParse(Console.ReadLine(), out option))
+                    {
+                        Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
+                    }
+
+                    if(option == 1)
+                        goto case 1;
+
+                    //TODO: add new author to DB
+
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(MenuSuccess.BookAuthorAddSuccess);
+                    //Console.ForegroundColor = ConsoleColor.Blue;
+                    //Console.WriteLine(MenuSuccess.CheckAuthorList);
+                    Console.ForegroundColor = ConsoleColor.White;
+                break;
+            case 2:
+                // show all authors
+                // choose one
+                // add to book's Authors list, go back to book add new process
+                // add more? repeat until doesn't
+                break;
+            case 3:
+                Console.WriteLine("Gone back to adding Book");
+                break;
+            default:
+                Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
+                break;
             }
         }
 
@@ -309,13 +371,16 @@ namespace LibraryManagementApp
                     Console.Write(MenuOutput.BookTitle);
                     string title = Console.ReadLine();
 
-                    Console.Write(MenuOutput.BookAuthors);
+                    Console.WriteLine(MenuOutput.BookAuthors);
                     ShowMenu(EMenuType.EBookAuthorMenu);
-                    int choice;
-                    while (!int.TryParse(Console.ReadLine(), out choice))
+                    while (!int.TryParse(Console.ReadLine(), out option))
                     {
                         Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
                     }
+
+                    BookAuthorMenuProcessing(option);
+
+
 
                     //if(1)
                     //ShowAvailableAuthors();
@@ -327,6 +392,7 @@ namespace LibraryManagementApp
                     //{
                     //    Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
                     //}
+                    Console.WriteLine("Came back to adding new Book");
                     break;
                 case 2:
                     // TODO: EditBorrower()
