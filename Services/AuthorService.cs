@@ -36,5 +36,17 @@ namespace Services
             }
             return false;
         }
+
+        public IEnumerable<Author> GetAllAuthors()
+        {
+            return authorRepository.Get(
+                 orderBy: q => q.OrderBy(c => c.FirstName));
+        }
+
+        public Author getAuthor(int id)
+        {
+            // TODO: Implement get author by id, gets the Author
+            throw new NotImplementedException();
+        }
     }
 }

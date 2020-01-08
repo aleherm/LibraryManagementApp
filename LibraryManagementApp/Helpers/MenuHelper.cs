@@ -1,4 +1,5 @@
-﻿using Services;
+﻿using DomainModel;
+using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,10 @@ namespace LibraryManagementApp
 
         #region [ Show Menu methods ]
 
+        /// <summary>
+        /// Shows the menu based on the type.
+        /// </summary>
+        /// <param name="menuType"></param>
         private void ShowMenu(EMenuType menuType)
         {
             menu = new Dictionary<int, string>();
@@ -83,6 +88,9 @@ namespace LibraryManagementApp
             }
         }
 
+        /// <summary>
+        /// Displays the MainMenu dashboard and asks the user for an action choice.
+        /// </summary>
         public void ShowMainMenu()
         {
             ShowMenu(EMenuType.EMainMenu);
@@ -97,6 +105,9 @@ namespace LibraryManagementApp
             MainMenuProcessing(option);
         }
 
+        /// <summary>
+        /// Displays the BorrowerMenu dashboard and asks the user for an action choice.
+        /// </summary>
         public void ShowBorrowerMenu()
         {
             Console.WriteLine(MenuOutput.BorrowerMenuTitle);
@@ -112,6 +123,9 @@ namespace LibraryManagementApp
             BorrowerMenuProcessing(option);
         }
 
+        /// <summary>
+        ///  Displays the BookMenu dashboard and asks the user for an action choice.
+        /// </summary>
         public void ShowBookMenu()
         {
             Console.WriteLine(MenuOutput.BookMenuTitle);
@@ -131,6 +145,10 @@ namespace LibraryManagementApp
 
         #region [ Menu Processing methods ]
 
+        /// <summary>
+        /// Processes the basic actions based on the user's choice.
+        /// </summary>
+        /// <param name="option"></param>
         public void MainMenuProcessing(int option)
         {
             switch (option)
@@ -158,6 +176,10 @@ namespace LibraryManagementApp
             }
         }
 
+        /// <summary>
+        /// Processes the Borrower actions based on the user's choice.
+        /// </summary>
+        /// <param name="option"></param>
         public void BorrowerMenuProcessing(int option)
         {
             BorrowerService borrowerService = new BorrowerService();
@@ -281,9 +303,16 @@ namespace LibraryManagementApp
             }
         }
 
-        public void BookAuthorMenuProcessing(int option)
+        /// <summary>
+        /// Processes the Author for a Book actions based on the user's choice.
+        /// </summary>
+        /// <param name="option"></param>
+        public List<Author> BookAuthorMenuProcessing(int option)
         {
-            switch(option)
+            List<Author> bookAuthors = new List<Author>();
+            AuthorService authorService = new AuthorService();
+
+            switch (option)
             {
                 case 1:
                     // show add new Author
@@ -321,9 +350,10 @@ namespace LibraryManagementApp
                         dateOfDeath = DateHelper.ConvertStringToDate(dod);
                     }
 
-                    // insert new Author in DB
-                    AuthorService authorService = new AuthorService();
-                    authorService.AddNewAuthor(firstName, lastName, language, dateOfBirth, dateOfDeath);
+                    // insert new Author in DB                    
+                    Author newAuthor = new Author(firstName, lastName, language, dateOfBirth, dateOfDeath);
+                    bookAuthors.Add(newAuthor);
+                    //authorService.AddNewAuthor(firstName, lastName, language, dateOfBirth, dateOfDeath);
 
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine(MenuSuccess.BookAuthorSavedInputs);
@@ -338,8 +368,6 @@ namespace LibraryManagementApp
                     if(option == 1)
                         goto case 1;
 
-                    //TODO: add new author to DB
-
                     Console.ForegroundColor = ConsoleColor.Green;
                     Console.WriteLine(MenuSuccess.BookAuthorAddSuccess);
                     //Console.ForegroundColor = ConsoleColor.Blue;
@@ -347,11 +375,28 @@ namespace LibraryManagementApp
                     Console.ForegroundColor = ConsoleColor.White;
                 break;
             case 2:
-                // show all authors
-                // choose one
-                // add to book's Authors list, go back to book add new process
-                // add more? repeat until doesn't
-                break;
+                    // show all authors
+                    // choose one
+                    // add to book's Authors list, go back to book add new process
+                    // add more? repeat until doesn't
+                    Console.WriteLine("Getting the data...");
+                    //IEnumerable<Author> authors = authorService.GetAllAuthors();
+                    //foreach(Author author in authors)
+                    //{
+                    //    Console.WriteLine(author.Id + " " + author.FirstName + " " + author.LastName);
+                    //}
+
+                    Console.WriteLine(MenuOutput.BookExistingAuthorChoice);
+                    int idAuthor = 0;
+                    while (!int.TryParse(Console.ReadLine(), out idAuthor))
+                    {
+                        Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
+                    }
+
+                    //Author selectedAuthor = authorService.getAuthor(idAuthor);
+                    //bookAuthors.Add(selectedAuthor);
+
+                    break;
             case 3:
                 Console.WriteLine("Gone back to adding Book");
                 break;
@@ -359,8 +404,14 @@ namespace LibraryManagementApp
                 Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
                 break;
             }
+
+            return bookAuthors;
         }
 
+        /// <summary>
+        /// Processes the Book actions based on the user's choice.
+        /// </summary>
+        /// <param name="option"></param>
         public void BookMenuProcessing(int option)
         {
             switch (option)
@@ -378,20 +429,13 @@ namespace LibraryManagementApp
                         Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
                     }
 
-                    BookAuthorMenuProcessing(option);
+                    List<Author> authors = BookAuthorMenuProcessing(option);
 
+                    foreach(var author in authors)
+                    {
+                        Console.WriteLine(author.ToString());
+                    }
 
-
-                    //if(1)
-                    //ShowAvailableAuthors();
-                    //if(2)
-                    //AddNewAuthor();
-
-                    //int pages;
-                    //while (!int.TryParse(Console.ReadLine(), out pages))
-                    //{
-                    //    Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
-                    //}
                     Console.WriteLine("Came back to adding new Book");
                     break;
                 case 2:

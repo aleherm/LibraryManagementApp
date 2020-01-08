@@ -48,6 +48,7 @@ namespace LibraryManagementApp
         public static string AddNewAuthor = "Add new author";
         public static string AddExistingAuthor = "Add existing author(s)";
         public static string BookAuthors = "Author(s): ";
+        public static string BookExistingAuthorChoice = "Type the ID number of the author you want to add...";
 
         // general
         public static string AddNew = "Add new...";

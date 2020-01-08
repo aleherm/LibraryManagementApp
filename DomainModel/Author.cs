@@ -66,5 +66,9 @@ namespace DomainModel
 
             yield return null;
         }
+        public override string ToString()
+        {
+            return $"{FirstName} | {LastName} | {Language} | {DateOfBirth} | {DateOfDeath} ";
+        }
     }
 }
