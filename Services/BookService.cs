@@ -28,5 +28,9 @@ namespace Services
             throw new NotImplementedException();
         }
 
+        public Book getBook(int id)
+        {
+            return bookRepository.GetByID(id);
+        }
     }
 }

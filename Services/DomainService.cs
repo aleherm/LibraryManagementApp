@@ -44,6 +44,11 @@ namespace Services
                 includeProperties: "Subdomains, ParentDomain");
         }
 
+        public Domain getDomain(int id)
+        {
+            return domainRepository.GetByID(id);
+        }
+
         //public IEnumerable<Domain> GetAllSubdomains(int idDomain)
         //{
         //    return domainRepository.GetSubdomains(idDomain);

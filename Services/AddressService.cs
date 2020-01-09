@@ -1,11 +1,7 @@
 ﻿using DataMapper;
 using DomainModel;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services
 {
@@ -29,7 +25,7 @@ namespace Services
         public bool AddNewAddress(string city, string street, int? number)
         {
             Address newAddress = new Address(city, street, number);
-            if(IsValidAddress(newAddress))
+            if (IsValidAddress(newAddress))
             {
                 addressRepository.Insert(newAddress);
                 return true;

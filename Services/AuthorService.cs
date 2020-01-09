@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services
 {
@@ -45,8 +43,7 @@ namespace Services
 
         public Author getAuthor(int id)
         {
-            // TODO: Implement get author by id, gets the Author
-            throw new NotImplementedException();
+            return authorRepository.GetByID(id);
         }
     }
 }

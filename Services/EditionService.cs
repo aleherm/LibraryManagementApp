@@ -1,6 +1,5 @@
 ﻿using DataMapper;
 using DomainModel;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -34,6 +33,11 @@ namespace Services
             return editionRepository.Get(
                 orderBy: q => q.OrderBy(c => c.Publisher),
                 includeProperties: "Address");
+        }
+
+        public Edition getEdition(int id)
+        {
+            return editionRepository.GetByID(id);
         }
     }
 }

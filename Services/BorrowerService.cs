@@ -4,8 +4,6 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Services
 {
@@ -51,8 +49,8 @@ namespace Services
         {
             Address address = new Address(city, street, number);
             Borrower newBorrower = new Borrower(firstName, lastName, email, dob, address, readerFlg, librarianFlg);
-            
-            if(IsValidBorrower(newBorrower))
+
+            if (IsValidBorrower(newBorrower))
             {
                 borrowerRepository.Insert(newBorrower);
                 return true;
@@ -66,6 +64,11 @@ namespace Services
             return borrowerRepository.Get(
                 orderBy: q => q.OrderBy(c => c.FirstName),
                 includeProperties: "Address");
+        }
+
+        public Borrower getBorrower(int id)
+        {
+            return borrowerRepository.GetByID(id);
         }
     }
 }
