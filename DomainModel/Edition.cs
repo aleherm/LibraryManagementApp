@@ -36,6 +36,16 @@ namespace DomainModel
 
         public Edition() { }
 
+        public Edition(string publisher, int pageNumber, int year, int noForLibrary, int noForLoan)
+        {
+            Publisher = publisher;
+            PageNumber = pageNumber;
+            Year = year;
+            NoForLibrary = noForLibrary;
+            NoForLoan = noForLoan;
+            NoTotal = noForLoan + noForLibrary;
+        }
+
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             List<string> memberNames = new List<string>();
@@ -62,6 +72,11 @@ namespace DomainModel
             if (memberNames.Count != 0)
                 yield return new ValidationResult(ErrorMessages.InvalidNumber, memberNames);
             yield return null;
+        }
+
+        public override string ToString()
+        {
+            return $"{Publisher} | year {Year} | {PageNumber} pages | {NoForLibrary} to library + {NoForLoan} to loan = {NoTotal} total ";
         }
     }
 }

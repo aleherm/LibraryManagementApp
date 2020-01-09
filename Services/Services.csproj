@@ -46,6 +46,8 @@
     <Compile Include="AuthorService.cs" />
     <Compile Include="BookService.cs" />
     <Compile Include="BorrowerService.cs" />
+    <Compile Include="DomainService.cs" />
+    <Compile Include="EditionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -57,6 +59,9 @@
       <Project>{a728c6f8-46a4-4d0a-9a85-b0b90b5b9710}</Project>
       <Name>DomainModel</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Data\constants.json" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

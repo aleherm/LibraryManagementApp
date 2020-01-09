@@ -16,6 +16,7 @@ namespace LibraryManagementApp
         EAddressMenu,
         EEditionMenu,
         ELoanMenu,
-        EDomainMenu
+        EDomainMenu,
+        EBookDomainMenu
     }
 }

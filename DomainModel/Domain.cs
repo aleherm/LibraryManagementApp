@@ -23,5 +23,12 @@ namespace DomainModel
         {
             Subdomains = new List<Domain>();
         }
+
+        public Domain(string domainName, Domain parent, List<Domain> subdomains)
+        {
+            DomainName = domainName;
+            ParentDomain = parent;
+            Subdomains = subdomains;
+        }
     }
 }

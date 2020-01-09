@@ -1,4 +1,7 @@
-﻿using DomainModel;
+﻿using System;
+using System.Collections.Generic;
+using DomainModel;
+using System.Linq;
 
 namespace DataMapper
 {

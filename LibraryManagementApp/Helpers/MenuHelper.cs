@@ -3,8 +3,6 @@ using Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibraryManagementApp
 {
@@ -36,7 +34,7 @@ namespace LibraryManagementApp
             switch (menuType)
             {
                 case EMenuType.EMainMenu:
-                    Console.Clear();
+                    Clear();
                     Console.WriteLine(@" _       ___   ____    ____       _      ____   __   __");
                     Console.WriteLine(@"| |     |_ _| | __ )  |  _ \     / \    |  _ \  \ \ / /");
                     Console.WriteLine(@"| |      | |  |  _ \  | |_) |   / _ \   | |_) |  \ V / ");
@@ -75,6 +73,16 @@ namespace LibraryManagementApp
                     menu.Add(2, MenuOutput.AddExistingAuthor);
                     menu.Add(3, MenuOutput.Back);
                     break;
+                case EMenuType.EDomainMenu:
+                    Console.WriteLine("Not implemented.................");
+                    break;
+                case EMenuType.EEditionMenu:
+                    menu.Add(1, MenuOutput.AddNew);
+                    menu.Add(2, MenuOutput.EditionEdit);
+                    menu.Add(3, MenuOutput.EditionDelete);
+                    menu.Add(4, MenuOutput.EditionShowAll);
+                    menu.Add(5, MenuOutput.Back);
+                    break;
                 default:
                     Console.WriteLine("ERROR 404! Page not found!");
                     break;
@@ -104,6 +112,8 @@ namespace LibraryManagementApp
 
             MainMenuProcessing(option);
         }
+
+
 
         /// <summary>
         /// Displays the BorrowerMenu dashboard and asks the user for an action choice.
@@ -141,6 +151,24 @@ namespace LibraryManagementApp
             BookMenuProcessing(option);
         }
 
+        /// <summary>
+        /// Displays the EditionMenu dashboard and asks the user for an action choise.
+        /// </summary>
+        public void ShowEditionMenu()
+        {
+            Console.WriteLine(MenuOutput.BookMenuTitle);
+            ShowMenu(EMenuType.EEditionMenu);
+
+            string input = Console.ReadLine();
+
+            while (!int.TryParse(input, out option))
+            {
+                Console.WriteLine(MenuErrors.WrongInputFormatError + MenuOutput.TryAgain);
+            }
+
+            //EditionMenuProcessing(option);
+        }
+
         #endregion
 
         #region [ Menu Processing methods ]
@@ -154,7 +182,7 @@ namespace LibraryManagementApp
             switch (option)
             {
                 case 1:
-                    //ShowAuthorMenu();
+                    ShowAuthorMenu();
                     break;
                 case 2:
                     ShowBookMenu();
@@ -175,6 +203,7 @@ namespace LibraryManagementApp
                     break;
             }
         }
+
 
         /// <summary>
         /// Processes the Borrower actions based on the user's choice.
@@ -266,15 +295,11 @@ namespace LibraryManagementApp
 
                     if(isInsertSuccessful)
                     {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine(MenuSuccess.BorrowerAddSuccess);
-                        Console.ForegroundColor = ConsoleColor.White;
+                        ShowSuccessMessage(MenuSuccess.BorrowerAddSuccess);
                     }
                     else
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
-                        Console.WriteLine(MenuErrors.FailedBorrowerInsert);
-                        Console.ForegroundColor = ConsoleColor.White;
+                        ShowErrorMessage(MenuErrors.FailedBorrowerInsert);
                     }
 
                     ShowBorrowerMenu();
@@ -319,15 +344,19 @@ namespace LibraryManagementApp
                     // add it
                     // add it to book's Authors list
                     // add more? repeat until doesn't
+                    // get FirstName
                     Console.Write(MenuOutput.AuthorFirstName);
                     string firstName = Console.ReadLine();
 
+                    // get LastName
                     Console.Write(MenuOutput.AuthorLastName);
                     string lastName = Console.ReadLine();
 
+                    // get Language
                     Console.Write(MenuOutput.AuthorLanguage);
                     string language = Console.ReadLine();
 
+                    // get DateOfBirth
                     Console.Write(MenuOutput.AuthorDOB);
                     string dob = Console.ReadLine();
                     DateTime? dateOfBirth = DateHelper.ConvertStringToDate(dob);
@@ -339,6 +368,7 @@ namespace LibraryManagementApp
                         dateOfBirth = DateHelper.ConvertStringToDate(dob);
                     }
 
+                    // get DateOfDeath
                     Console.Write(MenuOutput.AuthorDOD);
                     string dod = Console.ReadLine();
                     DateTime? dateOfDeath = DateHelper.ConvertStringToDate(dod);
@@ -350,55 +380,85 @@ namespace LibraryManagementApp
                         dateOfDeath = DateHelper.ConvertStringToDate(dod);
                     }
 
-                    // insert new Author in DB                    
+                    // insert new Author in DB --no more-- should be added directly when adding new Book                 
                     Author newAuthor = new Author(firstName, lastName, language, dateOfBirth, dateOfDeath);
                     bookAuthors.Add(newAuthor);
                     //authorService.AddNewAuthor(firstName, lastName, language, dateOfBirth, dateOfDeath);
 
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine(MenuSuccess.BookAuthorSavedInputs);
-                    Console.ForegroundColor = ConsoleColor.White;
+                    ShowSuccessMessage(MenuSuccess.BookAuthorSavedInputs);
 
+                    // go back to adding an Author's info
                     ShowMenu(EMenuType.EBookAuthorMenu);
                     while (!int.TryParse(Console.ReadLine(), out option))
                     {
                         Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
                     }
-
+                    
                     if(option == 1)
                         goto case 1;
-
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine(MenuSuccess.BookAuthorAddSuccess);
-                    //Console.ForegroundColor = ConsoleColor.Blue;
-                    //Console.WriteLine(MenuSuccess.CheckAuthorList);
-                    Console.ForegroundColor = ConsoleColor.White;
+                    ShowSuccessMessage(MenuSuccess.BookAuthorAddSuccess);
+                    //ShowInfoMessage(MenuSuccess.CheckAuthorList);
                 break;
             case 2:
                     // show all authors
                     // choose one
                     // add to book's Authors list, go back to book add new process
                     // add more? repeat until doesn't
-                    Console.WriteLine("Getting the data...");
-                    //IEnumerable<Author> authors = authorService.GetAllAuthors();
-                    //foreach(Author author in authors)
-                    //{
-                    //    Console.WriteLine(author.Id + " " + author.FirstName + " " + author.LastName);
-                    //}
-
-                    Console.WriteLine(MenuOutput.BookExistingAuthorChoice);
-                    int idAuthor = 0;
-                    while (!int.TryParse(Console.ReadLine(), out idAuthor))
+                    
+                    bool input = false;
+                    do
                     {
-                        Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
-                    }
+                        Console.WriteLine("Getting data...");
+                        //IEnumerable<Author> authors = authorService.GetAllAuthors();
+                        //foreach (Author domain in domains)
+                        //{
+                        //    Console.WriteLine(author.Id + ". " + author.FirstName + " " + author.LastName);
+                        //}
 
-                    //Author selectedAuthor = authorService.getAuthor(idAuthor);
-                    //bookAuthors.Add(selectedAuthor);
+                        int idAuthor = -1;
+
+                        Console.WriteLine(MenuOutput.BookExistingAuthorChoice);
+                        while (!int.TryParse(Console.ReadLine(), out idAuthor))
+                        {
+                            Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
+                        }
+                        // TODO: verify if exists in database
+
+                        //IEnumerable<Author> foundAuthor = authorService.GetById(idAuthor);
+                        //if(foundAuthor.Count() == 0)
+                        //{
+                        //    ShowErrorMessage(MenuErrors.FailedAuthorGet);
+                        //} else
+                        //{
+                        //    foreach(Author author in foundauthor)
+                        //    {
+                        //        bookAuthors.Add(author);
+                        //    }
+                        //}
+                        Console.WriteLine(MenuOutput.AddMoreDomains);
+                        string confirm = Console.ReadLine();
+
+                        switch (confirm.ToUpper())
+                        {
+                            case "YES":
+                            case "Y":
+                                input = true;
+                                break;
+                            case "NO":
+                            case "N":
+                                input = false;
+                                break;
+                            default:
+                                Console.WriteLine(MenuErrors.InvalidInputError);
+                                input = false;
+                                break;
+                        }
+
+                    } while (input == true);
 
                     break;
             case 3:
-                Console.WriteLine("Gone back to adding Book");
+                    
                 break;
             default:
                 Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
@@ -414,14 +474,17 @@ namespace LibraryManagementApp
         /// <param name="option"></param>
         public void BookMenuProcessing(int option)
         {
+            Clear();
             switch (option)
             {
                 case 1:
                     Console.WriteLine(MenuOutput.BookEntries);
                     
+                    // get Title
                     Console.Write(MenuOutput.BookTitle);
                     string title = Console.ReadLine();
 
+                    // get list of Authors
                     Console.WriteLine(MenuOutput.BookAuthors);
                     ShowMenu(EMenuType.EBookAuthorMenu);
                     while (!int.TryParse(Console.ReadLine(), out option))
@@ -436,7 +499,25 @@ namespace LibraryManagementApp
                         Console.WriteLine(author.ToString());
                     }
 
-                    Console.WriteLine("Came back to adding new Book");
+                    // get list of Domains
+                    Console.WriteLine(MenuOutput.BookDomains);
+                    List<Domain> domains = BookDomainMenuProcessing();
+
+                    foreach (var domain in domains)
+                    {
+                        Console.WriteLine(domain.ToString());
+                    }
+
+                    // get list of Editions
+                    Console.WriteLine(MenuOutput.BookEditions);
+                    List<Edition> editions = BookEditionMenuProcessing();
+
+                    foreach (var edition in editions)
+                    {
+                        Console.WriteLine(edition.ToString());
+                    }
+
+                    ShowSuccessMessage(MenuSuccess.BookAddSuccess);
                     break;
                 case 2:
                     // TODO: EditBorrower()
@@ -463,12 +544,197 @@ namespace LibraryManagementApp
                     Console.WriteLine("SearchByTitle()");
                     break;
                 case 8:
-                    ShowMenu(EMenuType.EMainMenu);
+                    ShowMainMenu();
                     break;
                 default:
                     Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
                     break;
             }
+
+            ShowBookMenu();
+        }
+
+        /// <summary>
+        /// Gets the list of domains for a new book.
+        /// </summary>
+        /// <param name="option"></param>
+        /// <returns></returns>
+        private List<Domain> BookDomainMenuProcessing()
+        {
+            List<Domain> bookDomains = new List<Domain>();
+            DomainService domainService = new DomainService();
+
+            bool input = false;
+            do
+            {
+                Console.WriteLine("Getting data...");
+                //IEnumerable<Domain> domains = domainService.GetAllDomains();
+                //foreach (Domain domain in domains)
+                //{
+                //    Console.WriteLine(domain.Id + ". " + domain.DomainName);
+                //}
+
+                int idDomain = -1;
+
+                Console.WriteLine(MenuOutput.BookExistingDomainChoice);
+                while (!int.TryParse(Console.ReadLine(), out idDomain))
+                {
+                    Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
+                }
+                // TODO: verify if exists in database
+
+                //IEnumerable<Domain> foundDomain = domainService.GetById(idDomain);
+                //if(foundDomain.Count() == 0)
+                //{
+                //    ShowErrorMessage(MenuErrors.FailedDomainGet);
+                //} else
+                //{
+                //    foreach(Domain domain in foundDomain)
+                //    {
+                //        bookDomains.Add(domain);
+                //    }
+                //}
+                Console.WriteLine(MenuOutput.AddMoreDomains);
+                string confirm = Console.ReadLine();
+
+                switch (confirm.ToUpper())
+                {
+                    case "YES":
+                    case "Y":
+                        input = true;
+                        break;
+                    case "NO":
+                    case "N":
+                        input = false;
+                        break;
+                    default:
+                        Console.WriteLine(MenuErrors.InvalidInputError);
+                        input = false;
+                        break;
+                }
+
+            } while (input == true);
+
+            return bookDomains;
+        }
+
+        /// <summary>
+        /// Gets the list of editions for a new book.
+        /// </summary>
+        /// <param name="option"></param>
+        private List<Edition> BookEditionMenuProcessing()
+        {
+            List<Edition> bookEditions = new List<Edition>();
+            EditionService domainService = new EditionService();
+
+            bool input = false;
+            do
+            {
+                Console.Write(MenuOutput.EditionPublisher);
+                string publisher = Console.ReadLine();
+
+                // get Year
+                Console.Write(MenuOutput.EditionYear);
+                int year = -1; 
+                while(!int.TryParse(Console.ReadLine(), out year))
+                {
+                    Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
+                }
+
+                // get PageNumber
+                Console.Write(MenuOutput.EditionPageNumber);
+                int pageNumber = -1;
+                while (!int.TryParse(Console.ReadLine(), out pageNumber))
+                {
+                    Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
+                }
+
+                // get NoForLibrary
+                Console.Write(MenuOutput.EditionNoForLibrary);
+                int noForLibrary = -1;
+                while (!int.TryParse(Console.ReadLine(), out noForLibrary))
+                {
+                    Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
+                }
+
+                // get NoForLoan
+                Console.Write(MenuOutput.EditionNoForLoan);
+                int noForLoan = -1;
+                while (!int.TryParse(Console.ReadLine(), out noForLoan))
+                {
+                    Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
+                }
+
+                Edition newEdition = new Edition(publisher, pageNumber, year, noForLibrary, noForLoan);
+                bookEditions.Add(newEdition);
+
+                Console.WriteLine(MenuOutput.AddMoreEditions);
+                string confirm = Console.ReadLine();
+
+                switch (confirm.ToUpper())
+                {
+                    case "YES":
+                    case "Y":
+                        input = true;
+                        break;
+                    case "NO":
+                    case "N":
+                        input = false;
+                        break;
+                    default:
+                        Console.WriteLine(MenuErrors.InvalidInputError);
+                        input = false;
+                        break;
+                }
+
+            } while (input == true);
+
+            return bookEditions;
+        }
+
+        #endregion
+
+        #region [ Console Helpers ]
+
+        /// <summary>
+        /// Clears the console.
+        /// </summary>
+        private void Clear()
+        {
+            Console.Clear();
+        }
+
+        /// <summary>
+        /// Displays an informative message in blue color.
+        /// </summary>
+        /// <param name="message"></param>
+        private void ShowInfoMessage(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Blue;
+            Console.WriteLine(message);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        /// <summary>
+        /// Displays an error message in red color.
+        /// </summary>
+        /// <param name="message"></param>
+        private void ShowErrorMessage(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine(message);
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+
+        /// <summary>
+        /// Displays a success message in green color.
+        /// </summary>
+        /// <param name="message"></param>
+        private void ShowSuccessMessage(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(message);
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         #endregion

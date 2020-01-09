@@ -68,7 +68,7 @@ namespace DomainModel
         }
         public override string ToString()
         {
-            return $"{FirstName} | {LastName} | {Language} | {DateOfBirth} | {DateOfDeath} ";
+            return $"{FirstName} | {LastName} | {Language} | {DateOfBirth.Value.Date} | {DateOfDeath.Value.Date} ";
         }
     }
 }
