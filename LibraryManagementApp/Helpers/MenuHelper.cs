@@ -50,6 +50,13 @@ namespace LibraryManagementApp
                     menu.Add(5, MenuOutput.EditionMenuItem);
                     menu.Add(6, MenuOutput.LoanMenuItem);
                     break;
+                case EMenuType.EAuthorMenu:
+                    menu.Add(1, MenuOutput.AddNew);
+                    menu.Add(2, MenuOutput.AuthorEdit);
+                    menu.Add(3, MenuOutput.AuthorDelete);
+                    menu.Add(4, MenuOutput.AuthorShowAll);
+                    menu.Add(8, MenuOutput.Back);
+                    break;
                 case EMenuType.EBookMenu:
                     menu.Add(1, MenuOutput.AddNew);
                     menu.Add(2, MenuOutput.BookEdit);
@@ -114,6 +121,23 @@ namespace LibraryManagementApp
         }
 
 
+        /// <summary>
+        /// Displays the AuthorMenu dashboard and asks the user for an action choice
+        /// </summary>
+        private void ShowAuthorMenu()
+        {
+            Console.WriteLine(MenuOutput.AuthorMenuTitle);
+            ShowMenu(EMenuType.EAuthorMenu);
+
+            string input = Console.ReadLine();
+
+            while (!int.TryParse(input, out option))
+            {
+                Console.WriteLine(MenuErrors.WrongInputFormatError + MenuOutput.TryAgain);
+            }
+
+            AuthorMenuProcessing(option);
+        }
 
         /// <summary>
         /// Displays the BorrowerMenu dashboard and asks the user for an action choice.
@@ -204,6 +228,14 @@ namespace LibraryManagementApp
             }
         }
 
+        /// <summary>
+        /// Processes the Author actions based on user's choice
+        /// </summary>
+        /// <param name="option"></param>
+        private void AuthorMenuProcessing(int option)
+        {
+            BookAuthorMenuProcessing(option);
+        }
 
         /// <summary>
         /// Processes the Borrower actions based on the user's choice.
