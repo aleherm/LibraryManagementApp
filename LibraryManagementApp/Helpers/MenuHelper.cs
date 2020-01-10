@@ -2,6 +2,7 @@
 using Services;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace LibraryManagementApp
@@ -9,6 +10,7 @@ namespace LibraryManagementApp
     /// <summary>
     /// A helper class for the menu shown in the console user interface.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
     public class MenuHelper
     {
         /// <summary>
@@ -702,7 +704,7 @@ namespace LibraryManagementApp
                     Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
                 }
 
-                Edition newEdition = new Edition(publisher, pageNumber, year, noForLibrary, noForLoan);
+                Edition newEdition = new Edition(publisher, pageNumber, year, EBookType.EHardCover, noForLibrary, noForLoan);
                 bookEditions.Add(newEdition);
 
                 Console.WriteLine(MenuOutput.AddMoreEditions);

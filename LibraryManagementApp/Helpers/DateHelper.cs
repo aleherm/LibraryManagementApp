@@ -1,18 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿// <copyright file="DateHelper.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace LibraryManagementApp
 {
+    using System;
+
+    /// <summary>
+    /// A helper class to process the format of a DateTime object.
+    /// </summary>
     public static class DateHelper
     {
         /// <summary>
         /// Converts to DateTime a date given in a String format.
         /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
+        /// <param name="date">The date to be converted.</param>
+        /// <returns>Null or the converted date.</returns>
         public static DateTime? ConvertStringToDate(string date)
         {
             string[] nums = date.Split('/');
@@ -22,6 +25,7 @@ namespace LibraryManagementApp
             }
             catch (Exception ex)
             {
+                int count = ex.Data.Count;
                 return null;
             }
         }

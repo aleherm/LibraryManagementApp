@@ -1,51 +1,97 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-
-namespace DomainModel
+﻿namespace DomainModel
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
+
     /// <summary>
-    /// Edition entity class
+    /// Edition entity class.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
     public class Edition : IValidatableObject
     {
-        public int Id { get; set; }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Edition"/> class.
+        /// </summary>
+        public Edition()
+        {
+        }
 
-        public EBookType BookType { get; set; }
-
-        [Range(5, 5000, ErrorMessage = ErrorMessages.PageNumberRange)]
-        public int PageNumber { get; set; }
-
-        public int? Year { get; set; }
-        
-        [Required(ErrorMessage = ErrorMessages.PublisherRequired)]
-        [StringLength(100, MinimumLength = 3, ErrorMessage = ErrorMessages.PublisherRangeLength)]
-        public string Publisher { get; set; }
-
-        [Required(ErrorMessage = ErrorMessages.NoBooksForLibraryRequired)]
-        [Range(0, 50, ErrorMessage = ErrorMessages.LibraryBooksRangeNumber)]
-        public int NoForLibrary { get; set; }
-
-        [Required(ErrorMessage = ErrorMessages.NoBooksForLoanRequired)]
-        [Range(0, 50, ErrorMessage = ErrorMessages.LoanBooksRangeNumber)]
-        public int NoForLoan { get; set; }
-
-        [Required(ErrorMessage = ErrorMessages.NoTotalBooksRequired)]
-        [Range(0, 100, ErrorMessage = ErrorMessages.TotalBooksRangeNumber)]
-        public int NoTotal { get; set; }
-
-        public Edition() { }
-
-        public Edition(string publisher, int pageNumber, int year, int noForLibrary, int noForLoan)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Edition"/> class.
+        /// </summary>
+        /// <param name="publisher">The publisher name.</param>
+        /// <param name="pageNumber">The page number.</param>
+        /// <param name="year">The year.</param>
+        /// <param name="bookType">The book type.</param>
+        /// <param name="noForLibrary">The number of books for library reading.</param>
+        /// <param name="noForLoan">The number of books for loan.</param>
+        public Edition(string publisher, int pageNumber, int year, EBookType bookType, int noForLibrary, int noForLoan)
         {
             Publisher = publisher;
             PageNumber = pageNumber;
             Year = year;
+            BookType = bookType;
             NoForLibrary = noForLibrary;
             NoForLoan = noForLoan;
             NoTotal = noForLoan + noForLibrary;
         }
 
+        /// <summary>
+        /// Gets or sets the ID of the borrower.
+        /// </summary>
+        public int Id { get; set; }
+
+        /// <summary>
+        /// Gets or sets the book type.
+        /// </summary>
+        public EBookType BookType { get; set; }
+
+        /// <summary>
+        /// Gets or sets the page number.
+        /// </summary>
+        [Range(5, 5000, ErrorMessage = ErrorMessages.PageNumberRange)]
+        public int PageNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets the year.
+        /// </summary>
+        public int? Year { get; set; }
+
+        /// <summary>
+        /// Gets or sets the publisher name.
+        /// </summary>
+        [Required(ErrorMessage = ErrorMessages.PublisherRequired)]
+        [StringLength(100, MinimumLength = 3, ErrorMessage = ErrorMessages.PublisherRangeLength)]
+        public string Publisher { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of books for library reading.
+        /// </summary>
+        [Required(ErrorMessage = ErrorMessages.NoBooksForLibraryRequired)]
+        [Range(0, 50, ErrorMessage = ErrorMessages.LibraryBooksRangeNumber)]
+        public int NoForLibrary { get; set; }
+
+        /// <summary>
+        /// Gets or sets the number of books for loan.
+        /// </summary>
+        [Required(ErrorMessage = ErrorMessages.NoBooksForLoanRequired)]
+        [Range(0, 50, ErrorMessage = ErrorMessages.LoanBooksRangeNumber)]
+        public int NoForLoan { get; set; }
+
+        /// <summary>
+        /// Gets or sets the total number of books.
+        /// </summary>
+        [Required(ErrorMessage = ErrorMessages.NoTotalBooksRequired)]
+        [Range(0, 100, ErrorMessage = ErrorMessages.TotalBooksRangeNumber)]
+        public int NoTotal { get; set; }
+
+        /// <summary>
+        /// Validates the entity.
+        /// </summary>
+        /// <param name="validationContext">The validation context.</param>
+        /// <returns>The validation result and memeber names.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             List<string> memberNames = new List<string>();
@@ -70,10 +116,17 @@ namespace DomainModel
             }
 
             if (memberNames.Count != 0)
+            {
                 yield return new ValidationResult(ErrorMessages.InvalidNumber, memberNames);
+            }
+
             yield return null;
         }
 
+        /// <summary>
+        /// Shows the data of the current entity.
+        /// </summary>
+        /// <returns>Output string for an Edition entity.</returns>
         public override string ToString()
         {
             return $"{Publisher} | year {Year} | {PageNumber} pages | {NoForLibrary} to library + {NoForLoan} to loan = {NoTotal} total ";

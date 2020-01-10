@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DomainModel
+﻿namespace DomainModel
 {
+    using System.Diagnostics.CodeAnalysis;
+
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1600", Justification = "Constants don't need to be documented.")]
     public static class ErrorMessages
     {
         // Required
@@ -62,7 +59,7 @@ namespace DomainModel
         public const string InvalidDate = "Invalid date";
         public const string InvalidEmail = "Invalid email";
         public const string InvalidYear = "Invalid year";
-        public static string InvalidNumber = "Invalid number";
-        public static string InvalidData = "Invalid data";
+        public const string InvalidNumber = "Invalid number";
+        public const string InvalidData = "Invalid data";
     }
 }

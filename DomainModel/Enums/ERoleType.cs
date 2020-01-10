@@ -1,17 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace DomainModel
+﻿namespace DomainModel
 {
+    using System.Diagnostics.CodeAnalysis;
+
     /// <summary>
-    /// The roles types of a borrower
+    /// The roles types of a borrower.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1602", Justification = "Enumerations don't need to be documented.")]
     public enum ERoleType
     {
         EReader,
-        ELibrarian
+        ELibrarian,
     }
 }

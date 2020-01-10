@@ -1,15 +1,16 @@
-﻿using DomainModel;
-using NUnit.Framework;
-using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace TestDomainModel
+﻿namespace TestDomainModel
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
+    using DomainModel;
+    using NUnit.Framework;
+
+    /// <summary>
+    /// Tests the Loan entity.
+    /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
     [TestFixture]
     public class LoanTest
     {
@@ -18,6 +19,9 @@ namespace TestDomainModel
         private ValidationContext context;
         private IList<ValidationResult> results;
 
+        /// <summary>
+        /// Sets up valid properties for the object to be tested.
+        /// </summary>
         [SetUp]
         public void LoanSetup()
         {
@@ -25,29 +29,11 @@ namespace TestDomainModel
             {
                 Id = 1,
                 DueDate = new DateTime(2019, 2, 1),
-                ReturnDate = new DateTime(),
-                //Borrower = new Borrower()
-                //{
-                //    FirstName = "Ioan",
-                //    LastName = "Marian",
-                //    Email = "ioan@marian.com",
-                //    Gender = EGenderType.EMale,
-                //    Loans = new List<Loan>()
-                //}
+                ReturnDate = new DateTime(2019, 10, 10),
             };
 
             context = new ValidationContext(loan, serviceProvider: null, items: null);
             results = new List<ValidationResult>();
         }
-
-        //[Test]
-        //public void BorrowerShouldNotBeNull()
-        //{
-        //    loan.Borrower = null;
-
-        //    bool isValid = Validator.TryValidateObject(loan, context, results);
-
-        //    Assert.IsFalse(isValid);
-        //}
     }
 }

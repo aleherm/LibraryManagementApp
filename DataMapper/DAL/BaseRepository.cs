@@ -1,13 +1,24 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Linq.Expressions;
-
-namespace DataMapper
+﻿namespace DataMapper
 {
-    public abstract class BaseRepository<T> : IRepository<T> where T : class
+    using System;
+    using System.Collections.Generic;
+    using System.Data.Entity;
+    using System.Linq;
+    using System.Linq.Expressions;
+
+    /// <summary>
+    /// Basic data access methods.
+    /// </summary>
+    public abstract class BaseRepository<T> : IRepository<T> 
+        where T : class
     {
+        /// <summary>
+        /// Gets the list of entities based on given type.
+        /// </summary>
+        /// <param name="filter">The filter criteria.</param>
+        /// <param name="orderBy">The ordering query.</param>
+        /// <param name="includeProperties">Properties to be included.</param>
+        /// <returns>The list of asked entities.</returns>
         public virtual IEnumerable<T> Get(
             Expression<Func<T, bool>> filter = null,
             Func<IQueryable<T>, IOrderedQueryable<T>> orderBy = null,
@@ -41,6 +52,10 @@ namespace DataMapper
             }
         }
 
+        /// <summary>
+        /// Inserts a given entity in the database.
+        /// </summary>
+        /// <param name="entity">The entity to be inserted.</param>
         public virtual void Insert(T entity)
         {
             using (var ctx = new LibraryDBContext())
@@ -52,6 +67,10 @@ namespace DataMapper
             }
         }
 
+        /// <summary>
+        /// Updates a given entity in the database.
+        /// </summary>
+        /// <param name="item">The modified entity.</param>
         public virtual void Update(T item)
         {
             using (var ctx = new LibraryDBContext())
@@ -64,11 +83,19 @@ namespace DataMapper
             }
         }
 
+        /// <summary>
+        /// Deletes a given entity based on ID from the database.
+        /// </summary>
+        /// <param name="id">The ID of the entity.</param>
         public virtual void Delete(object id)
         {
-            Delete(GetByID(id));
+            this.Delete(this.GetByID(id));
         }
 
+        /// <summary>
+        /// Deletes a given entity from the database.
+        /// </summary>
+        /// <param name="entityToDelete">The entity to delete.</param>
         public virtual void Delete(T entityToDelete)
         {
             using (var ctx = new LibraryDBContext())
@@ -86,6 +113,11 @@ namespace DataMapper
             }
         }
 
+        /// <summary>
+        /// Gets the entity based on given ID.
+        /// </summary>
+        /// <param name="id">The ID of the entity.</param>
+        /// <returns>The entity.</returns>
         public virtual T GetByID(object id)
         {
             using (var ctx = new LibraryDBContext())

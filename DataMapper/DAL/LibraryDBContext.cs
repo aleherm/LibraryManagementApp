@@ -1,14 +1,18 @@
-﻿using DomainModel;
-using System.Data.Entity;
-
-namespace DataMapper
+﻿namespace DataMapper
 {
+    using System.Data.Entity;
+    using DomainModel;
+
+    /// <summary>
+    /// The database context.
+    /// </summary>
     public class LibraryDBContext : DbContext
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="LibraryDBContext"/> class.
         /// </summary>
-        public LibraryDBContext() : base("strLibraryConnection")
+        public LibraryDBContext() 
+            : base("strLibraryConnection")
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<LibraryDBContext, Migrations.Configuration>());
         }

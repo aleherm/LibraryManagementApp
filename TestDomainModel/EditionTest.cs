@@ -1,17 +1,20 @@
-﻿using DomainModel;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-
-namespace TestDomainModel
+﻿namespace TestDomainModel
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using DomainModel;
+    using NUnit.Framework;
+
+    /// <summary>
+    /// Tests the Edition entity.
+    /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
     [TestFixture]
     public class EditionTest
     {
-        #region [ Declarations ]
-
         /// <summary>
         /// Edition object to test.
         /// </summary>
@@ -27,10 +30,6 @@ namespace TestDomainModel
         /// </summary>
         private IList<ValidationResult> validationResults;
 
-        #endregion
-
-        #region [ Setup ]
-
         /// <summary>
         /// Sets up valid properties for the object to be tested.
         /// </summary>
@@ -45,17 +44,16 @@ namespace TestDomainModel
                 Publisher = "Humanitas",
                 NoTotal = 10,
                 NoForLibrary = 2,
-                NoForLoan = 8
+                NoForLoan = 8,
             };
 
             context = new ValidationContext(edition);
             validationResults = new List<ValidationResult>();
         }
 
-        #endregion
-
-        #region [ Required Tests ]
-
+        /// <summary>
+        /// Tests the PublisherName to be null.
+        /// </summary>
         [TestCase]
         public void PublisherNameShouldNotBeNull()
         {
@@ -66,10 +64,10 @@ namespace TestDomainModel
             Assert.IsFalse(isValid);
         }
 
-        #endregion
-
-        #region [ Year Tests ]
-
+        /// <summary>
+        /// Tests the Year to be negative or zero.
+        /// </summary>
+        /// <param name="year">The year of the book Edition.</param>
         [Test]
         public void YearShouldNotBeNegativeOrZero([Values(-50, -1, 0)] int year)
         {
@@ -86,6 +84,9 @@ namespace TestDomainModel
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "Year").Count());
         }
 
+        /// <summary>
+        /// YearShouldNotBeBiggerThanCurrent.
+        /// </summary>
         [Test]
         public void YearShouldNotBeBiggerThanCurrent()
         {
@@ -102,10 +103,10 @@ namespace TestDomainModel
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "Year").Count());
         }
 
-        #endregion
-
-        #region [ PageNumber Tests ]
-        
+        /// <summary>
+        /// PageNumberWithinRangeShouldBeValid.
+        /// </summary>
+        /// <param name="pages">The page number.</param>
         [Test]
         public void PageNumberWithinRangeShouldBeValid([Values(5, 100, 4000)] int pages)
         {
@@ -118,6 +119,10 @@ namespace TestDomainModel
             Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
         }
 
+        /// <summary>
+        /// PageNumberShouldNotBeSmallerThan5.
+        /// </summary>
+        /// <param name="pages">The page number.</param>
         [Test]
         public void PageNumberShouldNotBeSmallerThan5([Values(-1, 0, 4)] int pages)
         {
@@ -130,10 +135,10 @@ namespace TestDomainModel
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
         }
 
-        #endregion
-
-        #region [ Publisher Tests ]
-
+        /// <summary>
+        /// PublisherNameShouldNotHaveLessThan3Characters.
+        /// </summary>
+        /// <param name="name">The publisher name.</param>
         [Test]
         public void PublisherNameShouldNotHaveLessThan3Characters([Values("x", "xx")] string name)
         {
@@ -148,6 +153,10 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.PublisherRangeLength, msg.ErrorMessage);
         }
 
+        /// <summary>
+        /// PublisherNameShouldBevalidWithNoCharsWithinRange.
+        /// </summary>
+        /// <param name="name">The publisher name.</param>
         [Test]
         public void PublisherNameShouldBevalidWithNoCharsWithinRange([Values("Amintiri din copilarie", "Morometii", "XoXo")] string name)
         {
@@ -160,6 +169,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
         }
 
+        /// <summary>
+        /// PublisherShouldNotHaveMoreThan100Chars.
+        /// </summary>
         [Test]
         public void PublisherShouldNotHaveMoreThan100Chars()
         {
@@ -174,10 +186,9 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.PublisherRangeLength, msg.ErrorMessage);
         }
 
-        #endregion
-
-        #region [ NoForLibrary ]
-
+        /// <summary>
+        /// NoForLibraryShouldBeBeValidWithPositiveValue.
+        /// </summary>
         [Test]
         public void NoForLibraryShouldBeBeValidWithPositiveValue()
         {
@@ -190,6 +201,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
         }
 
+        /// <summary>
+        /// NoForLibraryShouldNotBeNegative.
+        /// </summary>
         [Test]
         public void NoForLibraryShouldNotBeNegative()
         {
@@ -206,10 +220,9 @@ namespace TestDomainModel
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "NoForLibrary").Count());
         }
 
-        #endregion
-
-        #region [ NoForLoan ]
-
+        /// <summary>
+        /// NoForLoanShouldBeValidWithPositiveValue.
+        /// </summary>
         [Test]
         public void NoForLoanShouldBeValidWithPositiveValue()
         {
@@ -222,6 +235,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
         }
 
+        /// <summary>
+        /// NoForLoanShouldNotBeNegative.
+        /// </summary>
         [Test]
         public void NoForLoanShouldNotBeNegative()
         {
@@ -238,10 +254,9 @@ namespace TestDomainModel
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "NoForLoan").Count());
         }
 
-        #endregion
-
-        #region [ NoTotal ]
-
+        /// <summary>
+        /// NoTotalShouldBeValidWithPositiveValue.
+        /// </summary>
         [Test]
         public void NoTotalShouldBeValidWithPositiveValue()
         {
@@ -254,6 +269,9 @@ namespace TestDomainModel
             Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
         }
 
+        /// <summary>
+        /// NoTotalShouldNotBeNegative.
+        /// </summary>
         [Test]
         public void NoTotalShouldNotBeNegative()
         {
@@ -266,7 +284,14 @@ namespace TestDomainModel
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
         }
 
-        [Test, Sequential]
+        /// <summary>
+        /// NoTotalShouldNotBeSumOfLoanAndLibraryBooksNumber
+        /// </summary>
+        /// <param name="noLib">The book number for library.</param>
+        /// <param name="noLoan">The book number for loan</param>
+        /// <param name="noTotal">The total number of books.</param>
+        [Test]
+        [Sequential]
         public void NoTotalShouldNotBeSumOfLoanAndLibraryBooksNumber([Values(2, 5, 10)] int noLib, [Values(0, 4, 11)] int noLoan, [Values(2, 9, 21)] int noTotal)
         {
             edition.NoForLibrary = noLib;
@@ -275,7 +300,5 @@ namespace TestDomainModel
 
             Assert.AreEqual(edition.NoForLibrary + edition.NoForLoan, edition.NoTotal);
         }
-
-        #endregion
     }
 }

@@ -1,11 +1,20 @@
-﻿using DomainModel;
-using Moq;
-using NUnit.Framework;
-using Services;
-using System;
+﻿// <copyright file="BorrowerServiceTest.cs" company="PlaceholderCompany">
+// Copyright (c) PlaceholderCompany. All rights reserved.
+// </copyright>
 
 namespace TestServices
 {
+    using System;
+    using System.Diagnostics.CodeAnalysis;
+    using DomainModel;
+    using Moq;
+    using NUnit.Framework;
+    using Services;
+
+    /// <summary>
+    /// Test class for the BorrowerService.
+    /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
     [TestFixture]
     public class BorrowerServiceTest
     {
@@ -14,9 +23,10 @@ namespace TestServices
         /// </summary>
         private BorrowerService service;
 
-        private Borrower newBorrower;
-
-        #region [ Setup ]
+        /// <summary>
+        /// The Borrower entity based on which the tests will run.
+        /// </summary>
+        private Borrower borrower;
 
         /// <summary>
         /// The setup of the BorrowerService object to be tested.
@@ -26,21 +36,25 @@ namespace TestServices
         {
             service = new BorrowerService();
             Address address = new Address("Brasov", "Octavian", 10);
-            newBorrower = new Borrower("Alexandra", "Hermeneanu", "ale@email.com", new DateTime(1999, 10, 10), address, true, false);
+            borrower = new Borrower("Alexandra", "Hermeneanu", "ale@email.com", new DateTime(1999, 10, 10), address, true, false);
         }
 
-        #endregion
-
+        /// <summary>
+        /// Test that should pass with valid Borrower object.
+        /// </summary>
         [Test]
         public void BorowerShouldBeValid()
         {
-            Assert.AreEqual(service.IsValidBorrower(newBorrower), true);
+            Assert.AreEqual(service.IsValidBorrower(borrower), true);
         }
 
+        /// <summary>
+        /// Test that should pass with valid Borrower object.
+        /// </summary>
         [Test]
         public void AddBorowerShouldBeSuccessful()
         {
-            Assert.AreEqual(service.AddNewBorrower(newBorrower), true);
+            Assert.AreEqual(service.AddNewBorrower(borrower), true);
         }
     }
 }
