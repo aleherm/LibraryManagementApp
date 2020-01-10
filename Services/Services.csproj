@@ -44,13 +44,21 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AddressService.cs" />
-    <Compile Include="AuthorService.cs" />
-    <Compile Include="BookService.cs" />
-    <Compile Include="BorrowerService.cs" />
-    <Compile Include="DomainService.cs" />
-    <Compile Include="EditionService.cs" />
+    <Compile Include="Interfaces\IAddressService.cs" />
+    <Compile Include="Interfaces\IAuthorService.cs" />
+    <Compile Include="Interfaces\IBookService.cs" />
+    <Compile Include="Interfaces\IBorrowerService.cs" />
+    <Compile Include="Interfaces\IDomainService.cs" />
+    <Compile Include="Interfaces\IEditionService.cs" />
+    <Compile Include="Interfaces\ILoanService.cs" />
+    <Compile Include="Services\AddressService.cs" />
+    <Compile Include="Services\AuthorService.cs" />
+    <Compile Include="Services\BookService.cs" />
+    <Compile Include="Services\BorrowerService.cs" />
+    <Compile Include="Services\DomainService.cs" />
+    <Compile Include="Services\EditionService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\LoanService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataMapper\DataMapper.csproj">

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Services
 {
-    public class EditionService
+    public class EditionService : IEditionService
     {
         private EditionRepository editionRepository;
 
@@ -15,7 +15,7 @@ namespace Services
             editionRepository = new EditionRepository();
         }
 
-        private bool IsValidEdition(Edition edition)
+        public bool IsValidEdition(Edition edition)
         {
             ValidationContext context = new ValidationContext(edition);
             IList<ValidationResult> validationResults = new List<ValidationResult>();
@@ -23,9 +23,14 @@ namespace Services
             return Validator.TryValidateObject(edition, context, validationResults, true);
         }
 
-        public void AddNewEdition(Edition edition)
+        public bool AddNewEdition(Edition edition)
         {
-            editionRepository.Insert(edition);
+            if(IsValidEdition(edition))
+            {
+                editionRepository.Insert(edition);
+                return true;
+            }
+            return false;
         }
 
         public IEnumerable<Edition> GetAllEditions()
@@ -35,9 +40,9 @@ namespace Services
                 includeProperties: "Address");
         }
 
-        public Edition getEdition(int id)
+        public Edition GetEditionById(int idEdition)
         {
-            return editionRepository.GetByID(id);
+            return editionRepository.GetByID(idEdition);
         }
     }
 }

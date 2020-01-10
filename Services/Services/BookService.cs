@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Services
 {
-    public class BookService
+    public class BookService : IBookService
     {
         private BookRepository bookRepository;
 
@@ -15,7 +15,7 @@ namespace Services
             bookRepository = new BookRepository();
         }
 
-        private bool IsValidBook(Book book)
+        public bool IsValidBook(Book book)
         {
             ValidationContext context = new ValidationContext(book);
             IList<ValidationResult> validationResults = new List<ValidationResult>();
@@ -23,19 +23,19 @@ namespace Services
             return Validator.TryValidateObject(book, context, validationResults, true);
         }
 
-        public void AddNewBook()
+        public bool AddNewBook(Book book)
         {
-            throw new NotImplementedException();
+            if(IsValidBook(book))
+            {
+                bookRepository.Insert(book);
+                return true;
+            }
+            return false;
         }
 
-        public Book getBook(int id)
+        public Book GetBookById(int idBook)
         {
-            return bookRepository.GetByID(id);
-        }
-
-        public void AddNewBook(Book newBook)
-        {
-            bookRepository.Insert(newBook);
+            return bookRepository.GetByID(idBook);
         }
     }
 }

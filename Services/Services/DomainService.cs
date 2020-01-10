@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Services
 {
-    public class DomainService
+    public class DomainService : IDomainService
     {
         private DomainRepository domainRepository;
 
@@ -16,7 +16,7 @@ namespace Services
             domainRepository = new DomainRepository();
         }
 
-        private bool IsValidDomain(Domain domain)
+        public bool IsValidDomain(Domain domain)
         {
             ValidationContext context = new ValidationContext(domain);
             IList<ValidationResult> validationResults = new List<ValidationResult>();
@@ -24,9 +24,14 @@ namespace Services
             return Validator.TryValidateObject(domain, context, validationResults, true);
         }
 
-        public void AddNewDomain()
+        public bool AddNewDomain(Domain domain)
         {
-            throw new NotImplementedException();
+            if(IsValidDomain(domain))
+            {
+                domainRepository.Insert(domain);
+                return true;
+            }
+            return false;
         }
 
         public IEnumerable<Domain> GetAllDomains()
@@ -35,15 +40,7 @@ namespace Services
                 orderBy: q => q.OrderBy(c => c.Id));
         }
 
-        public IEnumerable<Domain> GetById(int idDomain)
-        {
-            return domainRepository.Get(
-                filter: exp => exp.Id == 1,
-                orderBy: q => q.OrderBy(c => c.DomainName),
-                includeProperties: "Subdomains, ParentDomain");
-        }
-
-        public Domain GetDomain(int idDomain)
+        public Domain GetDomainById(int idDomain)
         {
             return domainRepository.GetByID(idDomain);
         }

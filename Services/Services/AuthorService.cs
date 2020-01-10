@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace Services
 {
-    public class AuthorService
+    public class AuthorService : IAuthorService
     {
         private AuthorRepository authorRepository;
 
@@ -16,7 +16,7 @@ namespace Services
             authorRepository = new AuthorRepository();
         }
 
-        private bool IsValidAuthor(Author author)
+        public bool IsValidAuthor(Author author)
         {
             ValidationContext context = new ValidationContext(author);
             IList<ValidationResult> validationResults = new List<ValidationResult>();
@@ -24,12 +24,11 @@ namespace Services
             return Validator.TryValidateObject(author, context, validationResults, true);
         }
 
-        public bool AddNewAuthor(string firstName, string lastName, string language, DateTime? dateOfBirth, DateTime? dateOfDeath)
+        public bool AddNewAuthor(Author author)
         {
-            Author newAuthor = new Author(firstName, lastName, language, dateOfBirth, dateOfDeath);
-            if (IsValidAuthor(newAuthor))
+            if (IsValidAuthor(author))
             {
-                authorRepository.Insert(newAuthor);
+                authorRepository.Insert(author);
                 return true;
             }
             return false;
@@ -41,12 +40,7 @@ namespace Services
                  orderBy: q => q.OrderBy(c => c.FirstName));
         }
 
-        public Author GetAuthor(int idAuthor)
-        {
-            return authorRepository.GetByID(idAuthor);
-        }
-
-        public Author GetById(int idAuthor)
+        public Author GetAuthorById(int idAuthor)
         {
             return authorRepository.GetByID(idAuthor);
         }

@@ -45,11 +45,11 @@ namespace Services
         /// <param name="readerFlg"></param>
         /// <param name="librarianFlg"></param>
         /// <returns></returns>
-        public bool AddNewBorrower(Borrower newBorrower)
+        public bool AddNewBorrower(Borrower borrower)
         {
-            if (IsValidBorrower(newBorrower))
+            if (IsValidBorrower(borrower))
             {
-                borrowerRepository.Insert(newBorrower);
+                borrowerRepository.Insert(borrower);
                 return true;
             }
 
@@ -63,9 +63,9 @@ namespace Services
                 includeProperties: "Address");
         }
 
-        public Borrower GetBorrower(int id)
+        public Borrower GetBorrowerById(int idBorrower)
         {
-            return borrowerRepository.GetByID(id);
+            return borrowerRepository.GetByID(idBorrower);
         }
     }
 }

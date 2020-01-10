@@ -420,7 +420,7 @@ namespace LibraryManagementApp
                     // insert new Author in DB --no more-- should be added directly when adding new Book                 
                     Author newAuthor = new Author(firstName, lastName, language, dateOfBirth, dateOfDeath);
                     bookAuthors.Add(newAuthor);
-                    //authorService.AddNewAuthor(firstName, lastName, language, dateOfBirth, dateOfDeath);
+                    //authorService.AddNewAuthor(newAuthor);
 
                     ShowSuccessMessage(MenuSuccess.BookAuthorSavedInputs);
 
@@ -461,7 +461,7 @@ namespace LibraryManagementApp
                         }
                         // TODO: verify if exists in database
 
-                        Author foundAuthor = authorService.GetById(idAuthor);
+                        Author foundAuthor = authorService.GetAuthorById(idAuthor);
                         if (foundAuthor == null)
                         {
                             ShowErrorMessage(MenuErrors.FailedAuthorGet);
@@ -622,17 +622,14 @@ namespace LibraryManagementApp
                 }
                 // TODO: verify if exists in database
 
-                IEnumerable<Domain> foundDomain = domainService.GetById(idDomain);
-                if (foundDomain.Count() == 0)
+                Domain foundDomain = domainService.GetDomainById(idDomain);
+                if (foundDomain == null)
                 {
                     ShowErrorMessage(MenuErrors.FailedDomainGet);
                 }
                 else
                 {
-                    foreach (Domain domain in foundDomain)
-                    {
-                        bookDomains.Add(domain);
-                    }
+                    bookDomains.Add(foundDomain);
                 }
                 Console.WriteLine(MenuOutput.AddMoreDomains);
                 string confirm = Console.ReadLine();

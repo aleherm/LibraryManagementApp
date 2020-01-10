@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Services
 {
-    public class AddressService
+    public class AddressService : IAddressService
     {
         private AddressRepository addressRepository;
 
@@ -14,7 +14,7 @@ namespace Services
             addressRepository = new AddressRepository();
         }
 
-        private bool IsValidAddress(Address address)
+        public bool IsValidAddress(Address address)
         {
             ValidationContext context = new ValidationContext(address);
             IList<ValidationResult> validationResults = new List<ValidationResult>();
@@ -22,12 +22,11 @@ namespace Services
             return Validator.TryValidateObject(address, context, validationResults, true);
         }
 
-        public bool AddNewAddress(string city, string street, int? number)
+        public bool AddNewAddress(Address address)
         {
-            Address newAddress = new Address(city, street, number);
-            if (IsValidAddress(newAddress))
+            if (IsValidAddress(address))
             {
-                addressRepository.Insert(newAddress);
+                addressRepository.Insert(address);
                 return true;
             }
             return false;
