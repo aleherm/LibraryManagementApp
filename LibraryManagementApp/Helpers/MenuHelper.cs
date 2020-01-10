@@ -446,11 +446,11 @@ namespace LibraryManagementApp
                     do
                     {
                         Console.WriteLine("Getting data...");
-                        //IEnumerable<Author> authors = authorService.GetAllAuthors();
-                        //foreach (Author domain in domains)
-                        //{
-                        //    Console.WriteLine(author.Id + ". " + author.FirstName + " " + author.LastName);
-                        //}
+                        IEnumerable<Author> authors = authorService.GetAllAuthors();
+                        foreach (Author author in authors)
+                        {
+                            Console.WriteLine(author.Id + ". " + author.FirstName + " " + author.LastName);
+                        }
 
                         int idAuthor = -1;
 
@@ -461,17 +461,15 @@ namespace LibraryManagementApp
                         }
                         // TODO: verify if exists in database
 
-                        //IEnumerable<Author> foundAuthor = authorService.GetById(idAuthor);
-                        //if(foundAuthor.Count() == 0)
-                        //{
-                        //    ShowErrorMessage(MenuErrors.FailedAuthorGet);
-                        //} else
-                        //{
-                        //    foreach(Author author in foundauthor)
-                        //    {
-                        //        bookAuthors.Add(author);
-                        //    }
-                        //}
+                        Author foundAuthor = authorService.GetById(idAuthor);
+                        if (foundAuthor == null)
+                        {
+                            ShowErrorMessage(MenuErrors.FailedAuthorGet);
+                        }
+                        else
+                        {
+                                bookAuthors.Add(foundAuthor);
+                        }
                         Console.WriteLine(MenuOutput.AddMoreDomains);
                         string confirm = Console.ReadLine();
 
@@ -554,6 +552,10 @@ namespace LibraryManagementApp
                         Console.WriteLine(edition.ToString());
                     }
 
+                    Book newBook = new Book(title, authors, domains, editions);
+                    BookService bookService = new BookService();
+                    bookService.AddNewBook(newBook);
+
                     ShowSuccessMessage(MenuSuccess.BookAddSuccess);
                     break;
                 case 2:
@@ -605,11 +607,11 @@ namespace LibraryManagementApp
             do
             {
                 Console.WriteLine("Getting data...");
-                //IEnumerable<Domain> domains = domainService.GetAllDomains();
-                //foreach (Domain domain in domains)
-                //{
-                //    Console.WriteLine(domain.Id + ". " + domain.DomainName);
-                //}
+                IEnumerable<Domain> domains = domainService.GetAllDomains();
+                foreach (Domain domain in domains)
+                {
+                    Console.WriteLine(domain.Id + ". " + domain.DomainName);
+                }
 
                 int idDomain = -1;
 
@@ -620,17 +622,18 @@ namespace LibraryManagementApp
                 }
                 // TODO: verify if exists in database
 
-                //IEnumerable<Domain> foundDomain = domainService.GetById(idDomain);
-                //if(foundDomain.Count() == 0)
-                //{
-                //    ShowErrorMessage(MenuErrors.FailedDomainGet);
-                //} else
-                //{
-                //    foreach(Domain domain in foundDomain)
-                //    {
-                //        bookDomains.Add(domain);
-                //    }
-                //}
+                IEnumerable<Domain> foundDomain = domainService.GetById(idDomain);
+                if (foundDomain.Count() == 0)
+                {
+                    ShowErrorMessage(MenuErrors.FailedDomainGet);
+                }
+                else
+                {
+                    foreach (Domain domain in foundDomain)
+                    {
+                        bookDomains.Add(domain);
+                    }
+                }
                 Console.WriteLine(MenuOutput.AddMoreDomains);
                 string confirm = Console.ReadLine();
 

@@ -41,9 +41,14 @@ namespace Services
                  orderBy: q => q.OrderBy(c => c.FirstName));
         }
 
-        public Author getAuthor(int id)
+        public Author GetAuthor(int idAuthor)
         {
-            return authorRepository.GetByID(id);
+            return authorRepository.GetByID(idAuthor);
+        }
+
+        public Author GetById(int idAuthor)
+        {
+            return authorRepository.GetByID(idAuthor);
         }
     }
 }

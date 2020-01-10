@@ -32,5 +32,10 @@ namespace Services
         {
             return bookRepository.GetByID(id);
         }
+
+        public void AddNewBook(Book newBook)
+        {
+            bookRepository.Insert(newBook);
+        }
     }
 }

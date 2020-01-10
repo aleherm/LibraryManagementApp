@@ -32,8 +32,7 @@ namespace Services
         public IEnumerable<Domain> GetAllDomains()
         {
             return domainRepository.Get(
-                orderBy: q => q.OrderBy(c => c.DomainName),
-                includeProperties: "Address");
+                orderBy: q => q.OrderBy(c => c.Id));
         }
 
         public IEnumerable<Domain> GetById(int idDomain)
@@ -44,9 +43,9 @@ namespace Services
                 includeProperties: "Subdomains, ParentDomain");
         }
 
-        public Domain getDomain(int id)
+        public Domain GetDomain(int idDomain)
         {
-            return domainRepository.GetByID(id);
+            return domainRepository.GetByID(idDomain);
         }
 
         //public IEnumerable<Domain> GetAllSubdomains(int idDomain)

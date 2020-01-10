@@ -34,5 +34,10 @@ namespace DomainModel
             Subdomains = subdomains;
             Books = new List<Book>();
         }
+
+        public override string ToString()
+        {
+            return $"{DomainName} | {ParentDomain}";
+        }
     }
 }
