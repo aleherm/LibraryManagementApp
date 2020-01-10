@@ -27,7 +27,7 @@ namespace Services
         /// </summary>
         /// <param name="borrower"></param>
         /// <returns></returns>
-        private bool IsValidBorrower(Borrower borrower)
+        public bool IsValidBorrower(Borrower borrower)
         {
             ValidationContext context = new ValidationContext(borrower);
             IList<ValidationResult> validationResults = new List<ValidationResult>();
@@ -45,11 +45,8 @@ namespace Services
         /// <param name="readerFlg"></param>
         /// <param name="librarianFlg"></param>
         /// <returns></returns>
-        public bool AddNewBorrower(string firstName, string lastName, string email, DateTime? dob, bool readerFlg, bool librarianFlg, string city, string street, int number)
+        public bool AddNewBorrower(Borrower newBorrower)
         {
-            Address address = new Address(city, street, number);
-            Borrower newBorrower = new Borrower(firstName, lastName, email, dob, address, readerFlg, librarianFlg);
-
             if (IsValidBorrower(newBorrower))
             {
                 borrowerRepository.Insert(newBorrower);
@@ -66,7 +63,7 @@ namespace Services
                 includeProperties: "Address");
         }
 
-        public Borrower getBorrower(int id)
+        public Borrower GetBorrower(int id)
         {
             return borrowerRepository.GetByID(id);
         }

@@ -322,8 +322,13 @@ namespace LibraryManagementApp
                             librarianFlg = false;
                             break;
                     }
-                    
-                    bool isInsertSuccessful = borrowerService.AddNewBorrower(firstName, lastName, email, dateOfBirth, readerFlg, librarianFlg, city, street, number);
+
+                    Address address = new Address(city, street, number);
+
+                    Borrower newBorrower = new Borrower(firstName, lastName, email, dateOfBirth, address, readerFlg, librarianFlg);
+
+
+                    bool isInsertSuccessful = borrowerService.AddNewBorrower(newBorrower);
 
                     if(isInsertSuccessful)
                     {

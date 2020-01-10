@@ -19,9 +19,12 @@ namespace DomainModel
         [Required(ErrorMessage = ErrorMessages.SubdomainRequired)]
         public IList<Domain> Subdomains { get; set; }
 
+        public List<Book> Books { get; set; }
+
         public Domain()
         {
             Subdomains = new List<Domain>();
+            Books = new List<Book>();
         }
 
         public Domain(string domainName, Domain parent, List<Domain> subdomains)
@@ -29,6 +32,7 @@ namespace DomainModel
             DomainName = domainName;
             ParentDomain = parent;
             Subdomains = subdomains;
+            Books = new List<Book>();
         }
     }
 }

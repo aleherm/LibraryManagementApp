@@ -27,9 +27,11 @@ namespace DomainModel
 
         public DateTime? DateOfDeath { get; set; }
 
+        public List<Book> Books { get; set; }
+
         public Author()
         {
-
+            Books = new List<Book>();
         }
 
         public Author(string firstName, string lastName, string language, DateTime? dateOfBirth, DateTime? dateOfDeath)
@@ -39,6 +41,7 @@ namespace DomainModel
             Language = language;
             DateOfBirth = dateOfBirth;
             DateOfDeath = dateOfDeath;
+            Books = new List<Book>();
         }
 
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)

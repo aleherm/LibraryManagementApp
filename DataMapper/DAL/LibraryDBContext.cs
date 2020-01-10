@@ -10,7 +10,7 @@ namespace DataMapper
         /// </summary>
         public LibraryDBContext() : base("strLibraryConnection")
         {
-
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<LibraryDBContext, Migrations.Configuration>());
         }
 
         /// <summary>
