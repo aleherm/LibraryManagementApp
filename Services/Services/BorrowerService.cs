@@ -1,22 +1,31 @@
-﻿using DataMapper;
-using DomainModel;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿// <copyright file="BorrowerService.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
 
 namespace Services
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using DataMapper;
+    using DomainModel;
+
     /// <summary>
     /// Borrower service class.
     /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
     public class BorrowerService
     {
         /// <summary>
-        /// Borrower Repository
+        /// Borrower Repository.
         /// </summary>
-        private BorrowerRepository borrowerRepository;
+        private readonly BorrowerRepository borrowerRepository;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BorrowerService"/> class.
+        /// </summary>
         public BorrowerService()
         {
             borrowerRepository = new BorrowerRepository();
@@ -25,8 +34,8 @@ namespace Services
         /// <summary>
         /// Validates the given data for a Borrower object.
         /// </summary>
-        /// <param name="borrower"></param>
-        /// <returns></returns>
+        /// <param name="borrower">The borrower.</param>
+        /// <returns>True of False.</returns>
         public bool IsValidBorrower(Borrower borrower)
         {
             ValidationContext context = new ValidationContext(borrower);
@@ -36,15 +45,10 @@ namespace Services
         }
 
         /// <summary>
-        /// Adds new borrower if has valid data.
+        /// Inserts a new Borrower object in the database.
         /// </summary>
-        /// <param name="firstName"></param>
-        /// <param name="lastName"></param>
-        /// <param name="email"></param>
-        /// <param name="dob"></param>
-        /// <param name="readerFlg"></param>
-        /// <param name="librarianFlg"></param>
-        /// <returns></returns>
+        /// <param name="borrower">The borrower.</param>
+        /// <returns>True or false.</returns>
         public bool AddNewBorrower(Borrower borrower)
         {
             if (IsValidBorrower(borrower))
@@ -56,6 +60,10 @@ namespace Services
             return false;
         }
 
+        /// <summary>
+        /// Gets the list of borrowers.
+        /// </summary>
+        /// <returns>The list of borrowers.</returns>
         public IEnumerable<Borrower> GetAllBorrowers()
         {
             return borrowerRepository.Get(
@@ -63,6 +71,11 @@ namespace Services
                 includeProperties: "Address");
         }
 
+        /// <summary>
+        /// Gets the borrower by given ID.
+        /// </summary>
+        /// <param name="idBorrower">The ID of the borrower.</param>
+        /// <returns>The Borrower object found.</returns>
         public Borrower GetBorrowerById(int idBorrower)
         {
             return borrowerRepository.GetByID(idBorrower);

@@ -1,8 +1,4 @@
-﻿// <copyright file="DateHelper.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
-// </copyright>
-
-namespace LibraryManagementApp
+﻿namespace LibraryManagementApp
 {
     using System;
 

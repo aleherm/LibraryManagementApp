@@ -1,8 +1,15 @@
-﻿using DomainModel;
+﻿// <copyright file="ILoanRepository.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
 
 namespace DataMapper
 {
-    interface ILoanRepository : IRepository<Loan>
+    using DomainModel;
+
+    /// <summary>
+    /// ILoanRepository.
+    /// </summary>
+    internal interface ILoanRepository : IRepository<Loan>
     {
     }
 }

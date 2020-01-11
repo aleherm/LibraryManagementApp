@@ -11,6 +11,8 @@ namespace LibraryManagementApp
     /// A helper class for the menu shown in the console user interface.
     /// </summary>
     [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1600", Justification = "No documentantion needed yet.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1124", Justification = "No regions.")]
     public class MenuHelper
     {
         /// <summary>

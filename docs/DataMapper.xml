@@ -1,0 +1,231 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DataMapper</name>
+    </assembly>
+    <members>
+        <member name="T:DataMapper.AddressRepository">
+            <summary>
+            Data access methods for Address.
+            </summary>
+        </member>
+        <member name="T:DataMapper.AuthorRepository">
+            <summary>
+            Data access methods for Author.
+            </summary>
+        </member>
+        <member name="T:DataMapper.BaseRepository`1">
+            <summary>
+            Basic data access methods class.
+            </summary>
+            <typeparam name="T">The type of the entity.</typeparam>
+        </member>
+        <member name="M:DataMapper.BaseRepository`1.Get(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.String)">
+            <summary>
+            Gets the list of entities based on given type.
+            </summary>
+            <param name="filter">The filter criteria.</param>
+            <param name="orderBy">The ordering query.</param>
+            <param name="includeProperties">Properties to be included.</param>
+            <returns>The list of asked entities.</returns>
+        </member>
+        <member name="M:DataMapper.BaseRepository`1.Insert(`0)">
+            <summary>
+            Inserts a given entity in the database.
+            </summary>
+            <param name="entity">The entity to be inserted.</param>
+        </member>
+        <member name="M:DataMapper.BaseRepository`1.Update(`0)">
+            <summary>
+            Updates a given entity in the database.
+            </summary>
+            <param name="item">The modified entity.</param>
+        </member>
+        <member name="M:DataMapper.BaseRepository`1.Delete(System.Object)">
+            <summary>
+            Deletes a given entity based on ID from the database.
+            </summary>
+            <param name="id">The ID of the entity.</param>
+        </member>
+        <member name="M:DataMapper.BaseRepository`1.Delete(`0)">
+            <summary>
+            Deletes a given entity from the database.
+            </summary>
+            <param name="entityToDelete">The entity to delete.</param>
+        </member>
+        <member name="M:DataMapper.BaseRepository`1.GetByID(System.Object)">
+            <summary>
+            Gets the entity based on given ID.
+            </summary>
+            <param name="id">The ID of the entity.</param>
+            <returns>The entity.</returns>
+        </member>
+        <member name="T:DataMapper.BookRepository">
+            <summary>
+            Data access methods for Book.
+            </summary>
+        </member>
+        <member name="T:DataMapper.BorrowerRepository">
+            <summary>
+            Data access methods for Borrower.
+            </summary>
+        </member>
+        <member name="T:DataMapper.DomainRepository">
+            <summary>
+            Data access methods for Domain.
+            </summary>
+        </member>
+        <member name="T:DataMapper.LibraryDBContext">
+            <summary>
+            The database context.
+            </summary>
+        </member>
+        <member name="M:DataMapper.LibraryDBContext.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DataMapper.LibraryDBContext"/> class.
+            </summary>
+        </member>
+        <member name="P:DataMapper.LibraryDBContext.Addresses">
+            <summary>
+            Gets or sets the Addresses.
+            </summary>
+            <value>
+            The addresses.
+            </value>
+        </member>
+        <member name="P:DataMapper.LibraryDBContext.Authors">
+            <summary>
+            Gets or sets the authors.
+            </summary>
+            <value>
+            The authors.
+            </value>
+        </member>
+        <member name="P:DataMapper.LibraryDBContext.Books">
+            <summary>
+            Gets or sets the books.
+            </summary>
+            <value>
+            The books.
+            </value>
+        </member>
+        <member name="P:DataMapper.LibraryDBContext.Borrowers">
+            <summary>
+            Gets or sets the Borrowers.
+            </summary>
+            <value>
+            The borrowers.
+            </value>
+        </member>
+        <member name="P:DataMapper.LibraryDBContext.Domains">
+            <summary>
+            Gets or sets the Domains.
+            </summary>
+            <value>
+            The domains.
+            </value>
+        </member>
+        <member name="P:DataMapper.LibraryDBContext.Editions">
+            <summary>
+            Gets or sets the Editions.
+            </summary>
+            <value>
+            The editions.
+            </value>
+        </member>
+        <member name="P:DataMapper.LibraryDBContext.Loans">
+            <summary>
+            Gets or sets the Loans.
+            </summary>
+            <value>
+            The loans.
+            </value>
+        </member>
+        <member name="T:DataMapper.EditionRepository">
+            <summary>
+            Data access methods for Edition.
+            </summary>
+        </member>
+        <member name="T:DataMapper.LoanRepository">
+            <summary>
+            Data access methods for Loan.
+            </summary>
+        </member>
+        <member name="T:DataMapper.IAuthorRepository">
+            <summary>
+            IAuthorRepository.
+            </summary>
+        </member>
+        <member name="T:DataMapper.IBorrowerRepository">
+            <summary>
+            IBorrowerRepository.
+            </summary>
+        </member>
+        <member name="T:DataMapper.IDomainRepository">
+            <summary>
+            IDomainRepository.
+            </summary>
+        </member>
+        <member name="T:DataMapper.IEditionRepository">
+            <summary>
+            IEditionRepository.
+            </summary>
+        </member>
+        <member name="T:DataMapper.ILoanRepository">
+            <summary>
+            ILoanRepository.
+            </summary>
+        </member>
+        <member name="T:DataMapper.IRepository`1">
+            <summary>
+            The interface of the base Repository.
+            </summary>
+            <typeparam name="T">The type of the entity.</typeparam>
+        </member>
+        <member name="M:DataMapper.IRepository`1.Insert(`0)">
+            <summary>
+            Insert new entity.
+            </summary>
+            <param name="entity">The entity to be inserted.</param>
+        </member>
+        <member name="M:DataMapper.IRepository`1.Update(`0)">
+            <summary>
+            Update the entity.
+            </summary>
+            <param name="entity">The entity to be updated.</param>
+        </member>
+        <member name="M:DataMapper.IRepository`1.Delete(System.Object)">
+            <summary>
+            Delete the entity with given ID.
+            </summary>
+            <param name="id">The entity ID to be deleted.</param>
+        </member>
+        <member name="M:DataMapper.IRepository`1.Delete(`0)">
+            <summary>
+            Delete the entity.
+            </summary>
+            <param name="entity">The given entity.</param>
+        </member>
+        <member name="M:DataMapper.IRepository`1.GetByID(System.Object)">
+            <summary>
+            Gets the entity by given ID.
+            </summary>
+            <param name="id">The entity ID.</param>
+            <returns>The found entity.</returns>
+        </member>
+        <member name="M:DataMapper.IRepository`1.Get(System.Linq.Expressions.Expression{System.Func{`0,System.Boolean}},System.Func{System.Linq.IQueryable{`0},System.Linq.IOrderedQueryable{`0}},System.String)">
+            <summary>
+            Gets the list of entities.
+            </summary>
+            <param name="filter">The filter criteria.</param>
+            <param name="orderBy">The ordering query.</param>
+            <param name="includeProperties">The properties to be included.</param>
+            <returns>The list of entities.</returns>
+        </member>
+        <member name="T:DataMapper.IAddressRepository">
+            <summary>
+            IAddressRepository.
+            </summary>
+        </member>
+    </members>
+</doc>

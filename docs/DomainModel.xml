@@ -1,0 +1,445 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>DomainModel</name>
+    </assembly>
+    <members>
+        <member name="T:DomainModel.Address">
+            <summary>
+            Address entity.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Address.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DomainModel.Address"/> class.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Address.#ctor(System.String,System.String,System.Nullable{System.Int32})">
+            <summary>
+            Initializes a new instance of the <see cref="T:DomainModel.Address"/> class.
+            </summary>
+            <param name="city">The city name.</param>
+            <param name="street">The street name.</param>
+            <param name="number">The number of the house.</param>
+        </member>
+        <member name="P:DomainModel.Address.Id">
+            <summary>
+            Gets or sets the ID of the entity.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Address.City">
+            <summary>
+            Gets or sets the City name.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Address.Street">
+            <summary>
+            Gets or sets the Street name.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Address.Number">
+            <summary>
+            Gets or sets the Number of the house.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Address.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            Validates specific properties of the Address entity.
+            </summary>
+            <param name="validationContext">The validation context.</param>
+            <returns>A validation result containing the errors and member names of the invalid properties.</returns>
+        </member>
+        <member name="M:DomainModel.Address.ToString">
+            <summary>
+            Shows the data of the current entity.
+            </summary>
+            <returns>Output string for an Address entity.</returns>
+        </member>
+        <member name="T:DomainModel.Author">
+            <summary>
+            Author entity class.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Author.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DomainModel.Author"/> class.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Author.#ctor(System.String,System.String,System.String,System.Nullable{System.DateTime},System.Nullable{System.DateTime})">
+            <summary>
+            Initializes a new instance of the <see cref="T:DomainModel.Author"/> class.
+            </summary>
+            <param name="firstName">The first name.</param>
+            <param name="lastName">The last name.</param>
+            <param name="language">The language.</param>
+            <param name="dateOfBirth">The date of birth.</param>
+            <param name="dateOfDeath">The date o death.</param>
+        </member>
+        <member name="P:DomainModel.Author.Id">
+            <summary>
+            Gets or sets the ID of the Author.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Author.FirstName">
+            <summary>
+            Gets or sets the first name.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Author.LastName">
+            <summary>
+            Gets or sets the last name.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Author.Language">
+            <summary>
+            Gets or sets the language.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Author.DateOfBirth">
+            <summary>
+            Gets or sets the date of birth.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Author.DateOfDeath">
+            <summary>
+            Gets or sets the date of death.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Author.Books">
+            <summary>
+            Gets or sets the list of books.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Author.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            Validates the entity.
+            </summary>
+            <param name="validationContext">The validation context.</param>
+            <returns>The validation result and memeber names.</returns>
+        </member>
+        <member name="M:DomainModel.Author.ToString">
+            <summary>
+            Shows the data of the current entity.
+            </summary>
+            <returns>Output string for an Author entity.</returns>
+        </member>
+        <member name="T:DomainModel.Book">
+            <summary>
+            Book entity class.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Book.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DomainModel.Book"/> class.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Book.#ctor(System.String,System.Collections.Generic.List{DomainModel.Author},System.Collections.Generic.List{DomainModel.Domain},System.Collections.Generic.List{DomainModel.Edition})">
+            <summary>
+            Initializes a new instance of the <see cref="T:DomainModel.Book"/> class.
+            </summary>
+            <param name="title">The book title.</param>
+            <param name="authors">The list of authors.</param>
+            <param name="domains">The list of domains.</param>
+            <param name="editions">The list of editions.</param>
+        </member>
+        <member name="P:DomainModel.Book.Id">
+            <summary>
+            Gets or sets the ID of the book.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Book.Title">
+            <summary>
+            Gets or sets the title of the book.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Book.Authors">
+            <summary>
+            Gets or sets the list of authors.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Book.Domains">
+            <summary>
+            Gets or sets the list of domains.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Book.Editions">
+            <summary>
+            Gets or sets the list of editions.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Book.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            Validates the Book entity.
+            </summary>
+            <param name="validationContext">The validation context.</param>
+            <returns>Output string for a Book entity.</returns>
+        </member>
+        <member name="T:DomainModel.Borrower">
+            <summary>
+            The Borrower entity.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Borrower.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DomainModel.Borrower"/> class.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Borrower.#ctor(System.String,System.String,System.String,System.Nullable{System.DateTime},DomainModel.Address,System.Boolean,System.Boolean)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DomainModel.Borrower"/> class.
+            </summary>
+            <param name="firstName">The first name.</param>
+            <param name="lastName">The last name.</param>
+            <param name="email">The email.</param>
+            <param name="dateOfBirth">The date of birth.</param>
+            <param name="address">The address.</param>
+            <param name="readerFlg">The reader flag.</param>
+            <param name="librarianFlg">The librarian flag.</param>
+        </member>
+        <member name="P:DomainModel.Borrower.Id">
+            <summary>
+            Gets or sets the ID of the Borrower.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Borrower.FirstName">
+            <summary>
+            Gets or sets the first name.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Borrower.LastName">
+            <summary>
+            Gets or sets the last name.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Borrower.Email">
+            <summary>
+            Gets or sets the email.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Borrower.Gender">
+            <summary>
+            Gets or sets the gender.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Borrower.DateOfBirth">
+            <summary>
+            Gets or sets the date of birth.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Borrower.Address">
+            <summary>
+            Gets or sets the address.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Borrower.Loans">
+            <summary>
+            Gets or sets the loan list.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Borrower.ReaderFlg">
+            <summary>
+            Gets or sets a value indicating whether the borrower is a reader as well or not.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Borrower.LibrarianFlg">
+            <summary>
+            Gets or sets a value indicating whether the borrower is a librarian as well or not.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Borrower.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            /// <summary>
+            Validates the entity.
+            </summary>
+            <param name="validationContext">The validation context.</param>
+            <returns>The validation result and memeber names.</returns>
+        </member>
+        <member name="M:DomainModel.Borrower.ToString">
+            <summary>
+            Shows the data of the current entity.
+            </summary>
+            <returns>Output string for an Borrower entity.</returns>
+        </member>
+        <member name="T:DomainModel.Domain">
+            <summary>
+            Domain entity class.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Domain.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DomainModel.Domain"/> class.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Domain.#ctor(System.String,DomainModel.Domain,System.Collections.Generic.List{DomainModel.Domain})">
+            <summary>
+            Initializes a new instance of the <see cref="T:DomainModel.Domain"/> class.
+            </summary>
+            <param name="domainName">The domain name.</param>
+            <param name="parent">The parent domain name.</param>
+            <param name="subdomains">The subdomains list.</param>
+        </member>
+        <member name="P:DomainModel.Domain.Id">
+            <summary>
+            Gets or sets the ID of the borrower.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Domain.DomainName">
+            <summary>
+            Gets or sets the domain name.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Domain.ParentDomain">
+            <summary>
+            Gets or sets the parent domain.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Domain.Subdomains">
+            <summary>
+            Gets or sets the list of subdomains.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Domain.Books">
+            <summary>
+            Gets or sets the list of books.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Domain.ToString">
+            <summary>
+            Shows the data of the current entity.
+            </summary>
+            <returns>Output string for an Domain entity.</returns>
+        </member>
+        <member name="T:DomainModel.Edition">
+            <summary>
+            Edition entity class.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Edition.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DomainModel.Edition"/> class.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Edition.#ctor(System.String,System.Int32,System.Int32,DomainModel.EBookType,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DomainModel.Edition"/> class.
+            </summary>
+            <param name="publisher">The publisher name.</param>
+            <param name="pageNumber">The page number.</param>
+            <param name="year">The year.</param>
+            <param name="bookType">The book type.</param>
+            <param name="noForLibrary">The number of books for library reading.</param>
+            <param name="noForLoan">The number of books for loan.</param>
+        </member>
+        <member name="P:DomainModel.Edition.Id">
+            <summary>
+            Gets or sets the ID of the borrower.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Edition.BookType">
+            <summary>
+            Gets or sets the book type.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Edition.PageNumber">
+            <summary>
+            Gets or sets the page number.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Edition.Year">
+            <summary>
+            Gets or sets the year.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Edition.Publisher">
+            <summary>
+            Gets or sets the publisher name.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Edition.NoForLibrary">
+            <summary>
+            Gets or sets the number of books for library reading.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Edition.NoForLoan">
+            <summary>
+            Gets or sets the number of books for loan.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Edition.NoTotal">
+            <summary>
+            Gets or sets the total number of books.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Edition.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            Validates the entity.
+            </summary>
+            <param name="validationContext">The validation context.</param>
+            <returns>The validation result and memeber names.</returns>
+        </member>
+        <member name="M:DomainModel.Edition.ToString">
+            <summary>
+            Shows the data of the current entity.
+            </summary>
+            <returns>Output string for an Edition entity.</returns>
+        </member>
+        <member name="T:DomainModel.EBookType">
+            <summary>
+            Book types by cover aspect.
+            </summary>
+        </member>
+        <member name="T:DomainModel.EGenderType">
+            <summary>
+            The gender of a borrower.
+            </summary>
+        </member>
+        <member name="T:DomainModel.ERoleType">
+            <summary>
+            The roles types of a borrower.
+            </summary>
+        </member>
+        <member name="T:DomainModel.Loan">
+            <summary>
+            Loan entity class.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Loan.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DomainModel.Loan"/> class.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Loan.#ctor(System.DateTime,System.DateTime,System.DateTime,System.Collections.Generic.List{DomainModel.Book})">
+            <summary>
+            Initializes a new instance of the <see cref="T:DomainModel.Loan"/> class.
+            </summary>
+            <param name="loanDate">The loan date.</param>
+            <param name="dueDate">The due date.</param>
+            <param name="returnDate">The return date.</param>
+            <param name="borrowedBooks">The list of borrowed books.</param>
+        </member>
+        <member name="P:DomainModel.Loan.Id">
+            <summary>
+            Gets or sets the ID of the loan.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Loan.LoanDate">
+            <summary>
+            Gets or sets the loan date.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Loan.DueDate">
+            <summary>
+            Gets or sets the due date.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Loan.ReturnDate">
+            <summary>
+            Gets or sets the return date.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Loan.BorrowedBooks">
+            <summary>
+            Gets or sets the list of borrowed books.
+            </summary>
+        </member>
+    </members>
+</doc>

@@ -1,4 +1,8 @@
-﻿namespace DomainModel
+﻿// <copyright file="Loan.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
+
+namespace DomainModel
 {
     using System;
     using System.Collections.Generic;
@@ -57,7 +61,7 @@
         public DateTime ReturnDate { get; set; }
 
         /// <summary>
-        /// Gets or sets the list of borrowed books. 
+        /// Gets or sets the list of borrowed books.
         /// </summary>
         [Required(ErrorMessage = "The borrowed books list should not be null")]
         public IList<Book> BorrowedBooks { get; set; }

@@ -1,17 +1,26 @@
-﻿using DomainModel;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿// <copyright file="AuthorTest.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
 
 namespace TestDomainModel
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using DomainModel;
+    using NUnit.Framework;
+
+    /// <summary>
+    /// The Author test class.
+    /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1600", Justification = "Tests are self documented.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "CS1591", Justification = "No comment needed.")]
     [TestFixture]
     public class AuthorTest
     {
-        #region [ Declarations ]
-
         /// <summary>
         /// The Author object to be tested.
         /// </summary>
@@ -27,10 +36,6 @@ namespace TestDomainModel
         /// </summary>
         private IList<ValidationResult> validationResults;
 
-        #endregion
-
-        #region [ Setup ]
-
         /// <summary>
         /// The setup of the Author object to be tested.
         /// </summary>
@@ -43,16 +48,12 @@ namespace TestDomainModel
                 LastName = "Smith",
                 Language = "English",
                 DateOfBirth = new DateTime(1989, 10, 10),
-                DateOfDeath = new DateTime(2010, 1, 1)
+                DateOfDeath = new DateTime(2010, 1, 1),
             };
 
             context = new ValidationContext(author);
             validationResults = new List<ValidationResult>();
         }
-
-        #endregion
-
-        #region [ Required Tests ]
 
         [Test]
         public void FirstNameShouldNotBeNull()
@@ -96,10 +97,6 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LanguageRequired, msg.ErrorMessage);
         }
 
-        #endregion
-
-        #region [ FirstName Tests ]
-
         [Test]
         public void FirstNameShouldNotHaveMoreThan50Chars()
         {
@@ -114,7 +111,8 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.FirstNameRangeLength, msg.ErrorMessage);
         }
 
-        [Test, Sequential]
+        [Test]
+        [Sequential]
         public void FirstNameShouldNotHaveNoCharsOutsideRange([Values("A", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")] string name)
         {
             author.FirstName = name;
@@ -127,10 +125,6 @@ namespace TestDomainModel
             var msg = validationResults[0];
             Assert.AreEqual(ErrorMessages.FirstNameRangeLength, msg.ErrorMessage);
         }
-
-        #endregion
-
-        #region [ LastName Tests ]
 
         [Test]
         public void LastNameShouldNotHaveMoreThan50Chars()
@@ -146,7 +140,8 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LastNameRangeLength, msg.ErrorMessage);
         }
 
-        [Test, Sequential]
+        [Test]
+        [Sequential]
         public void LastNameShouldNotHaveNoCharsOutsideRange([Values("A", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")] string name)
         {
             author.LastName = name;
@@ -159,10 +154,6 @@ namespace TestDomainModel
             var msg = validationResults[0];
             Assert.AreEqual(ErrorMessages.LastNameRangeLength, msg.ErrorMessage);
         }
-
-        #endregion
-
-        #region [ DateOfBirth Tests ]
 
         [Test]
         public void DateOfBirthShouldBeValid()
@@ -203,10 +194,6 @@ namespace TestDomainModel
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "DateOfBirth").Count());
         }
 
-        #endregion
-
-        #region [ DateOfDeath Tests ]
-
         [Test]
         public void DateOfDeathShouldBeValid()
         {
@@ -232,7 +219,5 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidDate, msg.ErrorMessage);
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "DateOfDeath").Count());
         }
-
-        #endregion
     }
 }

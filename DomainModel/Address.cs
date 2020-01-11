@@ -1,4 +1,8 @@
-﻿namespace DomainModel
+﻿// <copyright file="Address.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
+
+namespace DomainModel
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
@@ -59,7 +63,7 @@
         /// <summary>
         /// Validates specific properties of the Address entity.
         /// </summary>
-        /// <param name="validationContext">The validation context</param>
+        /// <param name="validationContext">The validation context.</param>
         /// <returns>A validation result containing the errors and member names of the invalid properties.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {

@@ -1,4 +1,8 @@
-﻿namespace DomainModel
+﻿// <copyright file="Book.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
+
+namespace DomainModel
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;

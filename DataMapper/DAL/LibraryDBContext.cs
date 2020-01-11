@@ -1,4 +1,8 @@
-﻿namespace DataMapper
+﻿// <copyright file="LibraryDBContext.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
+
+namespace DataMapper
 {
     using System.Data.Entity;
     using DomainModel;
@@ -11,7 +15,7 @@
         /// <summary>
         /// Initializes a new instance of the <see cref="LibraryDBContext"/> class.
         /// </summary>
-        public LibraryDBContext() 
+        public LibraryDBContext()
             : base("strLibraryConnection")
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<LibraryDBContext, Migrations.Configuration>());
@@ -40,7 +44,6 @@
         /// The books.
         /// </value>
         public virtual DbSet<Book> Books { get; set; }
-
 
         /// <summary>
         /// Gets or sets the Borrowers.
@@ -73,6 +76,5 @@
         /// The loans.
         /// </value>
         public virtual DbSet<Loan> Loans { get; set; }
-
     }
 }

@@ -1,4 +1,8 @@
-﻿namespace TestDomainModel
+﻿// <copyright file="LoanTest.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
+
+namespace TestDomainModel
 {
     using System;
     using System.Collections.Generic;
@@ -11,6 +15,8 @@
     /// Tests the Loan entity.
     /// </summary>
     [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1600", Justification = "Tests are self documented.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "CS1591", Justification = "No comment needed.")]
     [TestFixture]
     public class LoanTest
     {

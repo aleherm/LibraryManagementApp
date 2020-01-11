@@ -1,4 +1,8 @@
-﻿namespace DataMapper
+﻿// <copyright file="BaseRepository.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
+
+namespace DataMapper
 {
     using System;
     using System.Collections.Generic;
@@ -7,9 +11,10 @@
     using System.Linq.Expressions;
 
     /// <summary>
-    /// Basic data access methods.
+    /// Basic data access methods class.
     /// </summary>
-    public abstract class BaseRepository<T> : IRepository<T> 
+    /// <typeparam name="T">The type of the entity.</typeparam>
+    public abstract class BaseRepository<T> : IRepository<T>
         where T : class
     {
         /// <summary>
@@ -35,8 +40,8 @@
                     query = query.Where(filter);
                 }
 
-                foreach (var includeProperty in includeProperties.Split
-                    (new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                foreach (var includeProperty in includeProperties.Split(
+                    new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
                 {
                     query = query.Include(includeProperty);
                 }

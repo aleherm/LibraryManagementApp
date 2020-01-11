@@ -1,4 +1,8 @@
-﻿namespace DomainModel
+﻿// <copyright file="Borrower.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
+
+namespace DomainModel
 {
     using System;
     using System.Collections.Generic;
@@ -53,6 +57,9 @@
         [StringLength(50, ErrorMessage = ErrorMessages.FirstNameRangeLength, MinimumLength = 2)]
         public string FirstName { get; set; }
 
+        /// <summary>
+        /// Gets or sets the last name.
+        /// </summary>
         [Required(ErrorMessage = ErrorMessages.LastNameRequired)]
         [StringLength(50, ErrorMessage = ErrorMessages.LastNameRangeLength, MinimumLength = 2)]
         public string LastName { get; set; }
@@ -110,7 +117,7 @@
                 memberNames.Add("DateOfBirth");
             }
 
-            if(!(ReaderFlg || LibrarianFlg))
+            if (!(ReaderFlg || LibrarianFlg))
             {
                 memberNames.Add("ReaderFlg");
                 memberNames.Add("LibrarianFlg");

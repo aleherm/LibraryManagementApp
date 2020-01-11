@@ -1,4 +1,8 @@
-﻿namespace DomainModel
+﻿// <copyright file="Edition.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
+
+namespace DomainModel
 {
     using System;
     using System.Collections.Generic;
@@ -95,7 +99,7 @@
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             List<string> memberNames = new List<string>();
-            if(Year.HasValue && (Year > DateTime.Now.Year || Year <= 0))
+            if (Year.HasValue && (Year > DateTime.Now.Year || Year <= 0))
             {
                 memberNames.Add("Year");
             }

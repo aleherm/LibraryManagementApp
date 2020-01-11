@@ -1,4 +1,8 @@
-﻿namespace TestDomainModel
+﻿// <copyright file="EditionTest.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
+
+namespace TestDomainModel
 {
     using System;
     using System.Collections.Generic;
@@ -12,6 +16,8 @@
     /// Tests the Edition entity.
     /// </summary>
     [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1600", Justification = "Tests are self documented.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "CS1591", Justification = "No comment needed.")]
     [TestFixture]
     public class EditionTest
     {
@@ -285,10 +291,10 @@
         }
 
         /// <summary>
-        /// NoTotalShouldNotBeSumOfLoanAndLibraryBooksNumber
+        /// NoTotalShouldNotBeSumOfLoanAndLibraryBooksNumber.
         /// </summary>
         /// <param name="noLib">The book number for library.</param>
-        /// <param name="noLoan">The book number for loan</param>
+        /// <param name="noLoan">The book number for loan.</param>
         /// <param name="noTotal">The total number of books.</param>
         [Test]
         [Sequential]

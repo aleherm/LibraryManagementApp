@@ -1,18 +1,25 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
-using DomainModel;
-using NUnit.Framework;
+﻿// <copyright file="DomainTest.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
 
 namespace TestDomainModel
 {
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
+    using DomainModel;
+    using NUnit.Framework;
+
+    /// <summary>
+    /// The Domain test class.
+    /// </summary>
     [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1600", Justification = "Tests are self documented.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "CS1591", Justification = "No comment needed.")]
     [TestFixture]
     public class DomainTest
     {
-        #region [ Declarations ]
-
         /// <summary>
         /// Domain object to test.
         /// </summary>
@@ -28,10 +35,6 @@ namespace TestDomainModel
         /// </summary>
         private IList<ValidationResult> validationResults;
 
-        #endregion
-
-        #region [ Setup ]
-
         /// <summary>
         /// Sets up valid properties for the object to be tested.
         /// </summary>
@@ -42,26 +45,18 @@ namespace TestDomainModel
             {
                 Id = 2,
                 DomainName = "Mathematics",
-                ParentDomain = new Domain() { Id = 1, DomainName = "Science", ParentDomain = null},
+                ParentDomain = new Domain() { Id = 1, DomainName = "Science", ParentDomain = null },
             };
 
             context = new ValidationContext(domain);
             validationResults = new List<ValidationResult>();
         }
 
-        #endregion
-        
-        #region [ Not Empty Tests ]
-
         [Test]
         public void DomainNameShouldNotBeEmpty()
         {
             Assert.IsNotEmpty(domain.DomainName);
         }
-
-        #endregion
-
-        #region [ Required Tests ]
 
         [Test]
         public void DomainNameShouldNotBeNull()
@@ -91,10 +86,6 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.SubdomainRequired, msg.ErrorMessage);
         }
 
-        #endregion
-
-        #region [ DomainName Tests ]
-
         [Test]
         public void DomainNameShouldNotHaveMoreThan100Chars()
         {
@@ -122,7 +113,5 @@ namespace TestDomainModel
             var msg = validationResults[0];
             Assert.AreEqual(ErrorMessages.DomainNameRangeLength, msg.ErrorMessage);
         }
-
-        #endregion
     }
 }

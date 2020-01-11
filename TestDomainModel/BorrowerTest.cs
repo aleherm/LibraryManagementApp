@@ -1,17 +1,25 @@
-﻿using DomainModel;
-using NUnit.Framework;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
-using System.Linq;
+﻿// <copyright file="BorrowerTest.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
 
 namespace TestDomainModel
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using DomainModel;
+    using NUnit.Framework;
+
+    /// <summary>
+    /// The Borrower test class.
+    /// </summary>
     [TestFixture]
     [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1600", Justification = "Tests are self documented.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "CS1591", Justification = "No comment needed.")]
     public class BorrowerTest
     {
-        #region [ Declarations ]
         /// <summary>
         /// Borrower object to test.
         /// </summary>
@@ -27,10 +35,6 @@ namespace TestDomainModel
         /// </summary>
         private IList<ValidationResult> validationResults;
 
-        #endregion
-
-        #region [ Setup ]
-
         [SetUp]
         public void SetUpBorrower()
         {
@@ -44,16 +48,12 @@ namespace TestDomainModel
                 Address = new Address(),
                 Loans = new List<Loan> { new Loan() },
                 ReaderFlg = true,
-                LibrarianFlg = false
+                LibrarianFlg = false,
             };
 
             context = new ValidationContext(borrower);
             validationResults = new List<ValidationResult>();
         }
-
-        #endregion
-
-        #region [ Not Empty Tests ]
 
         [Test]
         public void FirstNameShouldNotBeEmpty()
@@ -66,10 +66,6 @@ namespace TestDomainModel
         {
             Assert.IsNotEmpty(borrower.LastName);
         }
-
-        #endregion
-
-        #region [ Required Tests ]
 
         [Test]
         public void FirstNameShouldNotBeNull()
@@ -127,10 +123,6 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LoanRequired, msg.ErrorMessage);
         }
 
-        #endregion
-
-        #region [ FirstName Tests ]
-
         [Test]
         public void FirstNameShouldNotHaveMoreThan50Chars()
         {
@@ -145,7 +137,8 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.FirstNameRangeLength, msg.ErrorMessage);
         }
 
-        [Test, Sequential]
+        [Test]
+        [Sequential]
         public void FirstNameShouldNotHaveNoCharsOutsideRange([Values("x", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")] string name)
         {
             borrower.FirstName = name;
@@ -158,10 +151,6 @@ namespace TestDomainModel
             var msg = validationResults[0];
             Assert.AreEqual(ErrorMessages.FirstNameRangeLength, msg.ErrorMessage);
         }
-
-        #endregion
-
-        #region [ LastName Tests ]
 
         [Test]
         public void LastNameShouldNotHaveMoreThan50Chars()
@@ -177,7 +166,8 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LastNameRangeLength, msg.ErrorMessage);
         }
 
-        [Test, Sequential]
+        [Test]
+        [Sequential]
         public void LastNameShouldNotHaveNoCharsOutsideRange([Values("x", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")] string name)
         {
             borrower.LastName = name;
@@ -191,14 +181,10 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.LastNameRangeLength, msg.ErrorMessage);
         }
 
-        #endregion
-
-        #region [ Email Tests ] 
-
         [Test]
         public void EmailShouldNotBeEmpty()
         {
-            borrower.Email = "";
+            borrower.Email = string.Empty;
 
             var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
 
@@ -232,10 +218,6 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.InvalidEmail, msg.ErrorMessage);
         }
 
-        #endregion
-
-        #region [ DateOfBirth Tests ]
-
         [Test]
         public void DateOfBirthShouldBeValid()
         {
@@ -260,7 +242,5 @@ namespace TestDomainModel
             var msg = validationResults[0];
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "DateOfBirth").Count());
         }
-
-        #endregion
     }
 }

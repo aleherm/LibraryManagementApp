@@ -1,16 +1,24 @@
-﻿using DomainModel;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿// <copyright file="AddressTest.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
 
 namespace TestDomainModel
 {
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
+    using DomainModel;
+    using NUnit.Framework;
+
+    /// <summary>
+    /// Address test class.
+    /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1600", Justification = "Tests are self documented.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "CS1591", Justification = "No comment needed.")]
     [TestFixture]
     public class AddressTest
     {
-        #region [ Declarations ]
-
         /// <summary>
         /// Address object to test.
         /// </summary>
@@ -26,10 +34,6 @@ namespace TestDomainModel
         /// </summary>
         private IList<ValidationResult> validationResults;
 
-        #endregion
-
-        #region [ Setup ]
-
         /// <summary>
         /// The setup of the Address object to be tested.
         /// </summary>
@@ -40,16 +44,12 @@ namespace TestDomainModel
             {
                 City = "Brasov",
                 Street = "O. Goga",
-                Number = 44
+                Number = 44,
             };
 
             context = new ValidationContext(address);
             validationResults = new List<ValidationResult>();
         }
-
-        #endregion
-
-        #region [ Required Tests ]
 
         [Test]
         public void CityShouldNotBeNull()
@@ -93,15 +93,11 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.HouseNumberRequired, msg.ErrorMessage);
         }
 
-        #endregion
-
-        #region [ City Tests ]
-
         [Test]
         public void CityNameShouldNotHaveLessThan5Characters()
         {
             address.City = "Xo";
-            
+
             bool actual = Validator.TryValidateObject(address, context, validationResults, true);
 
             // Assert
@@ -123,7 +119,7 @@ namespace TestDomainModel
         public void CityNameShouldNotHaveMoreThan50Characters()
         {
             address.City = new string('x', 51);
-            
+
             bool actual = Validator.TryValidateObject(address, context, validationResults, true);
 
             // Assert
@@ -131,11 +127,8 @@ namespace TestDomainModel
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
         }
 
-        #endregion
-
-        #region [ Street ]
-
-        [Test, Sequential]
+        [Test]
+        [Sequential]
         public void StreetShouldNotHaveNoOfCharsOutsideRange([Values("A", "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "")] string streetName)
         {
             address.Street = streetName;
@@ -147,10 +140,6 @@ namespace TestDomainModel
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
         }
 
-        #endregion
-
-        #region [ Number Tests ]
-        
         [Test]
         public void PositiveHouseNumberShouldBeValid()
         {
@@ -186,7 +175,5 @@ namespace TestDomainModel
             Assert.IsFalse(actual, "Expected validation to fail.");
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
         }
-
-        #endregion
     }
 }

@@ -1,16 +1,26 @@
-﻿using DomainModel;
-using NUnit.Framework;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
+﻿// <copyright file="BookTest.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
 
 namespace TestDomainModel
 {
+    using System;
+    using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
+    using DomainModel;
+    using NUnit.Framework;
+
+    /// <summary>
+    /// The Book test class.
+    /// </summary>
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1600", Justification = "Tests are self documented.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "CS1591", Justification = "No comment needed.")]
     [TestFixture]
     public class BookTest
     {
-        #region [ Declarations ]
         /// <summary>
         /// Book object to test.
         /// </summary>
@@ -26,16 +36,12 @@ namespace TestDomainModel
         /// </summary>
         private IList<ValidationResult> validationResults;
 
-        #endregion
-
-        #region [ Setup }
-
         [SetUp]
         public void BookSetUp()
         {
             book = new Book()
             {
-                Title = "Something",
+                Title = "Something odd",
                 Authors = new List<Author>
                 {
                     new Author()
@@ -44,8 +50,8 @@ namespace TestDomainModel
                         LastName = "Smith",
                         Language = "English",
                         DateOfBirth = new DateTime(1989, 10, 10),
-                        DateOfDeath = new DateTime(2010, 1, 1)
-                    }
+                        DateOfDeath = new DateTime(2010, 1, 1),
+                    },
                 },
                 Editions = new List<Edition>
                 {
@@ -57,8 +63,8 @@ namespace TestDomainModel
                         Publisher = "Humanitas",
                         NoTotal = 10,
                         NoForLibrary = 2,
-                        NoForLoan = 8
-                    }
+                        NoForLoan = 8,
+                    },
                 },
                 Domains = new List<Domain>
                 {
@@ -68,19 +74,15 @@ namespace TestDomainModel
                         ParentDomain = new Domain()
                         {
                             DomainName = "Science",
-                            ParentDomain = null
-                        }
-                    }
-                }
+                            ParentDomain = null,
+                        },
+                    },
+                },
             };
 
             context = new ValidationContext(book);
             validationResults = new List<ValidationResult>();
         }
-
-        #endregion
-
-        #region [ Required ]
 
         [TestCase]
         public void BookTitleShouldNotBeNull()
@@ -144,10 +146,6 @@ namespace TestDomainModel
             Assert.IsNull(book.Domains, "Domains lsit expected to be null");
         }
 
-        #endregion
-
-        #region [ Title Tests ] 
-
         [Test]
         public void BookShouldNotHaveLessThan2Characters()
         {
@@ -182,10 +180,6 @@ namespace TestDomainModel
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
         }
 
-        #endregion
-
-        #region [ Authors Tests ]
-
         [Test]
         public void AuthorListShouldHaveAtLeastOneAuthor()
         {
@@ -202,10 +196,6 @@ namespace TestDomainModel
 
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "Authors").Count());
         }
-
-        #endregion
-
-        #region [ Domains Tests ]
 
         [Test]
         public void DomainListShouldHaveAtLeastOneAuthor()
@@ -224,10 +214,6 @@ namespace TestDomainModel
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "Domains").Count());
         }
 
-        #endregion
-
-        #region [ Editions Tests ]
-
         [Test]
         public void EditionListShouldHaveAtLeastOneAuthor()
         {
@@ -243,25 +229,5 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.ListRequireAtLeastOneObject, msg.ErrorMessage);
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "Editions").Count());
         }
-
-        #endregion
-
-        //[TestCase]
-        //public void CheckEntityValidationErrors()
-        //{
-        //    MyEntityObject myEntityObject = new MyEntityObject();
-        //    myEntityObject.myProperty = "1234567890";
-
-        //    var dbContext = new DbContext(MyEntityObject, true);
-
-        //    int errors = dbContext.GetValidationErrors().Count();
-
-        //    IEnumerable<DbEntityValidationResult> validationResults =
-        //                                             dbContext.GetValidationErrors();
-        //    DbValidationError validationError = validationResults.First().ValidationErrors.First();
-
-        //    Assert.AreEqual(1, errors);
-        //    Assert.AreEqual("myProperty", validationError.PropertyName);
-        //}
     }
 }

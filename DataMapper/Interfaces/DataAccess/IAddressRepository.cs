@@ -1,8 +1,15 @@
-﻿using DomainModel;
+﻿// <copyright file="IAddressRepository.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
 
 namespace DataMapper
 {
-    interface IAddressRepository : IRepository<Address>
+    using DomainModel;
+
+    /// <summary>
+    /// IAddressRepository.
+    /// </summary>
+    internal interface IAddressRepository : IRepository<Address>
     {
     }
 }

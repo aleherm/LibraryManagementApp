@@ -1,5 +1,5 @@
-﻿// <copyright file="BorrowerServiceTest.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="BorrowerServiceTest.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
 // </copyright>
 
 namespace TestServices
@@ -15,6 +15,7 @@ namespace TestServices
     /// Test class for the BorrowerService.
     /// </summary>
     [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1600", Justification = "Tests are self documented.")]
     [TestFixture]
     public class BorrowerServiceTest
     {
