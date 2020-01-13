@@ -61,8 +61,12 @@
     <Compile Include="Author.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="Borrower.cs" />
-    <Compile Include="Constants\ErrorMessages.cs" />
-    <Compile Include="Constants\Threshold.cs" />
+    <Compile Include="Constants\ErrorMessages.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="Constants\Threshold.cs">
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
     <Compile Include="Domain.cs" />
     <Compile Include="Edition.cs" />
     <Compile Include="Enums\EBookType.cs" />

@@ -4,9 +4,7 @@
 
 namespace DomainModel
 {
-    using System.Diagnostics.CodeAnalysis;
-    
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "CS1591", Justification = "No documentation needed.")]
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
     public static class ErrorMessages
     {
         // Required
@@ -66,4 +64,5 @@ namespace DomainModel
         public const string InvalidNumber = "Invalid number";
         public const string InvalidData = "Invalid data";
     }
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

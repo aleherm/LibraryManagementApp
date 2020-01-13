@@ -13,18 +13,15 @@ namespace Services
     /// <summary>
     /// The implementation class of the IBookService interface.
     /// </summary>
-    public class BookService : IBookService
+    public class BookService : Service, IBookService
     {
         private BookRepository bookRepository;
-
-        private readonly ErrorsHandler errors;
-
+        
         /// <summary>
         /// Initializes a new instance of the <see cref="BookService"/> class.
         /// </summary>
         public BookService()
         {
-            errors = new ErrorsHandler();
             bookRepository = new BookRepository();
         }
 
@@ -46,17 +43,27 @@ namespace Services
             {
                 foreach (ValidationResult result in validationResults)
                 {
-                    errors.Add(result.ErrorMessage);
+                    ErrorsHandler.Add(result.ErrorMessage);
                 }
 
                 isValid = false;
             }
 
-            //if(book.Domains.Count > threshold.NoMaxDomains)
-            //{
-            //  errors.Add(ValidationErrors.TooManyDomains);
-            //  isValid = false;
-            //}
+            if (!isValid)
+            {
+                return false;
+            }
+
+            if (book.Domains.Count > Threshold.NoMaxDomains)
+            {
+                ErrorsHandler.Add(ValidationErrors.TooManyDomains);
+                isValid = false;
+            }
+
+            if (!isValid)
+            {
+                return false;
+            }
 
             return isValid;
         }
@@ -75,7 +82,7 @@ namespace Services
             }
             else
             {
-                errors.PrintErrors();
+                ErrorsHandler.PrintErrors();
             }
 
             return false;

@@ -32,6 +32,16 @@ namespace Services
         }
 
         /// <summary>
+        /// Gets error at the specified index.
+        /// </summary>
+        /// <param name="index">The index.</param>
+        /// <returns>The error message.</returns>
+        public string Get(int index)
+        {
+            return inputErrors[index];
+        }
+
+        /// <summary>
         /// Clears this instance.
         /// </summary>
         public void Clear()
@@ -53,13 +63,23 @@ namespace Services
         /// </summary>
         public void PrintErrors()
         {
-            foreach(string error in inputErrors)
+            foreach (string error in inputErrors)
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(error);
             }
 
             Console.ForegroundColor = ConsoleColor.White;
+        }
+
+
+        /// <summary>
+        /// The number of errors.
+        /// </summary>
+        /// <returns>The number of errors</returns>
+        public int ErrorCount()
+        {
+            return inputErrors.Count;
         }
     }
 }

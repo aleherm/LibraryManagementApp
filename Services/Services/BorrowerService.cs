@@ -7,7 +7,6 @@ namespace Services
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using DataMapper;
     using DomainModel;
@@ -15,8 +14,7 @@ namespace Services
     /// <summary>
     /// Borrower service class.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
-    public class BorrowerService
+    public class BorrowerService : Service
     {
         /// <summary>
         /// Borrower Repository.

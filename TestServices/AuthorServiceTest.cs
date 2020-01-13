@@ -24,7 +24,7 @@ namespace TestServices
         /// <summary>
         /// The Author entity based on which the tests will run.
         /// </summary>
-        private Author Author;
+        private Author author;
 
         /// <summary>
         /// The threshold item needed to validate loan data.
@@ -38,7 +38,7 @@ namespace TestServices
         public void AuthorServiceSetUp()
         {
             service = new AuthorService();
-            Author = new Author("Alexandra", "Hermeneanu", "Romana", new DateTime(1997, 07, 02), null);
+            author = new Author("Alexandra", "Hermeneanu", "Romana", new DateTime(1997, 07, 02), null);
 
             string solutionDirectory = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(TestContext.CurrentContext.TestDirectory)));
             threshold = GetThresholdFromJSON(solutionDirectory);
@@ -50,7 +50,7 @@ namespace TestServices
         [Test]
         public void BorowerShouldBeValid()
         {
-            Assert.AreEqual(service.IsValidAuthor(Author), true);
+            Assert.AreEqual(service.IsValidAuthor(author), true);
         }
 
         /// <summary>
@@ -59,7 +59,7 @@ namespace TestServices
         [Test]
         public void BorowerShouldNotBeValid()
         {
-            Assert.AreEqual(service.IsValidAuthor(Author), true);
+            Assert.AreEqual(service.IsValidAuthor(author), true);
         }
 
         /// <summary>
@@ -68,7 +68,7 @@ namespace TestServices
         [Test]
         public void AddBorowerShouldBeSuccessful()
         {
-            Assert.AreEqual(service.AddNewAuthor(Author), true);
+            Assert.AreEqual(service.AddNewAuthor(author), true);
         }
 
         /// <summary>

@@ -1,14 +1,19 @@
-﻿namespace TestServices
+﻿// <copyright file="BookServiceTest.cs" company="Transilvania University of Brasov">
+// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// </copyright>
+
+namespace TestServices
 {
+    using System;
+    using System.Collections.Generic;
     using DomainModel;
     using NUnit.Framework;
     using Services;
-    using System;
-    using System.Collections.Generic;
 
     [TestFixture]
     public class BookServiceTest : ServiceTest
     {
+
         /// <summary>
         /// The service instance to be tested.
         /// </summary>
@@ -18,11 +23,6 @@
         /// The Book entity based on which the tests will run.
         /// </summary>
         private Book book;
-
-        /// <summary>
-        /// The threshold item needed to validate loan data.
-        /// </summary>
-        private readonly Threshold threshold;
 
         [SetUp]
         public void BookSetUp()
@@ -97,8 +97,14 @@
         }
 
         [Test]
-        public void NewValidEntityShouldNotHaveTooManyDomains()
+        public void BookShouldNotHaveTooManyDomains()
         {
+            book.Domains.Add(new Domain());
+            book.Domains.Add(new Domain());
+
+            Assert.AreEqual(false, service.IsValidBook(book), "Expected to fail.");
+            Assert.AreEqual(1, service.ErrorsHandler.ErrorCount(), "Unexpected number of errors.");
+            Assert.AreEqual(ValidationErrors.TooManyDomains, service.ErrorsHandler.Get(0));
         }
     }
 }

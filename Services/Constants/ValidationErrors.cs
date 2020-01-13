@@ -9,6 +9,8 @@ namespace Services
     /// </summary>
     public static class ValidationErrors
     {
+#pragma warning disable CS1591 // Missing XML comment for publicly visible type or member
         public const string TooManyDomains = "The maximum number of Domains per Book have been exceeded.";
+#pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
     }
 }

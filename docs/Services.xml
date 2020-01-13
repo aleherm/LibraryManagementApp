@@ -25,6 +25,13 @@
             </summary>
             <param name="errorMessage">The error message.</param>
         </member>
+        <member name="M:Services.ErrorsHandler.Get(System.Int32)">
+            <summary>
+            Gets error at the specified index.
+            </summary>
+            <param name="index">The index.</param>
+            <returns>The error message.</returns>
+        </member>
         <member name="M:Services.ErrorsHandler.Clear">
             <summary>
             Clears this instance.
@@ -40,6 +47,12 @@
             <summary>
             Prints the errors.
             </summary>
+        </member>
+        <member name="M:Services.ErrorsHandler.ErrorCount">
+            <summary>
+            The number of errors.
+            </summary>
+            <returns>The number of errors</returns>
         </member>
         <member name="T:Services.IAddressService">
             <summary>
@@ -279,6 +292,33 @@
             </summary>
             <param name="idAuthor">The ID of the author.</param>
             <returns>The Author object found.</returns>
+        </member>
+        <member name="T:Services.Service">
+            <summary>
+            Base service.
+            </summary>
+        </member>
+        <member name="F:Services.Service.ErrorsHandler">
+            <summary>
+            The validation errors.
+            </summary>
+        </member>
+        <member name="P:Services.Service.Threshold">
+            <summary>
+            The threshold.
+            </summary>
+        </member>
+        <member name="M:Services.Service.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Services.Service"/> class.
+            </summary>
+        </member>
+        <member name="M:Services.Service.GetThresholdFromJSON(System.String)">
+            <summary>
+            Gets the threshold data needed for validation from the external JSON file.
+            </summary>
+            <param name="path"></param>
+            <returns>A Threshold object.</returns>
         </member>
         <member name="T:Services.BookService">
             <summary>
