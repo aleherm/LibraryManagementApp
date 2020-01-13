@@ -271,42 +271,42 @@
         </member>
         <member name="P:DomainModel.Threshold.NoMaxDomains">
             <summary>
-            Gets of sets NoMaxDomains;
+            Gets of sets the maximum number of domains that a book is allowed to have.
             </summary>
         </member>
         <member name="P:DomainModel.Threshold.NoMaxLoans">
             <summary>
-            Gets of sets NoMaxLoans.
+            Gets of sets the maximum number of loans.
             </summary>
         </member>
         <member name="P:DomainModel.Threshold.Period">
             <summary>
-            Gets of sets Period.
+            Gets of sets the period between loans.
             </summary>
         </member>
-        <member name="P:DomainModel.Threshold.NoMaxBorrowerPerDomain">
+        <member name="P:DomainModel.Threshold.NoMaxLoansPerDomain">
             <summary>
-            Gets of sets NoMaxBorrowerPerDomain.
+            Gets of sets the maxim number of loans per domain.
             </summary>
         </member>
         <member name="P:DomainModel.Threshold.NoOfMonths">
             <summary>
-            Gets of sets NoOfMonths.
+            Gets of sets the number of months.
             </summary>
         </member>
         <member name="P:DomainModel.Threshold.LimitLoanExtension">
             <summary>
-            Gets of sets LimitLoanExtension.
+            Gets of sets limit for a loan extension for the past 3 months.
             </summary>
         </member>
         <member name="P:DomainModel.Threshold.Delta">
             <summary>
-            Gets of sets Delta.
+            Gets of sets number of maximum loans for a book.
             </summary>
         </member>
         <member name="P:DomainModel.Threshold.NoMaxLoansPerDay">
             <summary>
-            Gets of sets NoMaxLoansPerDay.
+            Gets of sets the maximum number of books loaned in a day.
             </summary>
         </member>
         <member name="T:DomainModel.Domain">

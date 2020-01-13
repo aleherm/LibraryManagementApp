@@ -42,7 +42,7 @@ namespace Services
         /// <summary>
         /// Gets the instance of the inputErrors.
         /// </summary>
-        /// <returns></returns>
+        /// <returns>The list of errors.</returns>
         public List<string> Errors()
         {
             return inputErrors;
@@ -58,6 +58,7 @@ namespace Services
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(error);
             }
+
             Console.ForegroundColor = ConsoleColor.White;
         }
     }

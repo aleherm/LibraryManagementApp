@@ -17,44 +17,43 @@ namespace DomainModel
         }
 
         /// <summary>
-        /// Gets of sets NoMaxDomains;
+        /// Gets of sets the maximum number of domains that a book is allowed to have.
         /// </summary>
         public int NoMaxDomains { get; set; }
 
         /// <summary>
-        /// Gets of sets NoMaxLoans.
+        /// Gets of sets the maximum number of loans.
         /// </summary>
         public int NoMaxLoans { get; set; }
 
         /// <summary>
-        /// Gets of sets Period.
+        /// Gets of sets the period between loans.
         /// </summary>
         public int Period { get; set; }
 
         /// <summary>
-        /// Gets of sets NoMaxBorrowerPerDomain.
+        /// Gets of sets the maxim number of loans per domain.
         /// </summary>
-        public int NoMaxBorrowerPerDomain { get; set; }
+        public int NoMaxLoansPerDomain { get; set; }
 
         /// <summary>
-        /// Gets of sets NoOfMonths.
+        /// Gets of sets the number of months.
         /// </summary>
         public int NoOfMonths { get; set; }
 
         /// <summary>
-        /// Gets of sets LimitLoanExtension.
+        /// Gets of sets limit for a loan extension for the past 3 months.
         /// </summary>
         public int LimitLoanExtension { get; set; }
 
         /// <summary>
-        /// Gets of sets Delta.
+        /// Gets of sets number of maximum loans for a book.
         /// </summary>
         public int Delta { get; set; }
 
         /// <summary>
-        /// Gets of sets NoMaxLoansPerDay.
+        /// Gets of sets the maximum number of books loaned in a day.
         /// </summary>
         public int NoMaxLoansPerDay { get; set; }
-
     }
 }

@@ -85,6 +85,7 @@ namespace DomainModel
                 {
                     dataMembers.Add("LoanDate");
                 }
+
                 dataMembers.Add("ReturnDate");
             }
 

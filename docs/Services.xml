@@ -34,7 +34,7 @@
             <summary>
             Gets the instance of the inputErrors.
             </summary>
-            <returns></returns>
+            <returns>The list of errors.</returns>
         </member>
         <member name="M:Services.ErrorsHandler.PrintErrors">
             <summary>

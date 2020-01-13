@@ -24,6 +24,7 @@ namespace Services
         /// </summary>
         public BookService()
         {
+            errors = new ErrorsHandler();
             bookRepository = new BookRepository();
         }
 
@@ -47,6 +48,7 @@ namespace Services
                 {
                     errors.Add(result.ErrorMessage);
                 }
+
                 isValid = false;
             }
 

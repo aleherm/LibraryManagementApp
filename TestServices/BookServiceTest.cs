@@ -104,7 +104,6 @@
         [Test]
         public void NewValidEntityShouldNotHaveTooManyDomains()
         {
-            
         }
     }
 }
