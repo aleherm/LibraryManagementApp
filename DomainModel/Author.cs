@@ -7,12 +7,10 @@ namespace DomainModel
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Author entity class.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
     public class Author : IValidatableObject
     {
         /// <summary>

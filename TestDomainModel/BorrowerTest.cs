@@ -6,7 +6,6 @@ namespace TestDomainModel
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using DomainModel;
     using NUnit.Framework;
@@ -15,9 +14,6 @@ namespace TestDomainModel
     /// The Borrower test class.
     /// </summary>
     [TestFixture]
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1600", Justification = "Tests are self documented.")]
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "CS1591", Justification = "No comment needed.")]
     public class BorrowerTest
     {
         /// <summary>

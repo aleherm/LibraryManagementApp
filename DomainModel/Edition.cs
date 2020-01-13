@@ -7,12 +7,10 @@ namespace DomainModel
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
 
     /// <summary>
     /// Edition entity class.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
     public class Edition : IValidatableObject
     {
         /// <summary>
@@ -20,6 +18,27 @@ namespace DomainModel
         /// </summary>
         public Edition()
         {
+            Loans = new List<Loan>();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Edition" /> class.
+        /// </summary>
+        /// <param name="publisher">The publisher name.</param>
+        /// <param name="pageNumber">The page number.</param>
+        /// <param name="year">The year.</param>
+        /// <param name="bookType">The book type.</param>
+        /// <param name="noForLibrary">The number of books for library reading.</param>
+        /// <param name="noForLoan">The number of books for loan.</param>
+        public Edition(string publisher, int pageNumber, int year, EBookType bookType, int noForLibrary, int noForLoan)
+        {
+            Publisher = publisher;
+            PageNumber = pageNumber;
+            Year = year;
+            BookType = bookType;
+            NoForLibrary = noForLibrary;
+            NoForLoan = noForLoan;
+            NoTotal = noForLoan + noForLibrary;
             Loans = new List<Loan>();
         }
 

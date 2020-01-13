@@ -15,9 +15,6 @@ namespace TestDomainModel
     /// <summary>
     /// Tests the Edition entity.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1600", Justification = "Tests are self documented.")]
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "CS1591", Justification = "No comment needed.")]
     [TestFixture]
     public class EditionTest
     {
@@ -68,6 +65,20 @@ namespace TestDomainModel
             bool isValid = Validator.TryValidateObject(edition, context, validationResults);
 
             Assert.IsFalse(isValid);
+        }
+        
+        [Test]
+        public void LoanListShouldNotBeNull()
+        {
+            edition.Loans = null;
+
+            var actual = Validator.TryValidateObject(edition, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.LoanRequired, msg.ErrorMessage);
         }
 
         /// <summary>

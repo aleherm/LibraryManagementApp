@@ -4,19 +4,14 @@
 
 namespace TestDomainModel
 {
-    using System.Collections;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using DomainModel;
     using NUnit.Framework;
 
     /// <summary>
     /// The Domain test class.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1600", Justification = "Tests are self documented.")]
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "CS1591", Justification = "No comment needed.")]
     [TestFixture]
     public class DomainTest
     {

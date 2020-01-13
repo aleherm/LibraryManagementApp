@@ -1,10 +1,12 @@
-{
-  "NoMaxDomains": "5",
-  "NoMaxLoans": "10",
-  "Period": "2",
-  "NoMaxBorrowerPerDomain": "3",
-  "NoOfMonths": "1",
-  "LimitLoanExtension": "2", 
-  "Delta": "5",
-  "NoMaxLoansPerDay": "30"
-}
+[
+  {
+    "NoMaxDomains": "5",
+    "NoMaxLoans": "10",
+    "Period": "2",
+    "NoMaxBorrowerPerDomain": "3",
+    "NoOfMonths": "1",
+    "LimitLoanExtension": "2",
+    "Delta": "5",
+    "NoMaxLoansPerDay": "30"
+  }
+]

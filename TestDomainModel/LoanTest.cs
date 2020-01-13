@@ -7,23 +7,30 @@ namespace TestDomainModel
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
+    using System.Linq;
     using DomainModel;
     using NUnit.Framework;
 
     /// <summary>
     /// Tests the Loan entity.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1600", Justification = "Tests are self documented.")]
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "CS1591", Justification = "No comment needed.")]
     [TestFixture]
     public class LoanTest
     {
+        /// <summary>
+        /// Loan object to test.
+        /// </summary>
         private Loan loan;
 
+        /// <summary>
+        /// The Loan validation context.
+        /// </summary>
         private ValidationContext context;
-        private IList<ValidationResult> results;
+
+        /// <summary>
+        /// Validation errors returned.
+        /// </summary>
+        private IList<ValidationResult> validationResults;
 
         /// <summary>
         /// Sets up valid properties for the object to be tested.
@@ -34,12 +41,94 @@ namespace TestDomainModel
             loan = new Loan()
             {
                 Id = 1,
+                LoanDate = new DateTime(2019, 1, 1),
                 DueDate = new DateTime(2019, 2, 1),
                 ReturnDate = new DateTime(2019, 10, 10),
             };
 
-            context = new ValidationContext(loan, serviceProvider: null, items: null);
-            results = new List<ValidationResult>();
+            context = new ValidationContext(loan);
+            validationResults = new List<ValidationResult>();
+        }
+
+        [Test]
+        public void BorrowedEditionsListShouldNotBeNull()
+        {
+            loan.BorrowedEditions = null;
+
+            var actual = Validator.TryValidateObject(loan, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void LoanDateShouldNotBeNull()
+        {
+            loan.LoanDate = null;
+
+            var actual = Validator.TryValidateObject(loan, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void DueDateShouldNotBeNull()
+        {
+            loan.DueDate = null;
+
+            var actual = Validator.TryValidateObject(loan, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void LoanDateShouldNotBeValidWithFutureDate()
+        {
+            loan.LoanDate = DateTime.Now.AddDays(1);
+
+            var actual = Validator.TryValidateObject(loan, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+
+            var msg = validationResults[0];
+            Assert.AreEqual(1, msg.MemberNames.Where(item => item == "LoanDate").Count());
+        }
+
+        [Test]
+        public void DueDateShouldNotBeValidWithFutureDate()
+        {
+            loan.DueDate = DateTime.Now.AddDays(1);
+
+            var actual = Validator.TryValidateObject(loan, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+
+            var msg = validationResults[0];
+            Assert.AreEqual(1, msg.MemberNames.Where(item => item == "DueDate").Count());
+        }
+
+        [Test]
+        public void ReturnDateShouldNotBeValidWithFutureDate()
+        {
+            loan.ReturnDate = DateTime.Now.AddDays(1);
+
+            var actual = Validator.TryValidateObject(loan, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+
+            var msg = validationResults[0];
+            Assert.AreEqual(1, msg.MemberNames.Where(item => item == "ReturnDate").Count());
         }
     }
 }

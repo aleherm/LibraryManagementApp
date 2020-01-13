@@ -706,7 +706,7 @@ namespace LibraryManagementApp
                     Console.WriteLine(MenuErrors.InvalidInputError + MenuOutput.TryAgain);
                 }
 
-                Edition newEdition = new Edition(publisher, pageNumber, year, EBookType.EHardCover, noForLibrary, noForLoan);
+                Edition newEdition = new Edition(publisher, pageNumber, year, EBookType.EHardCover, noForLibrary, noForLoan, new List<Loan>());
                 bookEditions.Add(newEdition);
 
                 Console.WriteLine(MenuOutput.AddMoreEditions);

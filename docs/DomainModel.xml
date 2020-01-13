@@ -369,6 +369,17 @@
             Initializes a new instance of the <see cref="T:DomainModel.Edition"/> class.
             </summary>
         </member>
+        <member name="M:DomainModel.Edition.#ctor(System.String,System.Int32,System.Int32,DomainModel.EBookType,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DomainModel.Edition" /> class.
+            </summary>
+            <param name="publisher">The publisher name.</param>
+            <param name="pageNumber">The page number.</param>
+            <param name="year">The year.</param>
+            <param name="bookType">The book type.</param>
+            <param name="noForLibrary">The number of books for library reading.</param>
+            <param name="noForLoan">The number of books for loan.</param>
+        </member>
         <member name="M:DomainModel.Edition.#ctor(System.String,System.Int32,System.Int32,DomainModel.EBookType,System.Int32,System.Int32,System.Collections.Generic.List{DomainModel.Loan})">
             <summary>
             Initializes a new instance of the <see cref="T:DomainModel.Edition" /> class.
@@ -527,6 +538,19 @@
             <summary>
             Gets or sets the list of borrowed Editions.
             </summary>
+        </member>
+        <member name="M:DomainModel.Loan.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            Validates the entity.
+            </summary>
+            <param name="validationContext">The validation context.</param>
+            <returns>The validation result and member names.</returns>
+        </member>
+        <member name="M:DomainModel.Loan.ToString">
+            <summary>
+            Shows the data of the current entity.
+            </summary>
+            <returns>Output string for an Author entity.</returns>
         </member>
     </members>
 </doc>
