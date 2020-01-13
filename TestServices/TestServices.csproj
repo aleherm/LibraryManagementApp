@@ -72,9 +72,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuthorServiceTest.cs" />
-    <Compile Include="BookServiceAdd.cs" />
+    <Compile Include="BookServiceTest.cs" />
     <Compile Include="BorrowerServiceTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ServiceTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

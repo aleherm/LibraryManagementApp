@@ -5,16 +5,13 @@
 namespace TestServices
 {
     using System;
-    using System.Collections.Generic;
-    using System.IO;
     using DomainModel;
     using Moq;
-    using Newtonsoft.Json;
     using NUnit.Framework;
     using Services;
     
     [TestFixture]
-    public class BorrowerServiceTest
+    public class BorrowerServiceTest : ServiceTest
     {
         /// <summary>
         /// The service instance to be tested.
@@ -27,62 +24,40 @@ namespace TestServices
         private Borrower borrower;
 
         /// <summary>
-        /// The threshold item needed to validate loan data.
-        /// </summary>
-        private Threshold threshold;
-
-        /// <summary>
         /// The setup of the BorrowerService object to be tested.
         /// </summary>
         [SetUp]
-        public void BorrowerServiceSetUp()
+        public new void BorrowerServiceSetUp()
         {
             service = new BorrowerService();
             Address address = new Address("Brasov", "Octavian", 10);
             borrower = new Borrower("Alexandra", "Hermeneanu", "ale@email.com", new DateTime(1999, 10, 10), address, true, false);
-
-            string solutionDirectory = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(TestContext.CurrentContext.TestDirectory)));
-            threshold = GetThresholdFromJSON(solutionDirectory);
         }
 
-        /// <summary>
-        /// Test that should pass with valid Borrower object.
-        /// </summary>
         [Test]
-        public void BorowerShouldBeValid()
+        public override void EntityShouldBeValid()
         {
-            Assert.AreEqual(service.IsValidBorrower(borrower), true);
+            Assert.AreEqual(true, service.IsValidBorrower(borrower));
         }
 
-        /// <summary>
-        /// Test that should pass with not valid Borrower object.
-        /// </summary>
         [Test]
-        public void BorowerShouldNotBeValid()
+        public override void EntityShouldNotBeValid()
         {
-            Assert.AreEqual(service.IsValidBorrower(borrower), true);
+            borrower.Email = "ceva";
+            Assert.AreEqual(false, service.IsValidBorrower(borrower));
         }
 
-        /// <summary>
-        /// Test that should pass with valid Borrower object.
-        /// </summary>
         [Test]
-        public void AddBorowerShouldBeSuccessful()
+        public override void AddNewValidEntityShouldBeSuccessful()
         {
-            Assert.AreEqual(service.AddNewBorrower(borrower), true);
+            Assert.AreEqual(true, service.AddNewBorrower(borrower));
         }
 
-        /// <summary>
-        /// Gets the threshold data needed for validation from the external JSON file.
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns>A Threshold object.</returns>
-        private Threshold GetThresholdFromJSON(string path)
+        [Test]
+        public override void AddNewInvalidEntityShouldFail()
         {
-            StreamReader reader = new StreamReader(path + "\\external-data.json");
-            string json = reader.ReadToEnd();
-            List<Threshold> items = JsonConvert.DeserializeObject<List<Threshold>>(json);
-            return items[0];
+            borrower.Email = "ceva";
+            Assert.AreEqual(false, service.AddNewBorrower(borrower));
         }
     }
 }

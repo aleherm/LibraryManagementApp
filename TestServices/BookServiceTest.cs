@@ -9,7 +9,7 @@
     using System.IO;
 
     [TestFixture]
-    public class BookServiceAdd
+    public class BookServiceTest : ServiceTest
     {
         /// <summary>
         /// The service instance to be tested.
@@ -77,34 +77,34 @@
         }
         
         [Test]
-        public void BookShouldBeValid()
+        public override void EntityShouldBeValid()
         {
             Assert.AreEqual(service.IsValidBook(book), true);
         }
 
         [Test]
-        public void BookShouldNotBeValid()
+        public override void EntityShouldNotBeValid()
         {
             Assert.AreEqual(service.IsValidBook(book), true);
         }
         
         [Test]
-        public void AddBookShouldBeSuccessful()
+        public override void AddNewValidEntityShouldBeSuccessful()
         {
             Assert.AreEqual(service.AddNewBook(book), true);
         }
 
-        /// <summary>
-        /// Gets the threshold data needed for validation from the external JSON file.
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns>A Threshold object.</returns>
-        private Threshold GetThresholdFromJSON(string path)
+        [Test]
+        public override void AddNewInvalidEntityShouldFail()
         {
-            StreamReader reader = new StreamReader(path + "\\external-data.json");
-            string json = reader.ReadToEnd();
-            List<Threshold> items = JsonConvert.DeserializeObject<List<Threshold>>(json);
-            return items[0];
+            book.Domains = new List<Domain>();
+            Assert.AreEqual(service.AddNewBook(book), false);
+        }
+
+        [Test]
+        public void NewValidEntityShouldNotHaveTooManyDomains()
+        {
+            
         }
     }
 }

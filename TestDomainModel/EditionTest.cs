@@ -175,7 +175,7 @@ namespace TestDomainModel
         /// </summary>
         /// <param name="name">The publisher name.</param>
         [Test]
-        public void PublisherNameShouldBevalidWithNoCharsWithinRange([Values("Amintiri din copilarie", "Morometii", "XoXo")] string name)
+        public void PublisherNameShouldBeValidWithNoCharsWithinRange([Values("Amintiri din copilarie", "Morometii", "XoXo")] string name)
         {
             edition.Publisher = name;
 

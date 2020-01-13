@@ -13,10 +13,11 @@ namespace Services
     /// <summary>
     /// The implementation class of the IBookService interface.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
     public class BookService : IBookService
     {
         private BookRepository bookRepository;
+
+        private readonly ErrorsHandler errors;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BookService"/> class.
@@ -33,10 +34,29 @@ namespace Services
         /// <returns>True or False.</returns>
         public bool IsValidBook(Book book)
         {
+            bool isValid = true;
+
             ValidationContext context = new ValidationContext(book);
             IList<ValidationResult> validationResults = new List<ValidationResult>();
 
-            return Validator.TryValidateObject(book, context, validationResults, true);
+            isValid = Validator.TryValidateObject(book, context, validationResults, true);
+
+            if (validationResults.Count != 0)
+            {
+                foreach (ValidationResult result in validationResults)
+                {
+                    errors.Add(result.ErrorMessage);
+                }
+                isValid = false;
+            }
+
+            //if(book.Domains.Count > threshold.NoMaxDomains)
+            //{
+            //  errors.Add(ValidationErrors.TooManyDomains);
+            //  isValid = false;
+            //}
+
+            return isValid;
         }
 
         /// <summary>
@@ -50,6 +70,10 @@ namespace Services
             {
                 bookRepository.Insert(book);
                 return true;
+            }
+            else
+            {
+                errors.PrintErrors();
             }
 
             return false;

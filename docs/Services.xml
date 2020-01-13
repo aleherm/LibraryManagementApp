@@ -4,6 +4,38 @@
         <name>Services</name>
     </assembly>
     <members>
+        <member name="T:Services.ErrorsHandler">
+            <summary>
+            Error handler class.
+            </summary>
+        </member>
+        <member name="M:Services.ErrorsHandler.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Services.ErrorsHandler"/> class.
+            </summary>
+        </member>
+        <member name="M:Services.ErrorsHandler.Add(System.String)">
+            <summary>
+            Adds the specified error message.
+            </summary>
+            <param name="errorMessage">The error message.</param>
+        </member>
+        <member name="M:Services.ErrorsHandler.Clear">
+            <summary>
+            Clears this instance.
+            </summary>
+        </member>
+        <member name="M:Services.ErrorsHandler.Errors">
+            <summary>
+            Gets the instance of the inputErrors.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Services.ErrorsHandler.PrintErrors">
+            <summary>
+            Prints the errors.
+            </summary>
+        </member>
         <member name="T:Services.IAddressService">
             <summary>
             Interface for the AddressService.
