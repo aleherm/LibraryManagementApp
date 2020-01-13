@@ -1,6 +1,6 @@
 [
   {
-    "NoMaxDomains": "5",
+    "NoMaxDomains": "2",
     "NoMaxLoans": "10",
     "Period": "2",
     "NoMaxBorrowerPerDomain": "3",

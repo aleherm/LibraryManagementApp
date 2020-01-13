@@ -104,6 +104,10 @@
     <Compile Include="Migrations\202001122143504_Editions-Loans-Borrower.designer.cs">
       <DependentUpon>202001122143504_Editions-Loans-Borrower.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202001131156028_Small-changes.cs" />
+    <Compile Include="Migrations\202001131156028_Small-changes.designer.cs">
+      <DependentUpon>202001131156028_Small-changes.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -142,6 +146,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202001122143504_Editions-Loans-Borrower.resx">
       <DependentUpon>202001122143504_Editions-Loans-Borrower.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202001131156028_Small-changes.resx">
+      <DependentUpon>202001131156028_Small-changes.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

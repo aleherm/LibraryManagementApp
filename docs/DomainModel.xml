@@ -271,42 +271,42 @@
         </member>
         <member name="P:DomainModel.Threshold.NoMaxDomains">
             <summary>
-            
+            Gets of sets NoMaxDomains;
             </summary>
         </member>
         <member name="P:DomainModel.Threshold.NoMaxLoans">
             <summary>
-            
+            Gets of sets NoMaxLoans.
             </summary>
         </member>
         <member name="P:DomainModel.Threshold.Period">
             <summary>
-            
+            Gets of sets Period.
             </summary>
         </member>
         <member name="P:DomainModel.Threshold.NoMaxBorrowerPerDomain">
             <summary>
-            
+            Gets of sets NoMaxBorrowerPerDomain.
             </summary>
         </member>
         <member name="P:DomainModel.Threshold.NoOfMonths">
             <summary>
-            
+            Gets of sets NoOfMonths.
             </summary>
         </member>
         <member name="P:DomainModel.Threshold.LimitLoanExtension">
             <summary>
-            
+            Gets of sets LimitLoanExtension.
             </summary>
         </member>
         <member name="P:DomainModel.Threshold.Delta">
             <summary>
-            
+            Gets of sets Delta.
             </summary>
         </member>
         <member name="P:DomainModel.Threshold.NoMaxLoansPerDay">
             <summary>
-            
+            Gets of sets NoMaxLoansPerDay.
             </summary>
         </member>
         <member name="T:DomainModel.Domain">
