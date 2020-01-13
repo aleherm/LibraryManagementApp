@@ -35,7 +35,10 @@
           </RuleSettings>
         </Rule>
       </Rules>
-      <AnalyzerSettings />
+      <AnalyzerSettings>
+        <StringProperty Name="CompanyName">Transilvania University of Brasov</StringProperty>
+        <StringProperty Name="Copyright">Code by Alexandra Hermeneanu. All rights reserved.</StringProperty>
+      </AnalyzerSettings>
     </Analyzer>
   </Analyzers>
 </StyleCopSettings>
