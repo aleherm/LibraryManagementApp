@@ -115,7 +115,7 @@
             Validates the entity.
             </summary>
             <param name="validationContext">The validation context.</param>
-            <returns>The validation result and memeber names.</returns>
+            <returns>The validation result and member names.</returns>
         </member>
         <member name="M:DomainModel.Author.ToString">
             <summary>
@@ -251,13 +251,63 @@
             Validates the entity.
             </summary>
             <param name="validationContext">The validation context.</param>
-            <returns>The validation result and memeber names.</returns>
+            <returns>The validation result and member names.</returns>
         </member>
         <member name="M:DomainModel.Borrower.ToString">
             <summary>
             Shows the data of the current entity.
             </summary>
             <returns>Output string for an Borrower entity.</returns>
+        </member>
+        <member name="T:DomainModel.Threshold">
+            <summary>
+            Threshold constant data.
+            </summary>
+        </member>
+        <member name="M:DomainModel.Threshold.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:DomainModel.Threshold"/> class.
+            </summary>
+        </member>
+        <member name="P:DomainModel.Threshold.NoMaxDomains">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:DomainModel.Threshold.NoMaxLoans">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:DomainModel.Threshold.Period">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:DomainModel.Threshold.NoMaxBorrowerPerDomain">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:DomainModel.Threshold.NoOfMonths">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:DomainModel.Threshold.LimitLoanExtension">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:DomainModel.Threshold.Delta">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="P:DomainModel.Threshold.NoMaxLoansPerDay">
+            <summary>
+            
+            </summary>
         </member>
         <member name="T:DomainModel.Domain">
             <summary>
@@ -269,13 +319,14 @@
             Initializes a new instance of the <see cref="T:DomainModel.Domain"/> class.
             </summary>
         </member>
-        <member name="M:DomainModel.Domain.#ctor(System.String,DomainModel.Domain,System.Collections.Generic.List{DomainModel.Domain})">
+        <member name="M:DomainModel.Domain.#ctor(System.String,DomainModel.Domain,System.Collections.Generic.List{DomainModel.Domain},System.Collections.Generic.List{DomainModel.Book})">
             <summary>
-            Initializes a new instance of the <see cref="T:DomainModel.Domain"/> class.
+            Initializes a new instance of the <see cref="T:DomainModel.Domain" /> class.
             </summary>
             <param name="domainName">The domain name.</param>
             <param name="parent">The parent domain name.</param>
             <param name="subdomains">The subdomains list.</param>
+            <param name="books">The books list.</param>
         </member>
         <member name="P:DomainModel.Domain.Id">
             <summary>
@@ -318,9 +369,9 @@
             Initializes a new instance of the <see cref="T:DomainModel.Edition"/> class.
             </summary>
         </member>
-        <member name="M:DomainModel.Edition.#ctor(System.String,System.Int32,System.Int32,DomainModel.EBookType,System.Int32,System.Int32)">
+        <member name="M:DomainModel.Edition.#ctor(System.String,System.Int32,System.Int32,DomainModel.EBookType,System.Int32,System.Int32,System.Collections.Generic.List{DomainModel.Loan})">
             <summary>
-            Initializes a new instance of the <see cref="T:DomainModel.Edition"/> class.
+            Initializes a new instance of the <see cref="T:DomainModel.Edition" /> class.
             </summary>
             <param name="publisher">The publisher name.</param>
             <param name="pageNumber">The page number.</param>
@@ -328,6 +379,7 @@
             <param name="bookType">The book type.</param>
             <param name="noForLibrary">The number of books for library reading.</param>
             <param name="noForLoan">The number of books for loan.</param>
+            <param name="loans">The loan list.</param>
         </member>
         <member name="P:DomainModel.Edition.Id">
             <summary>
@@ -369,12 +421,17 @@
             Gets or sets the total number of books.
             </summary>
         </member>
+        <member name="P:DomainModel.Edition.Loans">
+            <summary>
+            Gets or sets the list of loans.
+            </summary>
+        </member>
         <member name="M:DomainModel.Edition.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
             <summary>
             Validates the entity.
             </summary>
             <param name="validationContext">The validation context.</param>
-            <returns>The validation result and memeber names.</returns>
+            <returns>The validation result and member names.</returns>
         </member>
         <member name="M:DomainModel.Edition.ToString">
             <summary>
@@ -387,14 +444,44 @@
             Book types by cover aspect.
             </summary>
         </member>
+        <member name="F:DomainModel.EBookType.EPaperBack">
+            <summary>
+            The paper back cover.
+            </summary>
+        </member>
+        <member name="F:DomainModel.EBookType.EHardCover">
+            <summary>
+            The hard cover.
+            </summary>
+        </member>
         <member name="T:DomainModel.EGenderType">
             <summary>
             The gender of a borrower.
             </summary>
         </member>
+        <member name="F:DomainModel.EGenderType.EFemale">
+            <summary>
+            The female gender.
+            </summary>
+        </member>
+        <member name="F:DomainModel.EGenderType.EMale">
+            <summary>
+            The male gender
+            </summary>
+        </member>
         <member name="T:DomainModel.ERoleType">
             <summary>
             The roles types of a borrower.
+            </summary>
+        </member>
+        <member name="F:DomainModel.ERoleType.EReader">
+            <summary>
+            The reader flag.
+            </summary>
+        </member>
+        <member name="F:DomainModel.ERoleType.ELibrarian">
+            <summary>
+            The librarian flag.
             </summary>
         </member>
         <member name="T:DomainModel.Loan">
@@ -407,14 +494,14 @@
             Initializes a new instance of the <see cref="T:DomainModel.Loan"/> class.
             </summary>
         </member>
-        <member name="M:DomainModel.Loan.#ctor(System.DateTime,System.DateTime,System.DateTime,System.Collections.Generic.List{DomainModel.Book})">
+        <member name="M:DomainModel.Loan.#ctor(System.DateTime,System.DateTime,System.DateTime,System.Collections.Generic.List{DomainModel.Edition})">
             <summary>
             Initializes a new instance of the <see cref="T:DomainModel.Loan"/> class.
             </summary>
             <param name="loanDate">The loan date.</param>
             <param name="dueDate">The due date.</param>
             <param name="returnDate">The return date.</param>
-            <param name="borrowedBooks">The list of borrowed books.</param>
+            <param name="borrowedEditions">The list of borrowed editions.</param>
         </member>
         <member name="P:DomainModel.Loan.Id">
             <summary>
@@ -436,9 +523,9 @@
             Gets or sets the return date.
             </summary>
         </member>
-        <member name="P:DomainModel.Loan.BorrowedBooks">
+        <member name="P:DomainModel.Loan.BorrowedEditions">
             <summary>
-            Gets or sets the list of borrowed books.
+            Gets or sets the list of borrowed Editions.
             </summary>
         </member>
     </members>

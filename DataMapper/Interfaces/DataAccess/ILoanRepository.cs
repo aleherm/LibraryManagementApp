@@ -7,7 +7,7 @@ namespace DataMapper
     using DomainModel;
 
     /// <summary>
-    /// ILoanRepository.
+    /// The Loan Repository interface.
     /// </summary>
     internal interface ILoanRepository : IRepository<Loan>
     {

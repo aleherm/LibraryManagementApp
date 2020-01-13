@@ -5,9 +5,8 @@
 namespace DomainModel
 {
     using System.Diagnostics.CodeAnalysis;
-
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1600", Justification = "Constants don't need to be documented.")]
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "CS1591", Justification = "No comment needed.")]
+    
+    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "CS1591", Justification = "No documentation needed.")]
     public static class ErrorMessages
     {
         // Required

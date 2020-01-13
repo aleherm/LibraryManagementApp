@@ -13,7 +13,14 @@ namespace DomainModel
     [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "CS1591", Justification = "No comment needed.")]
     public enum EGenderType
     {
+        /// <summary>
+        /// The female gender.
+        /// </summary>
         EFemale,
+
+        /// <summary>
+        /// The male gender
+        /// </summary>
         EMale,
     }
 }

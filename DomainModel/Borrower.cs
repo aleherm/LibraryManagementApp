@@ -108,7 +108,7 @@ namespace DomainModel
         /// Validates the entity.
         /// </summary>
         /// <param name="validationContext">The validation context.</param>
-        /// <returns>The validation result and memeber names.</returns>
+        /// <returns>The validation result and member names.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             List<string> memberNames = new List<string>();

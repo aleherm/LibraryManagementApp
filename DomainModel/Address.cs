@@ -11,7 +11,9 @@ namespace DomainModel
     /// <summary>
     /// Address entity.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.Readability", "SA1101 : CSharp.Readability", Justification = "In .NET this is rarely used.")]
+    [SuppressMessage("Microsoft.StyleCop.CSharp.Readability", "SA1101 : CSharp.Readability", Justification = "In .NET this is rarely used.")]
+
     public class Address : IValidatableObject
     {
         /// <summary>

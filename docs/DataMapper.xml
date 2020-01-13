@@ -153,27 +153,27 @@
         </member>
         <member name="T:DataMapper.IAuthorRepository">
             <summary>
-            IAuthorRepository.
+            The Author Repository interface.
             </summary>
         </member>
         <member name="T:DataMapper.IBorrowerRepository">
             <summary>
-            IBorrowerRepository.
+            The Borrower Repository interface.
             </summary>
         </member>
         <member name="T:DataMapper.IDomainRepository">
             <summary>
-            IDomainRepository.
+            The Domain Repository interface.
             </summary>
         </member>
         <member name="T:DataMapper.IEditionRepository">
             <summary>
-            IEditionRepository.
+            The Edition Repository interface.
             </summary>
         </member>
         <member name="T:DataMapper.ILoanRepository">
             <summary>
-            ILoanRepository.
+            The Loan Repository interface.
             </summary>
         </member>
         <member name="T:DataMapper.IRepository`1">
@@ -224,7 +224,7 @@
         </member>
         <member name="T:DataMapper.IAddressRepository">
             <summary>
-            IAddressRepository.
+            The Address Repository interface.
             </summary>
         </member>
     </members>

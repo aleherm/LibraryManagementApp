@@ -20,10 +20,11 @@ namespace DomainModel
         /// </summary>
         public Edition()
         {
+            Loans = new List<Loan>();
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Edition"/> class.
+        /// Initializes a new instance of the <see cref="Edition" /> class.
         /// </summary>
         /// <param name="publisher">The publisher name.</param>
         /// <param name="pageNumber">The page number.</param>
@@ -31,7 +32,8 @@ namespace DomainModel
         /// <param name="bookType">The book type.</param>
         /// <param name="noForLibrary">The number of books for library reading.</param>
         /// <param name="noForLoan">The number of books for loan.</param>
-        public Edition(string publisher, int pageNumber, int year, EBookType bookType, int noForLibrary, int noForLoan)
+        /// <param name="loans">The loan list.</param>
+        public Edition(string publisher, int pageNumber, int year, EBookType bookType, int noForLibrary, int noForLoan, List<Loan> loans)
         {
             Publisher = publisher;
             PageNumber = pageNumber;
@@ -40,6 +42,7 @@ namespace DomainModel
             NoForLibrary = noForLibrary;
             NoForLoan = noForLoan;
             NoTotal = noForLoan + noForLibrary;
+            Loans = loans;
         }
 
         /// <summary>
@@ -90,12 +93,18 @@ namespace DomainModel
         [Required(ErrorMessage = ErrorMessages.NoTotalBooksRequired)]
         [Range(0, 100, ErrorMessage = ErrorMessages.TotalBooksRangeNumber)]
         public int NoTotal { get; set; }
+        
+        /// <summary>
+        /// Gets or sets the list of loans.
+        /// </summary>
+        [Required(ErrorMessage = ErrorMessages.LoanRequired)]
+        public IList<Loan> Loans { get; set; }
 
         /// <summary>
         /// Validates the entity.
         /// </summary>
         /// <param name="validationContext">The validation context.</param>
-        /// <returns>The validation result and memeber names.</returns>
+        /// <returns>The validation result and member names.</returns>
         public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
         {
             List<string> memberNames = new List<string>();
@@ -122,6 +131,11 @@ namespace DomainModel
             if (memberNames.Count != 0)
             {
                 yield return new ValidationResult(ErrorMessages.InvalidNumber, memberNames);
+            }
+
+            if (Loans != null && Loans.Count == 0)
+            {
+                memberNames.Add("Loans");
             }
 
             yield return null;

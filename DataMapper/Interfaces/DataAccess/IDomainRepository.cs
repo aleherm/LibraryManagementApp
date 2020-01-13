@@ -7,7 +7,7 @@ namespace DataMapper
     using DomainModel;
 
     /// <summary>
-    /// IDomainRepository.
+    /// The Domain Repository interface.
     /// </summary>
     internal interface IDomainRepository : IRepository<Domain>
     {

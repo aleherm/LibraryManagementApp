@@ -70,6 +70,7 @@
     <Compile Include="Book.cs" />
     <Compile Include="Borrower.cs" />
     <Compile Include="Constants\ErrorMessages.cs" />
+    <Compile Include="Constants\Threshold.cs" />
     <Compile Include="Domain.cs" />
     <Compile Include="Edition.cs" />
     <Compile Include="Enums\EBookType.cs" />
@@ -81,10 +82,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
     <AdditionalFiles Include="stylecop.json" />

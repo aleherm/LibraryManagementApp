@@ -24,17 +24,18 @@ namespace DomainModel
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Domain"/> class.
+        /// Initializes a new instance of the <see cref="Domain" /> class.
         /// </summary>
         /// <param name="domainName">The domain name.</param>
         /// <param name="parent">The parent domain name.</param>
         /// <param name="subdomains">The subdomains list.</param>
-        public Domain(string domainName, Domain parent, List<Domain> subdomains)
+        /// <param name="books">The books list.</param>
+        public Domain(string domainName, Domain parent, List<Domain> subdomains, List<Book> books)
         {
             DomainName = domainName;
             ParentDomain = parent;
             Subdomains = subdomains;
-            Books = new List<Book>();
+            Books = books;
         }
 
         /// <summary>

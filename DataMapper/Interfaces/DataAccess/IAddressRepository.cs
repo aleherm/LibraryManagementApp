@@ -7,7 +7,7 @@ namespace DataMapper
     using DomainModel;
 
     /// <summary>
-    /// IAddressRepository.
+    /// The Address Repository interface.
     /// </summary>
     internal interface IAddressRepository : IRepository<Address>
     {

@@ -20,7 +20,7 @@ namespace DomainModel
         /// </summary>
         public Loan()
         {
-            BorrowedBooks = new List<Book>();
+            BorrowedEditions = new List<Edition>();
         }
 
         /// <summary>
@@ -29,13 +29,13 @@ namespace DomainModel
         /// <param name="loanDate">The loan date.</param>
         /// <param name="dueDate">The due date.</param>
         /// <param name="returnDate">The return date.</param>
-        /// <param name="borrowedBooks">The list of borrowed books.</param>
-        public Loan(DateTime loanDate, DateTime dueDate, DateTime returnDate, List<Book> borrowedBooks)
+        /// <param name="borrowedEditions">The list of borrowed editions.</param>
+        public Loan(DateTime loanDate, DateTime dueDate, DateTime returnDate, List<Edition> borrowedEditions)
         {
             LoanDate = loanDate;
             DueDate = dueDate;
             ReturnDate = returnDate;
-            BorrowedBooks = borrowedBooks;
+            BorrowedEditions = borrowedEditions;
         }
 
         /// <summary>
@@ -61,9 +61,9 @@ namespace DomainModel
         public DateTime ReturnDate { get; set; }
 
         /// <summary>
-        /// Gets or sets the list of borrowed books.
+        /// Gets or sets the list of borrowed Editions.
         /// </summary>
-        [Required(ErrorMessage = "The borrowed books list should not be null")]
-        public IList<Book> BorrowedBooks { get; set; }
+        [Required(ErrorMessage = "The borrowed editions list should not be null")]
+        public IList<Edition> BorrowedEditions { get; set; }
     }
 }

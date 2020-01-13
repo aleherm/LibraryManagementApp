@@ -13,7 +13,14 @@ namespace DomainModel
     [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "CS1591", Justification = "No comment needed.")]
     public enum EBookType
     {
+        /// <summary>
+        /// The paper back cover.
+        /// </summary>
         EPaperBack,
+
+        /// <summary>
+        /// The hard cover.
+        /// </summary>
         EHardCover,
     }
 }

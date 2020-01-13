@@ -5,9 +5,12 @@
 namespace TestServices
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.IO;
     using DomainModel;
     using Moq;
+    using Newtonsoft.Json;
     using NUnit.Framework;
     using Services;
 
@@ -55,6 +58,16 @@ namespace TestServices
         [Test]
         public void AddBorowerShouldBeSuccessful()
         {
+            using (StreamReader r = new StreamReader("external-data.json"))
+            {
+                var json = r.ReadToEnd();
+                var items = JsonConvert.DeserializeObject<List<Threshold>>(json);
+                foreach (var item in items)
+                {
+                    Console.WriteLine("{0} {1}", item.LimitLoanExtension, item.Delta);
+                }
+            }
+
             Assert.AreEqual(service.AddNewBorrower(borrower), true);
         }
     }

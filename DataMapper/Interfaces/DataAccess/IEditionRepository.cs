@@ -7,7 +7,7 @@ namespace DataMapper
     using DomainModel;
 
     /// <summary>
-    /// IEditionRepository.
+    /// The Edition Repository interface.
     /// </summary>
     internal interface IEditionRepository : IRepository<Edition>
     {

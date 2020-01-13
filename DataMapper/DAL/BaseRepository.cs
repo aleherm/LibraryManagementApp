@@ -14,6 +14,10 @@ namespace DataMapper
     /// Basic data access methods class.
     /// </summary>
     /// <typeparam name="T">The type of the entity.</typeparam>
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+    "Microsoft.StyleCop.CSharp.NamingRules",
+    "SA1305:FieldNamesMustNotUseHungarianNotation",
+    Justification = "Using Win32 naming for consistency.")]
     public abstract class BaseRepository<T> : IRepository<T>
         where T : class
     {

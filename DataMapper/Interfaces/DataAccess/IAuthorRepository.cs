@@ -7,7 +7,7 @@ namespace DataMapper
     using DomainModel;
 
     /// <summary>
-    /// IAuthorRepository.
+    /// The Author Repository interface.
     /// </summary>
     internal interface IAuthorRepository : IRepository<Author>
     {

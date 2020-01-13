@@ -13,7 +13,14 @@ namespace DomainModel
     [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "CS1591", Justification = "No comment needed.")]
     public enum ERoleType
     {
+        /// <summary>
+        /// The reader flag.
+        /// </summary>
         EReader,
+
+        /// <summary>
+        /// The librarian flag.
+        /// </summary>
         ELibrarian,
     }
 }
