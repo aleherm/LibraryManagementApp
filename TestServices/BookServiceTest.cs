@@ -1,12 +1,10 @@
 ﻿namespace TestServices
 {
     using DomainModel;
-    using Newtonsoft.Json;
     using NUnit.Framework;
     using Services;
     using System;
     using System.Collections.Generic;
-    using System.IO;
 
     [TestFixture]
     public class BookServiceTest : ServiceTest
@@ -24,7 +22,7 @@
         /// <summary>
         /// The threshold item needed to validate loan data.
         /// </summary>
-        private Threshold threshold;
+        private readonly Threshold threshold;
 
         [SetUp]
         public void BookSetUp()
@@ -71,9 +69,6 @@
                     },
                 },
             };
-
-            string solutionDirectory = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(TestContext.CurrentContext.TestDirectory)));
-            threshold = GetThresholdFromJSON(solutionDirectory);
         }
         
         [Test]

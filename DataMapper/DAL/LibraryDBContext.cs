@@ -18,7 +18,7 @@ namespace DataMapper
         public LibraryDBContext()
             : base("strLibraryConnection")
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<LibraryDBContext, Migrations.Configuration>());
+            //Database.SetInitializer(new MigrateDatabaseToLatestVersion<LibraryDBContext, Migrations.Configuration>());
         }
 
         /// <summary>

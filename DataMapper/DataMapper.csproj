@@ -5,30 +5,27 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{DC3292AC-B405-4711-B523-3368F0DA212B}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <ProjectGuid>{9FB16FDA-ECEA-4AEF-AFEA-1E2A9AC8D7F2}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DataMapper</RootNamespace>
     <AssemblyName>DataMapper</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\docs\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>..\docs\DataMapper.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -39,11 +36,9 @@
   <ItemGroup>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.4.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -62,59 +57,22 @@
     <Compile Include="DAL\BookRepository.cs" />
     <Compile Include="DAL\BorrowerRepository.cs" />
     <Compile Include="DAL\DomainRepository.cs" />
-    <Compile Include="DAL\LibraryDBContext.cs" />
     <Compile Include="DAL\EditionRepository.cs" />
+    <Compile Include="DAL\LibraryDBContext.cs" />
     <Compile Include="DAL\LoanRepository.cs" />
+    <Compile Include="Interfaces\DataAccess\IAddressRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IAuthorRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IBorrowerRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IDomainRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IEditionRepository.cs" />
     <Compile Include="Interfaces\DataAccess\ILoanRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IRepository.cs" />
-    <Compile Include="Interfaces\DataAccess\IAddressRepository.cs" />
-    <Compile Include="Migrations\201912200728046_InitialCreate.cs" />
-    <Compile Include="Migrations\201912200728046_InitialCreate.designer.cs">
-      <DependentUpon>201912200728046_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001072012183_validations_props-ctors.cs" />
-    <Compile Include="Migrations\202001072012183_validations_props-ctors.designer.cs">
-      <DependentUpon>202001072012183_validations_props-ctors.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001072047113_borrower_ctor-change.cs" />
-    <Compile Include="Migrations\202001072047113_borrower_ctor-change.designer.cs">
-      <DependentUpon>202001072047113_borrower_ctor-change.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001091801543_ctor-changes.cs" />
-    <Compile Include="Migrations\202001091801543_ctor-changes.designer.cs">
-      <DependentUpon>202001091801543_ctor-changes.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001100714137_many-to-many-relations.cs" />
-    <Compile Include="Migrations\202001100714137_many-to-many-relations.designer.cs">
-      <DependentUpon>202001100714137_many-to-many-relations.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001122051373_Modified-properties.cs" />
-    <Compile Include="Migrations\202001122051373_Modified-properties.designer.cs">
-      <DependentUpon>202001122051373_Modified-properties.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001122111013_Added-loans-to-edition.cs" />
-    <Compile Include="Migrations\202001122111013_Added-loans-to-edition.designer.cs">
-      <DependentUpon>202001122111013_Added-loans-to-edition.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001122143504_Editions-Loans-Borrower.cs" />
-    <Compile Include="Migrations\202001122143504_Editions-Loans-Borrower.designer.cs">
-      <DependentUpon>202001122143504_Editions-Loans-Borrower.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\202001131156028_Small-changes.cs" />
-    <Compile Include="Migrations\202001131156028_Small-changes.designer.cs">
-      <DependentUpon>202001131156028_Small-changes.cs</DependentUpon>
+    <Compile Include="Migrations\202001131956289_InitialRedoMigration.cs" />
+    <Compile Include="Migrations\202001131956289_InitialRedoMigration.designer.cs">
+      <DependentUpon>202001131956289_InitialRedoMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="App.config" />
-    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">
@@ -123,40 +81,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201912200728046_InitialCreate.resx">
-      <DependentUpon>201912200728046_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001072012183_validations_props-ctors.resx">
-      <DependentUpon>202001072012183_validations_props-ctors.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001072047113_borrower_ctor-change.resx">
-      <DependentUpon>202001072047113_borrower_ctor-change.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001091801543_ctor-changes.resx">
-      <DependentUpon>202001091801543_ctor-changes.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001100714137_many-to-many-relations.resx">
-      <DependentUpon>202001100714137_many-to-many-relations.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001122051373_Modified-properties.resx">
-      <DependentUpon>202001122051373_Modified-properties.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001122111013_Added-loans-to-edition.resx">
-      <DependentUpon>202001122111013_Added-loans-to-edition.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001122143504_Editions-Loans-Borrower.resx">
-      <DependentUpon>202001122143504_Editions-Loans-Borrower.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\202001131156028_Small-changes.resx">
-      <DependentUpon>202001131156028_Small-changes.cs</DependentUpon>
-    </EmbeddedResource>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.CodeFixes.dll" />
-    <Analyzer Include="..\packages\StyleCop.Analyzers.1.1.118\analyzers\dotnet\cs\StyleCop.Analyzers.dll" />
-  </ItemGroup>
-  <ItemGroup>
-    <AdditionalFiles Include="stylecop.json" />
+    <EmbeddedResource Include="Migrations\202001131956289_InitialRedoMigration.resx">
+      <DependentUpon>202001131956289_InitialRedoMigration.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

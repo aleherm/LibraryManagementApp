@@ -7,13 +7,13 @@ namespace DataMapper.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.4.0")]
-    public sealed partial class ctorchanges : IMigrationMetadata
+    public sealed partial class InitialRedoMigration : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(ctorchanges));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialRedoMigration));
         
         string IMigrationMetadata.Id
         {
-            get { return "202001091801543_ctor-changes"; }
+            get { return "202001131956289_InitialRedoMigration"; }
         }
         
         string IMigrationMetadata.Source

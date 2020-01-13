@@ -65,7 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DataMapper\DataMapper.csproj">
-      <Project>{dc3292ac-b405-4711-b523-3368f0da212b}</Project>
+      <Project>{9fb16fda-ecea-4aef-afea-1e2a9ac8d7f2}</Project>
       <Name>DataMapper</Name>
     </ProjectReference>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">
