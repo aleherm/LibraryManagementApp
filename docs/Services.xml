@@ -4,6 +4,11 @@
         <name>Services</name>
     </assembly>
     <members>
+        <member name="T:Services.ValidationErrors">
+            <summary>
+            Error messages to be shown at the validation of an entity add.
+            </summary>
+        </member>
         <member name="T:Services.ErrorsHandler">
             <summary>
             Error handler class.
