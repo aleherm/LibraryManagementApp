@@ -1,12 +1,13 @@
 [
   {
-    "NoMaxDomains": "2",
-    "NoMaxLoans": "10",
-    "Period": "2",
-    "NoMaxBorrowerPerDomain": "3",
-    "NoOfMonths": "1",
-    "LimitLoanExtension": "2",
-    "Delta": "5",
-    "NoMaxLoansPerDay": "30"
+    "NoMaxDomains": "2", // DOM
+    "NoMaxLoans": "10", // 
+    "NoMaxBooks": "3", // max per Period - NMC
+    "Period": "2", // months - PER
+    "NoMaxBorrowerPerDomain": "3", // D
+    "NoOfMonths": "1", // L
+    "LimitLoanExtension": "2", // LIM
+    "Delta": "5", // DELTA
+    "NoMaxLoansPerDay": "10" // NCZ
   }
 ]

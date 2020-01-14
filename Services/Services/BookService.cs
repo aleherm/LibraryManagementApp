@@ -1,12 +1,12 @@
 ﻿// <copyright file="BookService.cs" company="Transilvania University of Brasov">
-// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// Copyright (c) Alexandra Hermeneanu. All rights reserved.
 // </copyright>
 
 namespace Services
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using DataMapper;
     using DomainModel;
 
@@ -16,7 +16,7 @@ namespace Services
     public class BookService : Service, IBookService
     {
         private BookRepository bookRepository;
-        
+
         /// <summary>
         /// Initializes a new instance of the <see cref="BookService"/> class.
         /// </summary>
@@ -65,9 +65,15 @@ namespace Services
                 return false;
             }
 
+            if (AreRelatedDomains(book.Domains))
+            {
+                ErrorsHandler.Add(ValidationErrors.DomainAreRelated);
+                isValid = false;
+            }
+
             return isValid;
         }
-
+        
         /// <summary>
         /// Inserts a new Book object in the database.
         /// </summary>
@@ -96,6 +102,48 @@ namespace Services
         public Book GetBookById(int idBook)
         {
             return bookRepository.GetByID(idBook);
+        }
+
+        /// <summary>
+        /// Determines whether the specified domains are related.
+        /// </summary>
+        /// <param name="domains">The domains list.</param>
+        /// <returns>
+        ///   <c>true</c> if one domain related to others; otherwise, <c>false</c>.
+        /// </returns>
+        private bool AreRelatedDomains(IList<Domain> domains)
+        {
+            List<Domain> parentDomains = new List<Domain>();
+
+            Domain domain = domains[0];
+            while (domain.ParentDomain != null)
+            {
+                parentDomains.Add(domain.ParentDomain);
+                domain = domain.ParentDomain;
+            }
+
+            for (int i = 1; i < domains.Count; i++)
+            {
+                domain = domains[i];
+                if (parentDomains.Contains(domain))
+                {
+                    return true;
+                }
+                else
+                {
+                    while (domain.ParentDomain != null)
+                    {
+                        if (!parentDomains.Contains(domain.ParentDomain))
+                        {
+                            parentDomains.Add(domain.ParentDomain);
+                        }
+
+                        domain = domain.ParentDomain;
+                    }
+                }
+            }
+
+            return false;
         }
     }
 }

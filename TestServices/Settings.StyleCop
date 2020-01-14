@@ -215,7 +215,7 @@
       </Rules>
       <AnalyzerSettings>
         <StringProperty Name="CompanyName">Transilvania University of Brasov</StringProperty>
-        <StringProperty Name="Copyright">Code by Alexandra Hermeneanu. All rights reserved.</StringProperty>
+        <StringProperty Name="Copyright">Copyright (c) Alexandra Hermeneanu. All rights reserved.</StringProperty>
       </AnalyzerSettings>
     </Analyzer>
     <Analyzer AnalyzerId="StyleCop.CSharp.ReadabilityRules">

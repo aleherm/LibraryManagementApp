@@ -1,5 +1,5 @@
 ﻿// <copyright file="BorrowerServiceTest.cs" company="Transilvania University of Brasov">
-// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// Copyright (c) Alexandra Hermeneanu. All rights reserved.
 // </copyright>
 
 namespace TestServices
@@ -49,6 +49,12 @@ namespace TestServices
 
         [Test]
         public override void AddNewValidEntityShouldBeSuccessful()
+        {
+            Assert.AreEqual(true, service.AddNewBorrower(borrower));
+        }
+
+        [Test]
+        public void AddNewInvalidEntityShouldBeSuccessful()
         {
             Assert.AreEqual(true, service.AddNewBorrower(borrower));
         }

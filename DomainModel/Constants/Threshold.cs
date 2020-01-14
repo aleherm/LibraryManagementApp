@@ -1,5 +1,5 @@
 ﻿// <copyright file="Threshold.cs" company="Transilvania University of Brasov">
-// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// Copyright (c) Alexandra Hermeneanu. All rights reserved.
 // </copyright>
 
 namespace DomainModel
@@ -25,6 +25,11 @@ namespace DomainModel
         /// Gets of sets the maximum number of loans.
         /// </summary>
         public int NoMaxLoans { get; set; }
+
+        /// <summary>
+        /// Gets of sets the maximum number of books per period.
+        /// </summary>
+        public int NoMaxBooks { get; set; }
 
         /// <summary>
         /// Gets of sets the period between loans.

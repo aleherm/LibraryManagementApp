@@ -1,15 +1,15 @@
 ﻿// <copyright file="Service.cs" company="Transilvania University of Brasov">
-// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// Copyright (c) Alexandra Hermeneanu. All rights reserved.
 // </copyright>
 
 namespace Services
 {
     using System;
-    using DomainModel;
-    using Newtonsoft.Json;
     using System.Collections.Generic;
     using System.IO;
     using System.Reflection;
+    using DomainModel;
+    using Newtonsoft.Json;
 
     /// <summary>
     /// Base service.
@@ -20,11 +20,6 @@ namespace Services
         /// The validation errors.
         /// </summary>
         public readonly ErrorsHandler ErrorsHandler;
-
-        /// <summary>
-        /// The threshold.
-        /// </summary>
-        protected Threshold Threshold { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Service"/> class.
@@ -38,9 +33,14 @@ namespace Services
         }
 
         /// <summary>
+        /// Gets or sets the threshold.
+        /// </summary>
+        protected Threshold Threshold { get; set; }
+
+        /// <summary>
         /// Gets the threshold data needed for validation from the external JSON file.
         /// </summary>
-        /// <param name="path"></param>
+        /// <param name="path">The path.</param>
         /// <returns>A Threshold object.</returns>
         protected Threshold GetThresholdFromJSON(string path)
         {

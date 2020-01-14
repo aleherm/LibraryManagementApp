@@ -2,7 +2,8 @@
   {
     "NoMaxDomains": "2",
     "NoMaxLoans": "10",
-    "Period": "2",
+    "NoMaxBooks": "3", // max per Period
+    "Period": "2", // months
     "NoMaxBorrowerPerDomain": "3",
     "NoOfMonths": "1",
     "LimitLoanExtension": "2",

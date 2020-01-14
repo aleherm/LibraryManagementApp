@@ -1,5 +1,5 @@
 ﻿// <copyright file="BookServiceTest.cs" company="Transilvania University of Brasov">
-// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// Copyright (c) Alexandra Hermeneanu. All rights reserved.
 // </copyright>
 
 namespace TestServices
@@ -13,7 +13,6 @@ namespace TestServices
     [TestFixture]
     public class BookServiceTest : ServiceTest
     {
-
         /// <summary>
         /// The service instance to be tested.
         /// </summary>
@@ -74,37 +73,70 @@ namespace TestServices
         [Test]
         public override void EntityShouldBeValid()
         {
-            Assert.AreEqual(service.IsValidBook(book), true);
+            Assert.AreEqual(true, service.IsValidBook(book), "Expected validation to pass");
         }
 
         [Test]
         public override void EntityShouldNotBeValid()
         {
-            Assert.AreEqual(service.IsValidBook(book), true);
+            book.Domains = new List<Domain>();
+            Assert.AreEqual(false, service.IsValidBook(book), "Expected validation to fail.");
         }
         
         [Test]
         public override void AddNewValidEntityShouldBeSuccessful()
         {
-            Assert.AreEqual(service.AddNewBook(book), true);
+            Assert.AreEqual(true, service.AddNewBook(book), "Expected validation to pass");
         }
 
         [Test]
         public override void AddNewInvalidEntityShouldFail()
         {
             book.Domains = new List<Domain>();
-            Assert.AreEqual(service.AddNewBook(book), false);
+            Assert.AreEqual(false, service.AddNewBook(book), "Expected validation to fail");
         }
 
         [Test]
         public void BookShouldNotHaveTooManyDomains()
         {
+            // Added more domains than specified in threshold file.
             book.Domains.Add(new Domain());
             book.Domains.Add(new Domain());
 
             Assert.AreEqual(false, service.IsValidBook(book), "Expected to fail.");
             Assert.AreEqual(1, service.ErrorsHandler.ErrorCount(), "Unexpected number of errors.");
             Assert.AreEqual(ValidationErrors.TooManyDomains, service.ErrorsHandler.Get(0));
+        }
+
+        [Test]
+        public void BookShouldBeValidWithNonRelatedDomains()
+        {
+            // Added 2 non-related domains within the threshold range.
+            book.Domains = new List<Domain>();
+            Domain parentDomain = new Domain("Parent", null, null, null);
+            Domain childDomain1 = new Domain("Domain1", parentDomain, null, new List<Book>() { book });
+            Domain childDomain2 = new Domain("Domain2", parentDomain, null, new List<Book>() { book });
+            book.Domains.Add(childDomain1);
+            book.Domains.Add(childDomain2);
+
+            Assert.AreEqual(true, service.IsValidBook(book), "Expected to true.");
+            Assert.AreEqual(0, service.ErrorsHandler.ErrorCount(), "Unexpected number of errors.");
+        }
+
+        [Test]
+        public void BookShouldNotHaveRelatedDomains()
+        {
+            // Added 2 related domains within the threshold range.
+            book.Domains = new List<Domain>();
+            Domain parentDomain = new Domain("Parent", null, null, null);
+            Domain childDomain1 = new Domain("Domain1", parentDomain, null, null);
+            Domain childDomain2 = parentDomain;
+            book.Domains.Add(childDomain1);
+            book.Domains.Add(childDomain2);
+
+            Assert.AreEqual(false, service.IsValidBook(book), "Expected to fail.");
+            Assert.AreEqual(1, service.ErrorsHandler.ErrorCount(), "Unexpected number of errors.");
+            Assert.AreEqual(ValidationErrors.DomainAreRelated, service.ErrorsHandler.Get(0));
         }
     }
 }

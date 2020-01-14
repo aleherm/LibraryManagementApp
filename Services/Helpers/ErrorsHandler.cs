@@ -1,5 +1,5 @@
 ﻿// <copyright file="ErrorsHandler.cs" company="Transilvania University of Brasov">
-// Copyright (c) Transilvania University of Brasov. Code by Alexandra Hermeneanu. All rights reserved.
+// Copyright (c) Alexandra Hermeneanu. All rights reserved.
 // </copyright>
 
 namespace Services
@@ -71,8 +71,7 @@ namespace Services
 
             Console.ForegroundColor = ConsoleColor.White;
         }
-
-
+        
         /// <summary>
         /// The number of errors.
         /// </summary>
