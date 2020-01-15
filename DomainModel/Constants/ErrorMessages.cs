@@ -63,6 +63,7 @@ namespace DomainModel
         public const string InvalidYear = "Invalid year";
         public const string InvalidNumber = "Invalid number";
         public const string InvalidData = "Invalid data";
+        public static string NegativeThreshold = "Negative threshold";
     }
 #pragma warning restore CS1591 // Missing XML comment for publicly visible type or member
 }

@@ -269,34 +269,29 @@
             Initializes a new instance of the <see cref="T:DomainModel.Threshold"/> class.
             </summary>
         </member>
-        <member name="P:DomainModel.Threshold.NoMaxDomains">
+        <member name="P:DomainModel.Threshold.MaxDomains">
             <summary>
-            Gets of sets the maximum number of domains that a book is allowed to have.
+            Gets of sets the [maximum number of domains per book] - DOM.
             </summary>
         </member>
-        <member name="P:DomainModel.Threshold.NoMaxLoans">
+        <member name="P:DomainModel.Threshold.MaxLoans">
             <summary>
-            Gets of sets the maximum number of loans.
-            </summary>
-        </member>
-        <member name="P:DomainModel.Threshold.NoMaxBooks">
-            <summary>
-            Gets of sets the maximum number of books per period.
+            Gets of sets the [maximum number of loans in the specified period underneath] - NMC.
             </summary>
         </member>
         <member name="P:DomainModel.Threshold.Period">
             <summary>
-            Gets of sets the period between loans.
+            Gets of sets the [period for the maximum loan number] from top - PER.
             </summary>
         </member>
-        <member name="P:DomainModel.Threshold.NoMaxLoansPerDomain">
+        <member name="P:DomainModel.Threshold.MaxLoansPerDomain">
             <summary>
-            Gets of sets the maxim number of loans per domain.
+            Gets of sets the [maximum number of books that can be loaned per domain].
             </summary>
         </member>
         <member name="P:DomainModel.Threshold.NoOfMonths">
             <summary>
-            Gets of sets the number of months.
+            Gets of sets the [number of months in which no more than D books can be loaned] - L.
             </summary>
         </member>
         <member name="P:DomainModel.Threshold.LimitLoanExtension">
@@ -306,13 +301,35 @@
         </member>
         <member name="P:DomainModel.Threshold.Delta">
             <summary>
-            Gets of sets number of maximum loans for a book.
+            Gets of sets the period between loans of the same book.
             </summary>
         </member>
-        <member name="P:DomainModel.Threshold.NoMaxLoansPerDay">
+        <member name="P:DomainModel.Threshold.MaxLoansPerDay">
             <summary>
             Gets of sets the maximum number of books loaned in a day.
             </summary>
+        </member>
+        <member name="M:DomainModel.Threshold.#ctor(System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new instance of the <see cref="T:DomainModel.Threshold"/> class.
+            </summary>
+            <param name="maxDomains">The maximum domains.</param>
+            <param name="maxLoans">The maximum loans.</param>
+            <param name="period">The period.</param>
+            <param name="maxLoansPerDomain">The maximum loans per domain.</param>
+            <param name="noOfMonths">The no of months.</param>
+            <param name="limitLoanExtention">The limit loan extention.</param>
+            <param name="delta">The delta.</param>
+            <param name="maxLoansPerDay">The maximum loans per day.</param>
+        </member>
+        <member name="M:DomainModel.Threshold.Validate(System.ComponentModel.DataAnnotations.ValidationContext)">
+            <summary>
+            Determines whether the specified object is valid.
+            </summary>
+            <param name="validationContext">The validation context.</param>
+            <returns>
+            A collection that holds failed-validation information.
+            </returns>
         </member>
         <member name="T:DomainModel.Domain">
             <summary>

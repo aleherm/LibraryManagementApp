@@ -16,9 +16,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DomainModel", "DomainModel", "{C372E54C-D19D-4AD3-81B7-C8FBB2BCE779}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ServiceLayer", "ServiceLayer", "{D5AFD5CF-5241-4C73-8674-8D30642AC352}"
-	ProjectSection(SolutionItems) = preProject
-		external-data.json = external-data.json
-	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{D47B8ED3-44B1-4ABF-BF01-B1732CE2A6DB}"
 EndProject
@@ -109,7 +106,7 @@ Global
 		{9FB16FDA-ECEA-4AEF-AFEA-1E2A9AC8D7F2} = {63E3F34E-6B90-4B28-83FA-2BCC58E2ACC9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Validation.6.0.1304.0\lib\NET45
 		SolutionGuid = {FA79A152-FDA6-4067-9E63-B5CC77A7858E}
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Validation.6.0.1304.0\lib\NET45
 	EndGlobalSection
 EndGlobal

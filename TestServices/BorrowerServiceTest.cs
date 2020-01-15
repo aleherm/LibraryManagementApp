@@ -27,7 +27,7 @@ namespace TestServices
         /// The setup of the BorrowerService object to be tested.
         /// </summary>
         [SetUp]
-        public new void BorrowerServiceSetUp()
+        public void BorrowerServiceSetUp()
         {
             service = new BorrowerService();
             Address address = new Address("Brasov", "Octavian", 10);

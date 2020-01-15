@@ -6,15 +6,13 @@ namespace Services
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using DataMapper;
     using DomainModel;
 
     /// <summary>
-    /// The implementation class of the IAddressService interface.
+    /// Address Service class.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
-    public class AddressService : IAddressService
+    public class AddressService
     {
         private readonly AddressRepository addressRepository;
 

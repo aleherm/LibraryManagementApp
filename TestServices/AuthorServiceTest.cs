@@ -14,7 +14,7 @@ namespace TestServices
     using Services;
 
     [TestFixture]
-    public class AuthorServiceTest
+    public class AuthorServiceTest : ServiceTest
     {
         /// <summary>
         /// The service instance to be tested.
@@ -27,61 +27,47 @@ namespace TestServices
         private Author author;
 
         /// <summary>
-        /// The threshold item needed to validate loan data.
-        /// </summary>
-        private Threshold threshold;
-
-        /// <summary>
         /// The setup of the AuthorService object to be tested.
         /// </summary>
         [SetUp]
         public void AuthorServiceSetUp()
         {
             service = new AuthorService();
-            author = new Author("Alexandra", "Hermeneanu", "Romana", new DateTime(1997, 07, 02), null);
 
-            string solutionDirectory = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(TestContext.CurrentContext.TestDirectory)));
-            threshold = GetThresholdFromJSON(solutionDirectory);
+            author = new Author()
+            {
+                FirstName = "John",
+                LastName = "Smith",
+                Language = "English",
+                DateOfBirth = new DateTime(1989, 10, 10),
+                DateOfDeath = new DateTime(2010, 1, 1),
+            };
         }
 
-        /// <summary>
-        /// Test that should pass with valid Author object.
-        /// </summary>
         [Test]
-        public void BorowerShouldBeValid()
+        public override void AddNewInvalidEntityShouldFail()
         {
-            Assert.AreEqual(service.IsValidAuthor(author), true);
+            author.FirstName = "I";
+            Assert.IsFalse(service.AddNewAuthor(author), "Expected validation to fail");
         }
 
-        /// <summary>
-        /// Test that should pass with not valid Author object.
-        /// </summary>
         [Test]
-        public void BorowerShouldNotBeValid()
+        public override void AddNewValidEntityShouldBeSuccessful()
         {
-            Assert.AreEqual(service.IsValidAuthor(author), true);
+            Assert.IsTrue(service.AddNewAuthor(author), "Expected validation to pass");
         }
 
-        /// <summary>
-        /// Test that should pass with valid Author object.
-        /// </summary>
         [Test]
-        public void AddBorowerShouldBeSuccessful()
+        public override void EntityShouldBeValid()
         {
-            Assert.AreEqual(service.AddNewAuthor(author), true);
+            Assert.AreEqual(true, service.IsValidAuthor(author), "Expected validation to pass");
         }
 
-        /// <summary>
-        /// Gets the threshold data needed for validation from the external JSON file.
-        /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
-        private Threshold GetThresholdFromJSON(string path)
+        [Test]
+        public override void EntityShouldNotBeValid()
         {
-            StreamReader reader = new StreamReader(path + "\\external-data.json");
-            string json = reader.ReadToEnd();
-            List<Threshold> items = JsonConvert.DeserializeObject<List<Threshold>>(json);
-            return items[0];
+            author.Language = "X";
+            Assert.AreEqual(false, service.IsValidAuthor(author), "Expected validation to fail");
         }
     }
 }

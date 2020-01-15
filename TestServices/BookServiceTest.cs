@@ -119,7 +119,7 @@ namespace TestServices
             book.Domains.Add(childDomain1);
             book.Domains.Add(childDomain2);
 
-            Assert.AreEqual(true, service.IsValidBook(book), "Expected to true.");
+            Assert.AreEqual(true, service.IsValidBook(book), "Expected to pass.");
             Assert.AreEqual(0, service.ErrorsHandler.ErrorCount(), "Unexpected number of errors.");
         }
 

@@ -54,187 +54,9 @@
             </summary>
             <returns>The number of errors</returns>
         </member>
-        <member name="T:Services.IAddressService">
-            <summary>
-            Interface for the AddressService.
-            </summary>
-        </member>
-        <member name="M:Services.IAddressService.IsValidAddress(DomainModel.Address)">
-            <summary>
-            Validates the given Address object.
-            </summary>
-            <param name="address">The address.</param>
-            <returns>True or False.</returns>
-        </member>
-        <member name="M:Services.IAddressService.AddNewAddress(DomainModel.Address)">
-            <summary>
-            Inserts a new Address object in the database.
-            </summary>
-            <param name="address">The address.</param>
-            <returns>True or false.</returns>
-        </member>
-        <member name="T:Services.IAuthorService">
-            <summary>
-            Interface for the AuthorService.
-            </summary>
-        </member>
-        <member name="M:Services.IAuthorService.IsValidAuthor(DomainModel.Author)">
-            <summary>
-            Validates the given Author object.
-            </summary>
-            <param name="author">The author.</param>
-            <returns>True or False.</returns>
-        </member>
-        <member name="M:Services.IAuthorService.AddNewAuthor(DomainModel.Author)">
-            <summary>
-            Inserts a new Author object in the database.
-            </summary>
-            <param name="author">The author.</param>
-            <returns>True or false.</returns>
-        </member>
-        <member name="M:Services.IAuthorService.GetAllAuthors">
-            <summary>
-            Gets the list of all authors.
-            </summary>
-            <returns>The list of authors.</returns>
-        </member>
-        <member name="M:Services.IAuthorService.GetAuthorById(System.Int32)">
-            <summary>
-            Gets the author by given ID.
-            </summary>
-            <param name="idAuthor">The ID of the author.</param>
-            <returns>The Author object found.</returns>
-        </member>
-        <member name="T:Services.IBookService">
-            <summary>
-            Interface for the BookService.
-            </summary>
-        </member>
-        <member name="M:Services.IBookService.IsValidBook(DomainModel.Book)">
-            <summary>
-            Validates the given Book object.
-            </summary>
-            <param name="book">The book.</param>
-            <returns>True or False.</returns>
-        </member>
-        <member name="M:Services.IBookService.AddNewBook(DomainModel.Book)">
-            <summary>
-            Inserts a new Book object in the database.
-            </summary>
-            <param name="book">The book.</param>
-            <returns>True or false.</returns>
-        </member>
-        <member name="M:Services.IBookService.GetBookById(System.Int32)">
-            <summary>
-            Gets the book by given ID.
-            </summary>
-            <param name="idBook">The ID of the book.</param>
-            <returns>The Book object found.</returns>
-        </member>
-        <member name="T:Services.IBorrowerService">
-            <summary>
-            Interface for the BorrowerService.
-            </summary>
-        </member>
-        <member name="M:Services.IBorrowerService.IsValidBorrower(DomainModel.Borrower)">
-            <summary>
-            Validates the given Borrower object.
-            </summary>
-            <param name="borrower">The borrower.</param>
-            <returns>True or False.</returns>
-        </member>
-        <member name="M:Services.IBorrowerService.AddNewBorrower(DomainModel.Borrower)">
-            <summary>
-            Inserts a new Borrower object in the database.
-            </summary>
-            <param name="borrower">The borrower.</param>
-            <returns>True or false.</returns>
-        </member>
-        <member name="M:Services.IBorrowerService.GetAllBorrowers">
-            <summary>
-            Gets the list of borrowers.
-            </summary>
-            <returns>The list of borrowers.</returns>
-        </member>
-        <member name="M:Services.IBorrowerService.GetBorrowerById(System.Int32)">
-            <summary>
-            Inserts a new Book object in the database.
-            </summary>
-            <param name="idBorrower">The borrower ID.</param>
-            <returns>True or false.</returns>
-        </member>
-        <member name="T:Services.IDomainService">
-            <summary>
-            Interface for the DomainService.
-            </summary>
-        </member>
-        <member name="M:Services.IDomainService.IsValidDomain(DomainModel.Domain)">
-            <summary>
-            Validates the given Domain object.
-            </summary>
-            <param name="domain">The domain.</param>
-            <returns>True or False.</returns>
-        </member>
-        <member name="M:Services.IDomainService.AddNewDomain(DomainModel.Domain)">
-            <summary>
-            Inserts a new Domain object in the database.
-            </summary>
-            <param name="domain">The domain.</param>
-            <returns>True or false.</returns>
-        </member>
-        <member name="M:Services.IDomainService.GetAllDomains">
-            <summary>
-            Gets the list of domains.
-            </summary>
-            <returns>The list of domains.</returns>
-        </member>
-        <member name="M:Services.IDomainService.GetDomainById(System.Int32)">
-            <summary>
-            Gets the domain by given ID.
-            </summary>
-            <param name="idDomain">The ID of the domain.</param>
-            <returns>The Domain object found.</returns>
-        </member>
-        <member name="T:Services.IEditionService">
-            <summary>
-            Interface for the BookService.
-            </summary>
-        </member>
-        <member name="M:Services.IEditionService.IsValidEdition(DomainModel.Edition)">
-            <summary>
-            Validates the given Edition object.
-            </summary>
-            <param name="edition">The edition.</param>
-            <returns>True or False.</returns>
-        </member>
-        <member name="M:Services.IEditionService.AddNewEdition(DomainModel.Edition)">
-            <summary>
-            Inserts a new Edition object in the database.
-            </summary>
-            <param name="edition">The edition.</param>
-            <returns>True or false.</returns>
-        </member>
-        <member name="M:Services.IEditionService.GetAllEditions">
-            <summary>
-            Gets the list of editions.
-            </summary>
-            <returns>The list of editions.</returns>
-        </member>
-        <member name="M:Services.IEditionService.GetEditionById(System.Int32)">
-            /// <summary>
-            Gets the edition by given ID.
-            </summary>
-            <param name="idEdition">The ID of the edition.</param>
-            <returns>The Book object found.</returns>
-        </member>
-        <member name="T:Services.ILoanService">
-            <summary>
-            Interface for the BookService.
-            </summary>
-        </member>
         <member name="T:Services.AddressService">
             <summary>
-            The implementation class of the IAddressService interface.
+            Address Service class.
             </summary>
         </member>
         <member name="M:Services.AddressService.#ctor">
@@ -258,7 +80,7 @@
         </member>
         <member name="T:Services.AuthorService">
             <summary>
-            The implementation class of the IAuthorService interface.
+            Author Service class.
             </summary>
         </member>
         <member name="M:Services.AuthorService.#ctor">
@@ -322,7 +144,7 @@
         </member>
         <member name="T:Services.BookService">
             <summary>
-            The implementation class of the IBookService interface.
+            Book Service class.
             </summary>
         </member>
         <member name="M:Services.BookService.#ctor">
@@ -404,7 +226,7 @@
         </member>
         <member name="T:Services.DomainService">
             <summary>
-            The implementation class of the IDomainService interface.
+            Domain Service class.
             </summary>
         </member>
         <member name="M:Services.DomainService.#ctor">
@@ -441,7 +263,7 @@
         </member>
         <member name="T:Services.EditionService">
             <summary>
-            The implementation class of the IEditionService interface.
+            Edition Service class.
             </summary>
         </member>
         <member name="M:Services.EditionService.#ctor">
@@ -478,8 +300,40 @@
         </member>
         <member name="T:Services.LoanService">
             <summary>
-            The implementation class of the IEditionService interface.
+            Loan Servic class.
             </summary>
+        </member>
+        <member name="M:Services.LoanService.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Services.LoanService"/> class.
+            </summary>
+        </member>
+        <member name="M:Services.LoanService.IsValidLoan(DomainModel.Loan)">
+            <summary>
+            Validates the given Loan object.
+            </summary>
+            <param name="loan">The loan.</param>
+            <returns>True or False.</returns>
+        </member>
+        <member name="M:Services.LoanService.AddNewLoan(DomainModel.Loan)">
+            <summary>
+            Inserts a new Loan object in the database.
+            </summary>
+            <param name="loan">The loan.</param>
+            <returns>True or false.</returns>
+        </member>
+        <member name="M:Services.LoanService.GetAllLoans">
+            <summary>
+            Gets the list of loans.
+            </summary>
+            <returns>The list of loans.</returns>
+        </member>
+        <member name="M:Services.LoanService.GetLoanById(System.Int32)">
+            <summary>
+            Gets the loan by given ID.
+            </summary>
+            <param name="idLoan">The ID of the loan.</param>
+            <returns>The Book object found.</returns>
         </member>
     </members>
 </doc>

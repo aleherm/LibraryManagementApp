@@ -6,16 +6,14 @@ namespace Services
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using DataMapper;
     using DomainModel;
 
     /// <summary>
-    /// The implementation class of the IEditionService interface.
+    /// Edition Service class.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
-    public class EditionService : IEditionService
+    public class EditionService
     {
         private EditionRepository editionRepository;
 

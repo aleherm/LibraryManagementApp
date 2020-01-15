@@ -57,6 +57,7 @@
     <Compile Include="DomainTest.cs" />
     <Compile Include="EditionTest.cs" />
     <Compile Include="LoanTest.cs" />
+    <Compile Include="ThresholdTest.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

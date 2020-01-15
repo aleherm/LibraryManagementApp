@@ -11,9 +11,9 @@ namespace Services
     using DomainModel;
 
     /// <summary>
-    /// The implementation class of the IBookService interface.
+    /// Book Service class.
     /// </summary>
-    public class BookService : Service, IBookService
+    public class BookService : Service
     {
         private BookRepository bookRepository;
 
@@ -54,7 +54,7 @@ namespace Services
                 return false;
             }
 
-            if (book.Domains.Count > Threshold.NoMaxDomains)
+            if (book.Domains.Count > Threshold.MaxDomains)
             {
                 ErrorsHandler.Add(ValidationErrors.TooManyDomains);
                 isValid = false;

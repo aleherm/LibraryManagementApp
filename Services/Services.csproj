@@ -50,13 +50,6 @@
   <ItemGroup>
     <Compile Include="Constants\ValidationErrors.cs" />
     <Compile Include="Helpers\ErrorsHandler.cs" />
-    <Compile Include="Interfaces\IAddressService.cs" />
-    <Compile Include="Interfaces\IAuthorService.cs" />
-    <Compile Include="Interfaces\IBookService.cs" />
-    <Compile Include="Interfaces\IBorrowerService.cs" />
-    <Compile Include="Interfaces\IDomainService.cs" />
-    <Compile Include="Interfaces\IEditionService.cs" />
-    <Compile Include="Interfaces\ILoanService.cs" />
     <Compile Include="Services\AddressService.cs" />
     <Compile Include="Services\AuthorService.cs" />
     <Compile Include="Services\Service.cs" />

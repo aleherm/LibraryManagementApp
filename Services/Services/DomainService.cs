@@ -12,10 +12,9 @@ namespace Services
     using DomainModel;
 
     /// <summary>
-    /// The implementation class of the IDomainService interface.
+    /// Domain Service class.
     /// </summary>
-    [SuppressMessage("Microsoft.StyleCop.CSharp.OrderingRules", "SA1101", Justification = "In .NET this is rarely used.")]
-    public class DomainService : IDomainService
+    public class DomainService
     {
         private DomainRepository domainRepository;
 
