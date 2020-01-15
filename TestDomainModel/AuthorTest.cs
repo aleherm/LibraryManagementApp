@@ -215,7 +215,7 @@
         [Test]
         public void TestToString()
         {
-            Assert.AreEqual("John | Smith | English | 10/10/1989 00:00:00 | 1/1/2010 00:00:00 ", author.ToString());
+            Assert.AreEqual("John | Smith | English | 10/10/1989 | 01/01/2010 ", author.ToString());
         }
     }
 }

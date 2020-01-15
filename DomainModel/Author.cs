@@ -7,6 +7,7 @@ namespace DomainModel
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
 
     /// <summary>
     /// Author entity class.
@@ -119,7 +120,7 @@ namespace DomainModel
         /// <returns>Output string for an Author entity.</returns>
         public override string ToString()
         {
-            return $"{FirstName} | {LastName} | {Language} | {DateOfBirth.Value.Date} | {DateOfDeath.Value.Date} ";
+            return $"{FirstName} | {LastName} | {Language} | {DateOfBirth.Value.Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)} | {DateOfDeath.Value.Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)} ";
         }
     }
 }

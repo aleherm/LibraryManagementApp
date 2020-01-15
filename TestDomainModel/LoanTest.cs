@@ -134,7 +134,7 @@ namespace TestDomainModel
         [Test]
         public void TestToString()
         {
-            string expected = "loan: 1/1/2019 00:00:00 | due: 2/1/2019 00:00:00 | return: 10/10/2019 00:00:00 ";
+            string expected = "loan: 01/01/2019 | due: 01/02/2019 | return: 10/10/2019 ";
             Assert.AreEqual(expected, loan.ToString());
         }
     }

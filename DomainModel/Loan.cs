@@ -7,6 +7,7 @@ namespace DomainModel
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
 
     /// <summary>
     /// Loan entity class.
@@ -127,7 +128,7 @@ namespace DomainModel
         /// <returns>Output string for an Author entity.</returns>
         public override string ToString()
         {
-            return $"loan: {LoanDate.Value.Date} | due: {DueDate.Value.Date} | return: {ReturnDate.Value.Date} ";
+            return $"loan: {LoanDate.Value.Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)} | due: {DueDate.Value.Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)} | return: {ReturnDate.Value.Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)} ";
         }
     }
 }

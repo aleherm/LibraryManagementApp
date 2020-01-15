@@ -69,5 +69,55 @@ namespace TestServices
             author.Language = "X";
             Assert.AreEqual(false, service.IsValidAuthor(author), "Expected validation to fail");
         }
+
+        [Test]
+        public void GetAllAuthorsValidCall()
+        {
+            var mockedAuthorService = new Mock<AuthorService>();
+            mockedAuthorService.Setup(x => x.GetAllAuthors()).Returns(GetAllSampleAuthors());
+
+            IEnumerable<Author> expected = service.GetAllAuthors();
+            IEnumerable<Author> actual = GetAllSampleAuthors();
+
+            Assert.True(EnumerableExtensions.HasSameElementsAs<Author>(expected, actual));
+        }
+
+        [Test]
+        public void GetAuthorByIdValidCall()
+        {
+            var mockedAuthorService = new Mock<AuthorService>();
+            mockedAuthorService.Setup(x => x.GetAuthorById(It.IsAny<Author>().Id)).Returns(author);
+
+            Assert.AreEqual(author, service.GetAuthorById(1));
+        }
+
+        /// <summary>
+        /// Gets all sample authors.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerable<Author> GetAllSampleAuthors()
+        {
+            List<Author> output = new List<Author>()
+            {
+                new Author
+                {
+                    Id = 1,
+                    FirstName = "FirstName1",
+                    LastName = "LastName1",
+                    DateOfBirth = new DateTime(1900, 10, 10),
+                    DateOfDeath = new DateTime(1990, 10, 10),
+                },
+                new Author
+                {
+                    Id = 2,
+                    FirstName = "FirstName2",
+                    LastName = "LastNam2",
+                    DateOfBirth = new DateTime(1800, 10, 10),
+                    DateOfDeath = new DateTime(1880, 10, 10),
+                }
+            };
+
+            return output;
+        }
     }
 }
