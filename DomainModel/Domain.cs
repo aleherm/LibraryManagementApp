@@ -70,7 +70,7 @@ namespace DomainModel
         /// <returns>Output string for an Domain entity.</returns>
         public override string ToString()
         {
-            return $"{DomainName} | {ParentDomain}";
+            return $"{DomainName} | {ParentDomain} ";
         }
     }
 }

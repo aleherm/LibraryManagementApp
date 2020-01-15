@@ -4,10 +4,10 @@
 
 namespace TestServices
 {
+    using System.Collections.Generic;
     using DomainModel;
     using NUnit.Framework;
     using Services;
-    using System.Collections.Generic;
 
     [TestFixture]
     public class DomainServiceTest : ServiceTest

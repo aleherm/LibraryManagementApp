@@ -4,10 +4,11 @@
 
 namespace TestServices
 {
+    using System;
+    using System.Collections.Generic;
     using DomainModel;
     using NUnit.Framework;
     using Services;
-    using System;
 
     [TestFixture]
     public class LoanServiceTest : ServiceTest
@@ -60,6 +61,46 @@ namespace TestServices
         {
             loan.LoanDate = DateTime.Now.AddDays(1);
             Assert.AreEqual(false, service.IsValidLoan(loan), "Expected validation to fail");
+        }
+
+        [Test]
+        public void LoanShouldNotBeMadeWhenNoBooksForLoan()
+        {
+            Edition edition = new Edition("Name", 200, 2000, EBookType.EHardCover, 10, 0);
+            Book book = new Book("Title", null, null, new List<Edition>() { edition });
+            
+            loan.BorrowedEditions.Add(book.Editions[0]);
+            edition.Loans.Add(loan);
+
+            Assert.AreEqual(false, service.IsValidLoan(loan), "Expected validation to fail");
+        }
+
+        [Test]
+        public void LoanShouldNotBeMadeWhenLessThan10PercentOfTotalBooksForLoan()
+        {
+            Edition edition = new Edition("Name", 200, 2000, EBookType.EHardCover, 20, 2);
+            Book book = new Book("Title", null, null, new List<Edition>() { edition });
+
+            loan.BorrowedEditions.Add(book.Editions[0]);
+            edition.Loans.Add(loan);
+
+            Assert.AreEqual(false, service.IsValidLoan(loan), "Expected validation to fail.");
+        }
+
+        [Test]
+        public void LoanShouldNotContainMoreThanThresholdBooks()
+        {
+            Edition edition = new Edition("Publisher", 200, 2000, EBookType.EHardCover, 20, 2);
+            Book book1 = new Book("Title1", null, null, new List<Edition>() { edition });
+            Book book2 = new Book("Title2", null, null, new List<Edition>() { edition });
+            Book book3 = new Book("Title3", null, null, new List<Edition>() { edition });
+
+            loan.BorrowedEditions.Add(book1.Editions[0]);
+            loan.BorrowedEditions.Add(book2.Editions[0]);
+            loan.BorrowedEditions.Add(book3.Editions[0]);
+            edition.Loans.Add(loan);
+
+            Assert.AreEqual(false, service.IsValidLoan(loan), "Expected validation to fail.");
         }
     }
 }

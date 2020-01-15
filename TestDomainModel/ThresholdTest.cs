@@ -35,7 +35,7 @@ namespace TestDomainModel
         [SetUp]
         public void LoanSetup()
         {
-            threshold = new Threshold(2, 10, 2, 2, 2, 2, 2, 2);
+            threshold = new Threshold(2, 10, 2, 2, 2, 2, 2, 2, 2);
 
             context = new ValidationContext(threshold);
             validationResults = new List<ValidationResult>();

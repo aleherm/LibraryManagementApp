@@ -4,6 +4,7 @@
 
 namespace Services
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -11,7 +12,7 @@ namespace Services
     using DomainModel;
 
     /// <summary>
-    /// Loan Servic class.
+    /// Loan Service class.
     /// </summary>
     public class LoanService : Service
     {
@@ -32,10 +33,66 @@ namespace Services
         /// <returns>True or False.</returns>
         public bool IsValidLoan(Loan loan)
         {
+            bool isValid = true;
+
             ValidationContext context = new ValidationContext(loan);
             IList<ValidationResult> validationResults = new List<ValidationResult>();
 
-            return Validator.TryValidateObject(loan, context, validationResults, true);
+            Validator.TryValidateObject(loan, context, validationResults, true);
+
+            if (validationResults.Count != 0)
+            {
+                foreach (ValidationResult result in validationResults)
+                {
+                    ErrorsHandler.Add(result.ErrorMessage);
+                }
+
+                isValid = false;
+            }
+            
+            ////if (!isValid)
+            ////{
+            ////    return false;
+            ////}
+            
+            ////if(loan.BorrowedEditions.Count > Threshold.MaxBooks)
+            ////{
+            ////    ErrorsHandler.Add(ValidationErrors.TooManyBooks);
+            ////    isValid = false;
+            ////} else
+            ////{
+            ////    if(loan.BorrowedEditions.Count >= 3)
+            ////    {
+            ////        BookService service = new BookService();
+            ////        ContainsMoreThatTwoDomains(loan.BorrowedEditions);
+            ////    }
+            ////}
+
+            foreach (Edition edition in loan.BorrowedEditions)
+            {
+                if (edition.NoForLoan == 0)
+                {
+                    ErrorsHandler.Add(ValidationErrors.NoBooksForLoan);
+                    isValid = false;
+                    break;
+                }
+                else
+                {
+                    if (edition.NoForLoan < edition.NoTotal * 0.1)
+                    {
+                        ErrorsHandler.Add(ValidationErrors.TooFewBooks);
+                        isValid = false;
+                        break;
+                    }
+                }
+            }
+
+            ////if (!isValid)
+            ////{
+            ////    return false;
+            ////}
+
+            return isValid;
         }
 
         /// <summary>

@@ -3,7 +3,8 @@
     "MaxDomains": "2", // DOM = max nr of domains per book
     "MaxLoans": "10", // NMC - max loans per PER
     "Period": "2", // months - PER
-    "MaxLoansPerDomain": "2", // D - max loan nr per domain per borrower 
+    "MaxBooks": "2", // C - max book editions per loan
+    "MaxLoansPerDomain": "2", // D - max loan nr per domain per borrower
     "NoOfMonths": "2", // L - the nr of months (the last ones) in which no more than D books can be loaned
     "LimitLoanExtension": "2", // LIM - the max number of loan extentions in the past 3 months
     "Delta": "5", // DELTA - the period between loans of the same book

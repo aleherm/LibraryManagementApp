@@ -317,5 +317,12 @@ namespace TestDomainModel
 
             Assert.AreEqual(edition.NoForLibrary + edition.NoForLoan, edition.NoTotal);
         }
+
+        [Test]
+        public void TestToString()
+        {
+            string expected = "Humanitas | year 2019 | 100 pages | 2 to library + 8 to loan = 10 total ";
+            Assert.AreEqual(expected, edition.ToString());
+        }
     }
 }

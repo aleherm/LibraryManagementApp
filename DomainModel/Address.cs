@@ -77,7 +77,7 @@ namespace DomainModel
         /// <returns>Output string for an Address entity.</returns>
         public override string ToString()
         {
-            return $"{City} | str {Street} | nr {Number}";
+            return $"{City} | str {Street} | nr {Number} ";
         }
     }
 }

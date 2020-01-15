@@ -194,7 +194,7 @@ namespace TestDomainModel
         }
 
         [Test]
-        public void DomainListShouldHaveAtLeastOneAuthor()
+        public void DomainListShouldHaveAtLeastOneDomain()
         {
             book.Domains = new List<Domain>();
 
@@ -211,7 +211,7 @@ namespace TestDomainModel
         }
 
         [Test]
-        public void EditionListShouldHaveAtLeastOneAuthor()
+        public void EditionListShouldHaveAtLeastOneEdition()
         {
             book.Editions = new List<Edition>();
 

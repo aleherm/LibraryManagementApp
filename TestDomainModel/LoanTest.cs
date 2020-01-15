@@ -130,5 +130,12 @@ namespace TestDomainModel
             var msg = validationResults[0];
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "ReturnDate").Count());
         }
+
+        [Test]
+        public void TestToString()
+        {
+            string expected = "loan: 1/1/2019 00:00:00 | due: 2/1/2019 00:00:00 | return: 10/10/2019 00:00:00 ";
+            Assert.AreEqual(expected, loan.ToString());
+        }
     }
 }

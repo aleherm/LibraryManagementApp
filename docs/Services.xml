@@ -300,7 +300,7 @@
         </member>
         <member name="T:Services.LoanService">
             <summary>
-            Loan Servic class.
+            Loan Service class.
             </summary>
         </member>
         <member name="M:Services.LoanService.#ctor">

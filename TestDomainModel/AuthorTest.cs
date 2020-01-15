@@ -211,5 +211,11 @@
             Assert.AreEqual(ErrorMessages.InvalidDate, msg.ErrorMessage);
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "DateOfDeath").Count());
         }
+
+        [Test]
+        public void TestToString()
+        {
+            Assert.AreEqual("John | Smith | English | 10/10/1989 00:00:00 | 1/1/2010 00:00:00 ", author.ToString());
+        }
     }
 }

@@ -127,7 +127,7 @@ namespace DomainModel
         /// <returns>Output string for an Author entity.</returns>
         public override string ToString()
         {
-            return $"loan: {LoanDate.Value.Date} | due: {DueDate.Value.Date} | return: {ReturnDate.Value.Date} | book editions: {BorrowedEditions}";
+            return $"loan: {LoanDate.Value.Date} | due: {DueDate.Value.Date} | return: {ReturnDate.Value.Date} ";
         }
     }
 }

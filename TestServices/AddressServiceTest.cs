@@ -7,7 +7,6 @@ namespace TestServices
     using DomainModel;
     using NUnit.Framework;
     using Services;
-    using System;
 
     [TestFixture]
     public class AddressServiceTest : ServiceTest

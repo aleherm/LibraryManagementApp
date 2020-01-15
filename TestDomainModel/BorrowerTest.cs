@@ -238,5 +238,33 @@ namespace TestDomainModel
             var msg = validationResults[0];
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "DateOfBirth").Count());
         }
+
+        [Test]
+        public void BorrowerCannotBeNonReaderAndNonLibrarian()
+        {
+            borrower.LibrarianFlg = false;
+            borrower.ReaderFlg = false;
+
+            var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+
+            var msg = validationResults[0];
+            Assert.AreEqual(2, msg.MemberNames.Where(item => item.Contains("Flg")).Count());
+        }
+
+        [Test]
+        public void BorrowerShouldBeAtLeastReader()
+        {
+            borrower.LibrarianFlg = false;
+
+            var actual = Validator.TryValidateObject(borrower, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
     }
 }

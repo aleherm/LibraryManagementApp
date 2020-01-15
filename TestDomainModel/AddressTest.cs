@@ -171,5 +171,14 @@ namespace TestDomainModel
             Assert.IsFalse(actual, "Expected validation to fail.");
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
         }
+
+        [Test]
+        public void TestToString()
+        {
+            string city = "Brasov";
+            string street = "O. Goga";
+            int number = 44;
+            Assert.AreEqual($"{city} | str {street} | nr {number} ", address.ToString());
+        }
     }
 }

@@ -108,5 +108,11 @@ namespace TestDomainModel
             var msg = validationResults[0];
             Assert.AreEqual(ErrorMessages.DomainNameRangeLength, msg.ErrorMessage);
         }
+
+        [Test]
+        public void TestToString()
+        {
+            Assert.AreEqual("Mathematics | Science |   ", domain.ToString());
+        }
     }
 }
