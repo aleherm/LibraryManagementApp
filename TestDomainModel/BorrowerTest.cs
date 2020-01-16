@@ -4,6 +4,7 @@
 
 namespace TestDomainModel
 {
+    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -41,6 +42,7 @@ namespace TestDomainModel
                 LastName = "Hermeneanu",
                 Email = "ale.herm@email.com",
                 Gender = EGenderType.EFemale,
+                DateOfBirth = new System.DateTime(1997, 7, 2),
                 Address = new Address(),
                 Loans = new List<Loan> { new Loan() },
                 ReaderFlg = true,
@@ -265,6 +267,64 @@ namespace TestDomainModel
             // Assert
             Assert.IsTrue(actual, "Expected validation to pass.");
             Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void BorrowerShouldBeValid()
+        {
+            Borrower actual = new Borrower("Alexa", "Herme", "alexa@email.com", new DateTime(1999, 10, 10), new Address(), true, true);
+
+            context = new ValidationContext(actual);
+            var isValid = Validator.TryValidateObject(actual, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(isValid, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void TestToString()
+        {
+            string expected = "1 | Alexandra | Hermeneanu | ale.herm@email.com | 02/07/1997 |  | str  | nr   ";
+            Assert.AreEqual(expected, borrower.ToString());
+        }
+
+        [Test]
+        public void EqualsShouldBeTrue()
+        {
+            Borrower actual = new Borrower()
+            {
+                Id = 1,
+                FirstName = "Alexandra",
+                LastName = "Hermeneanu",
+                Email = "ale.herm@email.com",
+                Gender = EGenderType.EFemale,
+                Address = null,
+                Loans = new List<Loan> { new Loan() },
+                ReaderFlg = true,
+                LibrarianFlg = false,
+            };
+
+            Assert.IsTrue(actual.Equals(borrower));
+        }
+
+        [Test]
+        public void EqualsShouldBeFalse()
+        {
+            Borrower expected = new Borrower()
+            {
+                Id = 1,
+                FirstName = "Nicoleta",
+                LastName = "Hermeneanu",
+                Email = "nico@email.com",
+                Gender = EGenderType.EFemale,
+                Address = new Address(),
+                Loans = new List<Loan> { new Loan() },
+                ReaderFlg = true,
+                LibrarianFlg = false,
+            };
+
+            Assert.IsFalse(expected.Equals(borrower));
         }
     }
 }

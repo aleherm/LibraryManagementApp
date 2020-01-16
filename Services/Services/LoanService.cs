@@ -14,7 +14,7 @@ namespace Services
     /// <summary>
     /// Loan Service class.
     /// </summary>
-    public class LoanService : Service
+    public class LoanService : Service, ILoanService
     {
         private LoanRepository loanRepository;
 

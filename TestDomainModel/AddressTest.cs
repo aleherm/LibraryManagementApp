@@ -159,6 +159,16 @@ namespace TestDomainModel
         }
 
         [Test]
+        public void NumberShouldNotBeNegative()
+        {
+            address.Number = -200;
+
+            bool isValid = Validator.TryValidateObject(address, context, validationResults);
+
+            Assert.IsFalse(isValid);
+        }
+
+        [Test]
         public void NegativeHouseNumberShouldNotBeValid()
         {
             address.Number = -1;
@@ -179,6 +189,30 @@ namespace TestDomainModel
             string street = "O. Goga";
             int number = 44;
             Assert.AreEqual($"{city} | str {street} | nr {number} ", address.ToString());
+        }
+
+        [Test]
+        public void EqualsShouldBeTrue()
+        {
+            string city = "Brasov";
+            string street = "O. Goga";
+            int number = 44;
+
+            Address actual = new Address(city, street, number);
+
+            Assert.IsTrue(actual.Equals(address));
+        }
+
+        [Test]
+        public void EqualsShouldBeFalse()
+        {
+            string city = "Bv";
+            string street = "Goga";
+            int number = 4;
+
+            Address actual = new Address(city, street, number);
+
+            Assert.IsFalse(actual.Equals(address));
         }
     }
 }

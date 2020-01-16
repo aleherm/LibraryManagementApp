@@ -6,7 +6,6 @@ namespace Services
 {
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Diagnostics.CodeAnalysis;
     using System.Linq;
     using DataMapper;
     using DomainModel;
@@ -14,7 +13,7 @@ namespace Services
     /// <summary>
     /// Domain Service class.
     /// </summary>
-    public class DomainService
+    public class DomainService : Service, IDomainService
     {
         private DomainRepository domainRepository;
 

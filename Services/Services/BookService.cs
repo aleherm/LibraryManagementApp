@@ -4,16 +4,16 @@
 
 namespace Services
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Linq;
     using DataMapper;
     using DomainModel;
 
     /// <summary>
     /// Book Service class.
     /// </summary>
-    public class BookService : Service
+    public class BookService : Service, IBookService
     {
         private BookRepository bookRepository;
 
@@ -92,6 +92,18 @@ namespace Services
             }
 
             return false;
+        }
+
+        /// <summary>
+        /// Gets the list of books.
+        /// </summary>
+        /// <returns>
+        /// The list of addresses.
+        /// </returns>
+        public IEnumerable<Book> GetAllBooks()
+        {
+            return bookRepository.Get(
+                 orderBy: q => q.OrderBy(c => c.Title));
         }
 
         /// <summary>

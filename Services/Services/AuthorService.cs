@@ -13,7 +13,7 @@ namespace Services
     /// <summary>
     /// Author Service class.
     /// </summary>
-    public class AuthorService
+    public class AuthorService : Service, IAuthorService
     {
         private readonly AuthorRepository authorRepository;
 

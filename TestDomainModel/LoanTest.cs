@@ -137,5 +137,46 @@ namespace TestDomainModel
             string expected = "loan: 01/01/2019 | due: 01/02/2019 | return: 10/10/2019 ";
             Assert.AreEqual(expected, loan.ToString());
         }
+
+        [Test]
+        public void LoanShouldBeValid()
+        {
+            Loan actual = new Loan(new DateTime(2010, 10, 10), new DateTime(2011, 10, 10), new DateTime(2010, 10, 10), new List<Edition>());
+
+            context = new ValidationContext(actual);
+            var isValid = Validator.TryValidateObject(actual, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(isValid, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void EqualsShouldBeTrue()
+        {
+            Loan actual = new Loan()
+            {
+                Id = 1,
+                LoanDate = new DateTime(2019, 1, 1),
+                DueDate = new DateTime(2019, 2, 1),
+                ReturnDate = new DateTime(2019, 10, 10),
+            };
+
+            Assert.IsTrue(actual.Equals(loan));
+        }
+
+        [Test]
+        public void EqualsShouldBeFalse()
+        {
+            Loan expected = new Loan()
+            {
+                Id = 2,
+                LoanDate = new DateTime(2000, 1, 1),
+                DueDate = new DateTime(2001, 2, 1),
+                ReturnDate = new DateTime(2010, 1, 1),
+            };
+
+            Assert.IsFalse(expected.Equals(loan));
+        }
     }
 }

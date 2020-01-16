@@ -7,6 +7,7 @@ namespace DomainModel
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
+    using System.Globalization;
 
     /// <summary>
     /// The Borrower entity.
@@ -135,7 +136,27 @@ namespace DomainModel
         /// <returns>Output string for an Borrower entity.</returns>
         public override string ToString()
         {
-            return $"{Id} | {FirstName} | {LastName} | {Email} | {DateOfBirth.Value.ToString("dd/MM/yyyy")} | {Address} ";
+            return $"{Id} | {FirstName} | {LastName} | {Email} | {DateOfBirth.Value.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)} | {Address} ";
+        }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            Borrower borrower = obj as Borrower;
+            if (FirstName.Equals(borrower.FirstName) && 
+                LastName.Equals(borrower.LastName) &&
+                Email.Equals(borrower.Email))
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }

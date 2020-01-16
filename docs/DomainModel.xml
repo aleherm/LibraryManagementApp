@@ -55,6 +55,15 @@
             </summary>
             <returns>Output string for an Address entity.</returns>
         </member>
+        <member name="M:DomainModel.Address.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
         <member name="T:DomainModel.Author">
             <summary>
             Author entity class.
@@ -123,6 +132,15 @@
             </summary>
             <returns>Output string for an Author entity.</returns>
         </member>
+        <member name="M:DomainModel.Author.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
         <member name="T:DomainModel.Book">
             <summary>
             Book entity class.
@@ -173,6 +191,15 @@
             </summary>
             <param name="validationContext">The validation context.</param>
             <returns>Output string for a Book entity.</returns>
+        </member>
+        <member name="M:DomainModel.Book.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
         </member>
         <member name="T:DomainModel.Borrower">
             <summary>
@@ -258,6 +285,15 @@
             Shows the data of the current entity.
             </summary>
             <returns>Output string for an Borrower entity.</returns>
+        </member>
+        <member name="M:DomainModel.Borrower.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
         </member>
         <member name="T:DomainModel.Threshold">
             <summary>
@@ -414,6 +450,15 @@
             </summary>
             <returns>Output string for an Domain entity.</returns>
         </member>
+        <member name="M:DomainModel.Domain.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
+        </member>
         <member name="T:DomainModel.Edition">
             <summary>
             Edition entity class.
@@ -504,6 +549,15 @@
             Shows the data of the current entity.
             </summary>
             <returns>Output string for an Edition entity.</returns>
+        </member>
+        <member name="M:DomainModel.Edition.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
         </member>
         <member name="T:DomainModel.EBookType">
             <summary>
@@ -606,6 +660,15 @@
             Shows the data of the current entity.
             </summary>
             <returns>Output string for an Author entity.</returns>
+        </member>
+        <member name="M:DomainModel.Loan.Equals(System.Object)">
+            <summary>
+            Determines whether the specified <see cref="T:System.Object" />, is equal to this instance.
+            </summary>
+            <param name="obj">The <see cref="T:System.Object" /> to compare with this instance.</param>
+            <returns>
+              <c>true</c> if the specified <see cref="T:System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+            </returns>
         </member>
     </members>
 </doc>

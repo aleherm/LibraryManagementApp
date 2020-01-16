@@ -7,6 +7,7 @@ namespace TestServices
     using System;
     using System.Collections.Generic;
     using DomainModel;
+    using Moq;
     using NUnit.Framework;
     using Services;
 
@@ -69,7 +70,7 @@ namespace TestServices
                 },
             };
         }
-        
+
         [Test]
         public override void EntityShouldBeValid()
         {
@@ -82,7 +83,7 @@ namespace TestServices
             book.Domains = new List<Domain>();
             Assert.AreEqual(false, service.IsValidBook(book), "Expected validation to fail.");
         }
-        
+
         [Test]
         public override void AddNewValidEntityShouldBeSuccessful()
         {
@@ -137,6 +138,86 @@ namespace TestServices
             Assert.AreEqual(false, service.IsValidBook(book), "Expected to fail.");
             Assert.AreEqual(1, service.ErrorsHandler.ErrorCount(), "Unexpected number of errors.");
             Assert.AreEqual(ValidationErrors.DomainAreRelated, service.ErrorsHandler.Get(0));
+        }
+
+        [Test]
+        public void GetAllBookesValidCall()
+        {
+            var mockedBookService = new Mock<IBookService>();
+            mockedBookService.Setup(x => x.GetAllBooks()).Returns(GetAllSampleBooks());
+
+            IBookService mockService = mockedBookService.Object;
+
+            IEnumerable<Book> expected = mockService.GetAllBooks();
+            IEnumerable<Book> actual = GetAllSampleBooks();
+
+            Assert.True(EnumerableExtensions.HasSameElementsAs<Book>(expected, actual));
+        }
+
+        [Test]
+        public void GetBookByIdValidCall()
+        {
+            var mockedBookService = new Mock<IBookService>();
+            mockedBookService.Setup(x => x.GetBookById(It.IsAny<int>())).Returns(book);
+
+            IBookService mockService = mockedBookService.Object;
+            Book expected = book;
+            Book actual = mockService.GetBookById(1);
+
+            Assert.AreEqual(expected, actual, "Expected to have the same values");
+        }
+
+        /// <summary>
+        /// Gets all sample addresses.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerable<Book> GetAllSampleBooks()
+        {
+            List<Book> output = new List<Book>()
+            {
+                new Book()
+                {
+                    Title = "Something odd",
+                    Authors = new List<Author>
+                    {
+                        new Author()
+                        {
+                            FirstName = "John",
+                            LastName = "Smith",
+                            Language = "English",
+                            DateOfBirth = new DateTime(1989, 10, 10),
+                            DateOfDeath = new DateTime(2010, 1, 1),
+                        },
+                    },
+                    Editions = new List<Edition>
+                    {
+                        new Edition()
+                        {
+                            PageNumber = 100,
+                            Year = 2019,
+                            BookType = EBookType.EHardCover,
+                            Publisher = "Humanitas",
+                            NoTotal = 10,
+                            NoForLibrary = 2,
+                            NoForLoan = 8,
+                        },
+                    },
+                        Domains = new List<Domain>
+                    {
+                        new Domain()
+                        {
+                            DomainName = "Math",
+                            ParentDomain = new Domain()
+                            {
+                                DomainName = "Science",
+                                ParentDomain = null,
+                            },
+                        },
+                    },
+                },
+            };
+
+            return output;
         }
     }
 }

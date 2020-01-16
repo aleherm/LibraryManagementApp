@@ -40,7 +40,12 @@ namespace TestDomainModel
             {
                 Id = 2,
                 DomainName = "Mathematics",
-                ParentDomain = new Domain() { Id = 1, DomainName = "Science", ParentDomain = null },
+                ParentDomain = new Domain()
+                {
+                    Id = 1,
+                    DomainName = "Science",
+                    ParentDomain = null
+                },
             };
 
             context = new ValidationContext(domain);
@@ -110,9 +115,58 @@ namespace TestDomainModel
         }
 
         [Test]
+        public void DomainShouldBeValid()
+        {
+            Domain actual = new Domain("Domain", new Domain("Parent", null, new List<Domain>(), null), new List<Domain>(), null);
+
+            context = new ValidationContext(actual);
+            var isValid = Validator.TryValidateObject(actual, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(isValid, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
         public void TestToString()
         {
             Assert.AreEqual("Mathematics | Science |   ", domain.ToString());
+        }
+
+        [Test]
+        public void EqualsShouldBeTrue()
+        {
+            Domain actual = new Domain()
+            {
+                Id = 2,
+                DomainName = "Mathematics",
+                ParentDomain = new Domain()
+                {
+                    Id = 1,
+                    DomainName = "Science",
+                    ParentDomain = null
+                },
+            };
+
+            Assert.IsTrue(actual.Equals(domain));
+        }
+
+        [Test]
+        public void EqualsShouldBeFalse()
+        {
+            Domain expected = new Domain()
+            {
+                Id = 2,
+                DomainName = "Science Fiction",
+                ParentDomain = new Domain()
+                {
+                    Id = 1,
+                    DomainName = "Fiction",
+                    ParentDomain = null
+                },
+            };
+
+            Assert.IsFalse(expected.Equals(domain));
         }
     }
 }

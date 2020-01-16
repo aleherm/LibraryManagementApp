@@ -19,7 +19,7 @@ namespace TestServices
         /// <summary>
         /// The service instance to be tested.
         /// </summary>
-        private AuthorService service;
+        private IAuthorService service;
 
         /// <summary>
         /// The Author entity based on which the tests will run.
@@ -73,10 +73,12 @@ namespace TestServices
         [Test]
         public void GetAllAuthorsValidCall()
         {
-            var mockedAuthorService = new Mock<AuthorService>();
+            var mockedAuthorService = new Mock<IAuthorService>();
             mockedAuthorService.Setup(x => x.GetAllAuthors()).Returns(GetAllSampleAuthors());
 
-            IEnumerable<Author> expected = service.GetAllAuthors();
+            IAuthorService mockService = mockedAuthorService.Object;
+
+            IEnumerable<Author> expected = mockService.GetAllAuthors();
             IEnumerable<Author> actual = GetAllSampleAuthors();
 
             Assert.True(EnumerableExtensions.HasSameElementsAs<Author>(expected, actual));
@@ -85,10 +87,14 @@ namespace TestServices
         [Test]
         public void GetAuthorByIdValidCall()
         {
-            var mockedAuthorService = new Mock<AuthorService>();
-            mockedAuthorService.Setup(x => x.GetAuthorById(It.IsAny<Author>().Id)).Returns(author);
+            var mockedAuthorService = new Mock<IAuthorService>();
+            mockedAuthorService.Setup(x => x.GetAuthorById(It.IsAny<int>())).Returns(author);
 
-            Assert.AreEqual(author, service.GetAuthorById(1));
+            IAuthorService mockService = mockedAuthorService.Object;
+            Author expected = author;
+            Author actual = mockService.GetAuthorById(1);
+
+            Assert.AreEqual(expected, actual, "Expected to have the same values");
         }
 
         /// <summary>
@@ -104,6 +110,7 @@ namespace TestServices
                     Id = 1,
                     FirstName = "FirstName1",
                     LastName = "LastName1",
+                    Language = "Language",
                     DateOfBirth = new DateTime(1900, 10, 10),
                     DateOfDeath = new DateTime(1990, 10, 10),
                 },
@@ -111,7 +118,8 @@ namespace TestServices
                 {
                     Id = 2,
                     FirstName = "FirstName2",
-                    LastName = "LastNam2",
+                    LastName = "LastName2",
+                    Language = "Language",
                     DateOfBirth = new DateTime(1800, 10, 10),
                     DateOfDeath = new DateTime(1880, 10, 10),
                 }

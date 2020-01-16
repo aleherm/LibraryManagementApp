@@ -156,6 +156,11 @@ namespace DomainModel
                 memberNames.Add("NoOfMonths");
             }
 
+            if (LimitLoanExtension < 0)
+            {
+                memberNames.Add("LimitLoanExtension");
+            }
+
             if (Delta < 0)
             {
                 memberNames.Add("Delta");
@@ -163,10 +168,15 @@ namespace DomainModel
 
             if (MaxLoansPerDay < 0)
             {
-                memberNames.Add("Delta");
+                memberNames.Add("MaxLoansPerDay");
             }
             
-            yield return new ValidationResult(ErrorMessages.NegativeThreshold, memberNames);
+            if(memberNames.Count !=0 )
+            {
+                yield return new ValidationResult(ErrorMessages.NegativeThreshold, memberNames);
+            }
+
+            yield return null;
         }
     }
 }

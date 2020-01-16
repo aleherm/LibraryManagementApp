@@ -130,5 +130,23 @@ namespace DomainModel
         {
             return $"loan: {LoanDate.Value.Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)} | due: {DueDate.Value.Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)} | return: {ReturnDate.Value.Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)} ";
         }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            Loan loan = obj as Loan;
+            if (Id == loan.Id && LoanDate.Equals(loan.LoanDate))
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

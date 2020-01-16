@@ -7,6 +7,7 @@ namespace TestServices
     using System;
     using System.Collections.Generic;
     using DomainModel;
+    using Moq;
     using NUnit.Framework;
     using Services;
 
@@ -101,6 +102,60 @@ namespace TestServices
             edition.Loans.Add(loan);
 
             Assert.AreEqual(false, service.IsValidLoan(loan), "Expected validation to fail.");
+        }
+
+        [Test]
+        public void GetAllLoansValidCall()
+        {
+            var mockedLoanService = new Mock<ILoanService>();
+            mockedLoanService.Setup(x => x.GetAllLoans()).Returns(GetAllSampleLoans());
+
+            ILoanService mockService = mockedLoanService.Object;
+
+            IEnumerable<Loan> expected = mockService.GetAllLoans();
+            IEnumerable<Loan> actual = GetAllSampleLoans();
+
+            Assert.True(EnumerableExtensions.HasSameElementsAs<Loan>(expected, actual));
+        }
+
+        [Test]
+        public void GetLoanByIdValidCall()
+        {
+            var mockedLoanService = new Mock<ILoanService>();
+            mockedLoanService.Setup(x => x.GetLoanById(It.IsAny<int>())).Returns(loan);
+
+            ILoanService mockService = mockedLoanService.Object;
+            Loan expected = loan;
+            Loan actual = mockService.GetLoanById(1);
+
+            Assert.AreEqual(expected, actual, "Expected to have the same values");
+        }
+
+        /// <summary>
+        /// Gets all sample loans.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerable<Loan> GetAllSampleLoans()
+        {
+            List<Loan> output = new List<Loan>()
+            {
+                new Loan()
+                {
+                    Id = 1,
+                    LoanDate = new DateTime(2019, 1, 1),
+                    DueDate = new DateTime(2019, 2, 1),
+                    ReturnDate = new DateTime(2019, 10, 10),
+                },
+                new Loan()
+                {
+                    Id = 2,
+                    LoanDate = new DateTime(2019, 1, 1),
+                    DueDate = new DateTime(2019, 2, 1),
+                    ReturnDate = new DateTime(2019, 10, 10),
+                },
+            };
+
+            return output;
         }
     }
 }

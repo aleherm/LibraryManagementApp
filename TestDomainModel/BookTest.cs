@@ -225,5 +225,104 @@ namespace TestDomainModel
             Assert.AreEqual(ErrorMessages.ListRequireAtLeastOneObject, msg.ErrorMessage);
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "Editions").Count());
         }
+
+        [Test]
+        public void EqualsShouldBeTrue()
+        {
+            Book actual = new Book()
+            {
+                Title = "Something odd",
+                Authors = new List<Author>
+                {
+                    new Author()
+                    {
+                        FirstName = "John",
+                        LastName = "Smith",
+                        Language = "English",
+                        DateOfBirth = new DateTime(1989, 10, 10),
+                        DateOfDeath = new DateTime(2010, 1, 1),
+                    },
+                },
+                Editions = new List<Edition>
+                {
+                    new Edition()
+                    {
+                        PageNumber = 100,
+                        Year = 2019,
+                        BookType = EBookType.EHardCover,
+                        Publisher = "Humanitas",
+                        NoTotal = 10,
+                        NoForLibrary = 2,
+                        NoForLoan = 8,
+                    },
+                },
+                Domains = new List<Domain>
+                {
+                    new Domain()
+                    {
+                        DomainName = "Math",
+                        ParentDomain = new Domain()
+                        {
+                            DomainName = "Science",
+                            ParentDomain = null,
+                        },
+                    },
+                },
+            };
+
+            Assert.IsTrue(actual.Equals(book));
+        }
+
+        [Test]
+        public void EqualsShouldBeFalse()
+        {
+            Book expected = new Book()
+            {
+                Id = 3,
+                Title = "Abuela",
+                Authors = new List<Author>
+                {
+                    new Author()
+                    {
+                        Id = 1,
+                        FirstName = "Iulian",
+                        LastName = "Marian",
+                        Language = "Romana",
+                        DateOfBirth = new DateTime(1940, 1, 10),
+                        DateOfDeath = new DateTime(1990, 11, 12),
+                    },
+                },
+                Editions = new List<Edition>
+                {
+                    new Edition()
+                    {
+                        Id = 1,
+                        PageNumber = 200,
+                        Year = 1980,
+                        BookType = EBookType.EPaperBack,
+                        Publisher = "All",
+                        NoTotal = 10,
+                        NoForLibrary = 2,
+                        NoForLoan = 8,
+                    },
+                },
+                Domains = new List<Domain>
+                {
+                    new Domain()
+                    {
+                        Id = 2,
+                        DomainName = "Fiction",
+                        ParentDomain = new Domain()
+                        {
+                            Id = 1,
+                            DomainName = "Science Fiction",
+                            ParentDomain = null,
+                        },
+                    },
+                },
+            };
+
+            Assert.IsFalse(expected.Equals(book));
+        }
     }
 }

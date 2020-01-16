@@ -4,7 +4,9 @@
 
 namespace TestServices
 {
+    using System.Collections.Generic;
     using DomainModel;
+    using Moq;
     using NUnit.Framework;
     using Services;
 
@@ -62,6 +64,56 @@ namespace TestServices
         {
             edition.Publisher = "N";
             Assert.AreEqual(false, service.IsValidEdition(edition), "Expected validation to fail");
+        }
+
+        [Test]
+        public void GetAllEditionsValidCall()
+        {
+            var mockedEditionService = new Mock<IEditionService>();
+            mockedEditionService.Setup(x => x.GetAllEditions()).Returns(GetAllSampleEditions());
+
+            IEditionService mockService = mockedEditionService.Object;
+
+            IEnumerable<Edition> expected = mockService.GetAllEditions();
+            IEnumerable<Edition> actual = GetAllSampleEditions();
+
+            Assert.True(EnumerableExtensions.HasSameElementsAs<Edition>(expected, actual));
+        }
+
+        [Test]
+        public void GetEditionByIdValidCall()
+        {
+            var mockedEditionService = new Mock<IEditionService>();
+            mockedEditionService.Setup(x => x.GetEditionById(It.IsAny<int>())).Returns(edition);
+
+            IEditionService mockService = mockedEditionService.Object;
+            Edition expected = edition;
+            Edition actual = mockService.GetEditionById(1);
+
+            Assert.AreEqual(expected, actual, "Expected to have the same values");
+        }
+
+        /// <summary>
+        /// Gets all sample editiones.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerable<Edition> GetAllSampleEditions()
+        {
+            List<Edition> output = new List<Edition>()
+            {
+                new Edition()
+                {
+                    PageNumber = 100,
+                    Year = 2019,
+                    BookType = EBookType.EHardCover,
+                    Publisher = "Humanitas",
+                    NoTotal = 10,
+                    NoForLibrary = 2,
+                    NoForLoan = 8,
+                },
+            };
+
+            return output;
         }
     }
 }

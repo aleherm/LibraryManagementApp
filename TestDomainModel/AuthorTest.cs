@@ -217,5 +217,34 @@
         {
             Assert.AreEqual("John | Smith | English | 10/10/1989 | 01/01/2010 ", author.ToString());
         }
+
+        [Test]
+        public void EqualsShouldBeTrue()
+        {
+            Author actual = new Author()
+            {
+                FirstName = "John",
+                LastName = "Smith",
+                Language = "English",
+                DateOfBirth = new DateTime(1989, 10, 10),
+                DateOfDeath = new DateTime(2010, 1, 1),
+            };
+
+            Assert.IsTrue(actual.Equals(author));
+        }
+
+        [Test]
+        public void EqualsShouldBeFalse()
+        {
+            string firstName = "Lilian";
+            string lastName = "Smith";
+            string language = "English";
+            DateTime dateOfBirth = new DateTime(1989, 10, 10);
+            DateTime dateOfDeath = new DateTime(2010, 1, 1);
+
+            Author expected = new Author(firstName, lastName, language, dateOfBirth, dateOfDeath);
+            
+            Assert.IsFalse(expected.Equals(author));
+        }
     }
 }

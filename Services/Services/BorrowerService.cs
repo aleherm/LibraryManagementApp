@@ -4,7 +4,6 @@
 
 namespace Services
 {
-    using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
     using System.Linq;
@@ -14,7 +13,7 @@ namespace Services
     /// <summary>
     /// Borrower service class.
     /// </summary>
-    public class BorrowerService : Service
+    public class BorrowerService : Service, IBorrowerService
     {
         /// <summary>
         /// Borrower Repository.

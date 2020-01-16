@@ -5,6 +5,7 @@
 namespace TestServices
 {
     using System;
+    using System.Collections.Generic;
     using DomainModel;
     using Moq;
     using NUnit.Framework;
@@ -64,6 +65,70 @@ namespace TestServices
         {
             borrower.Email = "ceva";
             Assert.AreEqual(false, service.AddNewBorrower(borrower));
+        }
+
+        [Test]
+        public void GetAllBorrowersValidCall()
+        {
+            var mockedBorrowerService = new Mock<IBorrowerService>();
+            mockedBorrowerService.Setup(x => x.GetAllBorrowers()).Returns(GetAllSampleBorrowers());
+
+            IBorrowerService mockService = mockedBorrowerService.Object;
+
+            IEnumerable<Borrower> expected = mockService.GetAllBorrowers();
+            IEnumerable<Borrower> actual = GetAllSampleBorrowers();
+
+            Assert.True(EnumerableExtensions.HasSameElementsAs<Borrower>(expected, actual));
+        }
+
+        [Test]
+        public void GetBorrowerByIdValidCall()
+        {
+            var mockedBorrowerService = new Mock<IBorrowerService>();
+            mockedBorrowerService.Setup(x => x.GetBorrowerById(It.IsAny<int>())).Returns(borrower);
+
+            IBorrowerService mockService = mockedBorrowerService.Object;
+            Borrower expected = borrower;
+            Borrower actual = mockService.GetBorrowerById(1);
+
+            Assert.AreEqual(expected, actual, "Expected to have the same values");
+        }
+
+        /// <summary>
+        /// Gets all sample borrowers.
+        /// </summary>
+        /// <returns></returns>
+        private IEnumerable<Borrower> GetAllSampleBorrowers()
+        {
+            List<Borrower> output = new List<Borrower>()
+            {
+                new Borrower()
+                {
+                    Id = 1,
+                    FirstName = "Alexandra",
+                    LastName = "Hermeneanu",
+                    Email = "ale.herm@email.com",
+                    Gender = EGenderType.EFemale,
+                    Address = new Address(),
+                    Loans = new List<Loan> { new Loan() },
+                    ReaderFlg = true,
+                    LibrarianFlg = false,
+                },
+                new Borrower
+                {
+                    Id = 1,
+                    FirstName = "Nicolae",
+                    LastName = "Hermeneanu",
+                    Email = "nic@email.com",
+                    Gender = EGenderType.EMale,
+                    Address = new Address(),
+                    Loans = new List<Loan> { new Loan() },
+                    ReaderFlg = true,
+                    LibrarianFlg = false,
+                },
+            };
+
+            return output;
         }
     }
 }

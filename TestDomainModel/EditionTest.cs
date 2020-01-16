@@ -319,10 +319,71 @@ namespace TestDomainModel
         }
 
         [Test]
+        public void EditionShouldBeValid()
+        {
+            Edition actual = new Edition("Publisher", 200, 2000, EBookType.EHardCover, 20, 10);
+
+            context = new ValidationContext(actual);
+            var isValid = Validator.TryValidateObject(actual, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(isValid, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void EditionWithLoansShouldBeValid()
+        {
+            Edition actual = new Edition("Publisher", 200, 2000, EBookType.EHardCover, 20, 10, new List<Loan>());
+
+            context = new ValidationContext(actual);
+            var isValid = Validator.TryValidateObject(actual, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(isValid, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
         public void TestToString()
         {
             string expected = "Humanitas | year 2019 | 100 pages | 2 to library + 8 to loan = 10 total ";
             Assert.AreEqual(expected, edition.ToString());
+        }
+
+        [Test]
+        public void EqualsShouldBeTrue()
+        {
+            Edition actual = new Edition()
+            {
+                PageNumber = 100,
+                Year = 2019,
+                BookType = EBookType.EHardCover,
+                Publisher = "Humanitas",
+                NoTotal = 10,
+                NoForLibrary = 2,
+                NoForLoan = 8,
+            };
+
+            Assert.IsTrue(actual.Equals(edition));
+        }
+
+        [Test]
+        public void EqualsShouldBeFalse()
+        {
+            Edition expected = new Edition()
+            {
+                Id = 6,
+                PageNumber = 10,
+                Year = 2000,
+                BookType = EBookType.EHardCover,
+                Publisher = "All",
+                NoTotal = 4,
+                NoForLibrary = 2,
+                NoForLoan = 2,
+            };
+
+            Assert.IsFalse(expected.Equals(edition));
         }
     }
 }

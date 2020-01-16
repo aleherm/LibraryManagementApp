@@ -168,5 +168,25 @@ namespace DomainModel
         {
             return $"{Publisher} | year {Year} | {PageNumber} pages | {NoForLibrary} to library + {NoForLoan} to loan = {NoTotal} total ";
         }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            Edition edition = obj as Edition;
+            if (Id == edition.Id && 
+                PageNumber == edition.PageNumber && 
+                Publisher.Equals(edition.Publisher))
+            {
+                return true;
+            }
+            
+            return false;
+        }
     }
 }

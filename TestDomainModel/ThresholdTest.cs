@@ -128,5 +128,28 @@ namespace TestDomainModel
             Assert.IsFalse(actual, "Expected validation to fail.");
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
         }
+
+        [Test]
+        public void ThresholdShouldBeValid()
+        {
+            Threshold actual = new Threshold(1, 1, 1, 1, 1, 1, 1, 1, 1);
+            context = new ValidationContext(actual);
+            var isValid = Validator.TryValidateObject(actual, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(isValid, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void ThresholdShouldNotBeValid()
+        {
+            threshold.Delta = -10;
+            var actual = Validator.TryValidateObject(threshold, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+        }
     }
 }

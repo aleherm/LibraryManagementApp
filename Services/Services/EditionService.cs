@@ -13,7 +13,7 @@ namespace Services
     /// <summary>
     /// Edition Service class.
     /// </summary>
-    public class EditionService
+    public class EditionService : Service, IEditionService
     {
         private EditionRepository editionRepository;
 

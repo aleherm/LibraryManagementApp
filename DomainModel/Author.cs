@@ -122,5 +122,27 @@ namespace DomainModel
         {
             return $"{FirstName} | {LastName} | {Language} | {DateOfBirth.Value.Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)} | {DateOfDeath.Value.Date.ToString("dd/MM/yyyy", CultureInfo.InvariantCulture)} ";
         }
+
+        /// <summary>
+        /// Determines whether the specified <see cref="System.Object" />, is equal to this instance.
+        /// </summary>
+        /// <param name="obj">The <see cref="System.Object" /> to compare with this instance.</param>
+        /// <returns>
+        ///   <c>true</c> if the specified <see cref="System.Object" /> is equal to this instance; otherwise, <c>false</c>.
+        /// </returns>
+        public override bool Equals(object obj)
+        {
+            Author author = (Author)obj;
+            if (FirstName.Equals(author.FirstName) &&
+                LastName.Equals(author.LastName) &&
+                Language.Equals(author.Language) &&
+                DateOfBirth.Equals(author.DateOfBirth) &&
+                DateOfDeath.Equals(author.DateOfDeath))
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }
