@@ -77,8 +77,8 @@ namespace TestServices
 
             IAddressService mockService = new AddressService(mockedAddressRepository.Object);
 
-            IEnumerable<Address> expected = mockService.GetAllAddresses();
-            IEnumerable<Address> actual = GetAllSampleAddresses();
+            IEnumerable<Address> expected = GetAllSampleAddresses();
+            IEnumerable<Address> actual = mockService.GetAllAddresses();
 
             Assert.True(EnumerableExtensions.HasSameElementsAs<Address>(expected, actual));
         }

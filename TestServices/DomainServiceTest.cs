@@ -98,8 +98,8 @@ namespace TestServices
 
             IDomainService mockService = new DomainService(mockedDomainRepository.Object);
 
-            IEnumerable<Domain> expected = mockService.GetAllDomains();
-            IEnumerable<Domain> actual = GetAllSampleDomains();
+            IEnumerable<Domain> expected = GetAllSampleDomains();
+            IEnumerable<Domain> actual = mockService.GetAllDomains();
 
             Assert.True(EnumerableExtensions.HasSameElementsAs<Domain>(expected, actual));
         }

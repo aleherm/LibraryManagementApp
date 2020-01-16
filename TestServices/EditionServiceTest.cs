@@ -81,8 +81,8 @@ namespace TestServices
 
             IEditionService mockService = new EditionService(mockedEditionRepository.Object);
 
-            IEnumerable<Edition> expected = mockService.GetAllEditions();
-            IEnumerable<Edition> actual = GetAllSampleEditions();
+            IEnumerable<Edition> expected = GetAllSampleEditions();
+            IEnumerable<Edition> actual = mockService.GetAllEditions();
 
             Assert.True(EnumerableExtensions.HasSameElementsAs<Edition>(expected, actual));
         }

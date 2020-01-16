@@ -81,8 +81,8 @@ namespace TestServices
 
             IBorrowerService mockService = new BorrowerService(mockedBorrowerRepository.Object);
 
-            IEnumerable<Borrower> expected = mockService.GetAllBorrowers();
-            IEnumerable<Borrower> actual = GetAllSampleBorrowers();
+            IEnumerable<Borrower> expected = GetAllSampleBorrowers();
+            IEnumerable<Borrower> actual = mockService.GetAllBorrowers();
 
             Assert.True(EnumerableExtensions.HasSameElementsAs<Borrower>(expected, actual));
         }

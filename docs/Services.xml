@@ -380,7 +380,7 @@
         </member>
         <member name="P:Services.Service.ErrorsHandler">
             <summary>
-            Gets or sets the validation errors.
+            Gets the validation errors.
             </summary>
         </member>
         <member name="P:Services.Service.Threshold">

@@ -118,8 +118,8 @@ namespace TestServices
 
             ILoanService mockService = new LoanService(mockedLoanRepository.Object);
 
-            IEnumerable<Loan> expected = mockService.GetAllLoans();
-            IEnumerable<Loan> actual = GetAllSampleLoans();
+            IEnumerable<Loan> expected = GetAllSampleLoans();
+            IEnumerable<Loan> actual = mockService.GetAllLoans();
 
             Assert.True(EnumerableExtensions.HasSameElementsAs<Loan>(expected, actual));
         }

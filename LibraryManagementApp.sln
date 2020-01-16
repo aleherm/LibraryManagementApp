@@ -29,6 +29,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestServices", "TestService
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataMapper", "DataMapper\DataMapper.csproj", "{9FB16FDA-ECEA-4AEF-AFEA-1E2A9AC8D7F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryManagementApp", "LibraryManagementApp\LibraryManagementApp.csproj", "{34654755-799D-433F-99FE-DD9402A129E3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -77,6 +79,14 @@ Global
 		{9FB16FDA-ECEA-4AEF-AFEA-1E2A9AC8D7F2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9FB16FDA-ECEA-4AEF-AFEA-1E2A9AC8D7F2}.Release|x86.ActiveCfg = Release|Any CPU
 		{9FB16FDA-ECEA-4AEF-AFEA-1E2A9AC8D7F2}.Release|x86.Build.0 = Release|Any CPU
+		{34654755-799D-433F-99FE-DD9402A129E3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{34654755-799D-433F-99FE-DD9402A129E3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{34654755-799D-433F-99FE-DD9402A129E3}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{34654755-799D-433F-99FE-DD9402A129E3}.Debug|x86.Build.0 = Debug|Any CPU
+		{34654755-799D-433F-99FE-DD9402A129E3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{34654755-799D-433F-99FE-DD9402A129E3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{34654755-799D-433F-99FE-DD9402A129E3}.Release|x86.ActiveCfg = Release|Any CPU
+		{34654755-799D-433F-99FE-DD9402A129E3}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -93,9 +103,10 @@ Global
 		{F14A9ABA-C6A4-408C-91CE-CCA70E0F9337} = {D5AFD5CF-5241-4C73-8674-8D30642AC352}
 		{88099609-7182-459A-BB55-573DFE502011} = {D5AFD5CF-5241-4C73-8674-8D30642AC352}
 		{9FB16FDA-ECEA-4AEF-AFEA-1E2A9AC8D7F2} = {63E3F34E-6B90-4B28-83FA-2BCC58E2ACC9}
+		{34654755-799D-433F-99FE-DD9402A129E3} = {D47B8ED3-44B1-4ABF-BF01-B1732CE2A6DB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Validation.6.0.1304.0\lib\NET45
 		SolutionGuid = {FA79A152-FDA6-4067-9E63-B5CC77A7858E}
+		EnterpriseLibraryConfigurationToolBinariesPathV6 = packages\EnterpriseLibrary.Common.6.0.1304.0\lib\NET45;packages\EnterpriseLibrary.Validation.6.0.1304.0\lib\NET45
 	EndGlobalSection
 EndGlobal

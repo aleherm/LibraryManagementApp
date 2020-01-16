@@ -154,8 +154,8 @@ namespace TestServices
 
             IBookService mockService = new BookService(mockedBookRepository.Object);
 
-            IEnumerable<Book> expected = mockService.GetAllBooks();
-            IEnumerable<Book> actual = GetAllSampleBooks();
+            IEnumerable<Book> expected = GetAllSampleBooks();
+            IEnumerable<Book> actual = mockService.GetAllBooks();
 
             Assert.True(EnumerableExtensions.HasSameElementsAs<Book>(expected, actual));
         }

@@ -84,8 +84,8 @@ namespace TestServices
 
             IAuthorService mockService = new AuthorService(mockedAuthorRepository.Object);
 
-            IEnumerable<Author> expected = mockService.GetAllAuthors();
-            IEnumerable<Author> actual = GetAllSampleAuthors();
+            IEnumerable<Author> expected = GetAllSampleAuthors();
+            IEnumerable<Author> actual = mockService.GetAllAuthors();
 
             Assert.True(EnumerableExtensions.HasSameElementsAs<Author>(expected, actual));
         }

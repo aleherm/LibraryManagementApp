@@ -21,14 +21,14 @@ namespace Services
         /// </summary>
         public Service()
         {
-            string solutionDirectory = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Assembly.GetAssembly(this.GetType()).Location)));
+            string solutionDirectory = Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Path.GetDirectoryName(Assembly.GetAssembly(this.GetType()).Location))));
             Threshold = GetThresholdFromJSON(solutionDirectory);
 
             ErrorsHandler = new ErrorsHandler();
         }
 
         /// <summary>
-        /// Gets or sets the validation errors.
+        /// Gets the validation errors.
         /// </summary>
         public ErrorsHandler ErrorsHandler { get; private set; }
 
@@ -44,7 +44,7 @@ namespace Services
         /// <returns>A Threshold object.</returns>
         protected Threshold GetThresholdFromJSON(string path)
         {
-            StreamReader reader = new StreamReader(path + "\\Data\\external-data.json");
+            StreamReader reader = new StreamReader(path + "\\Services\\Data\\external-data.json");
             string json = reader.ReadToEnd();
             List<Threshold> items = JsonConvert.DeserializeObject<List<Threshold>>(json);
             return items[0];
