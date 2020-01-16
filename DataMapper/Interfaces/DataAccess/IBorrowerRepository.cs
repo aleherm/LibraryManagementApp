@@ -9,7 +9,8 @@ namespace DataMapper
     /// <summary>
     /// The Borrower Repository interface.
     /// </summary>
-    internal interface IBorrowerRepository : IRepository<Borrower>
+    /// <seealso cref="DataMapper.IRepository{DomainModel.Borrower}" />
+    public interface IBorrowerRepository : IRepository<Borrower>
     {
     }
 }

@@ -15,7 +15,7 @@ namespace Services
     /// </summary>
     public class EditionService : Service, IEditionService
     {
-        private EditionRepository editionRepository;
+        private IEditionRepository editionRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="EditionService"/> class.
@@ -23,6 +23,15 @@ namespace Services
         public EditionService()
         {
             editionRepository = new EditionRepository();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="EditionService"/> class.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        public EditionService(IEditionRepository repository)
+        {
+            editionRepository = repository;
         }
 
         /// <summary>

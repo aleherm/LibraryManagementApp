@@ -6,6 +6,9 @@ namespace TestServices
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using DataMapper;
     using DomainModel;
     using Moq;
     using NUnit.Framework;
@@ -17,7 +20,7 @@ namespace TestServices
         /// <summary>
         /// The service instance to be tested.
         /// </summary>
-        private LoanService service;
+        private ILoanService service;
 
         /// <summary>
         /// The Loan entity based on which the tests will run.
@@ -107,10 +110,13 @@ namespace TestServices
         [Test]
         public void GetAllLoansValidCall()
         {
-            var mockedLoanService = new Mock<ILoanService>();
-            mockedLoanService.Setup(x => x.GetAllLoans()).Returns(GetAllSampleLoans());
+            var mockedLoanRepository = new Mock<ILoanRepository>();
+            mockedLoanRepository.Setup(x => x.Get(
+                It.IsAny<Expression<Func<Loan, bool>>>(),
+                It.IsAny<Func<IQueryable<Loan>, IOrderedQueryable<Loan>>>(),
+                It.IsAny<string>())).Returns(GetAllSampleLoans());
 
-            ILoanService mockService = mockedLoanService.Object;
+            ILoanService mockService = new LoanService(mockedLoanRepository.Object);
 
             IEnumerable<Loan> expected = mockService.GetAllLoans();
             IEnumerable<Loan> actual = GetAllSampleLoans();
@@ -121,10 +127,10 @@ namespace TestServices
         [Test]
         public void GetLoanByIdValidCall()
         {
-            var mockedLoanService = new Mock<ILoanService>();
-            mockedLoanService.Setup(x => x.GetLoanById(It.IsAny<int>())).Returns(loan);
+            var mockedLoanRepository = new Mock<ILoanRepository>();
+            mockedLoanRepository.Setup(x => x.GetByID(It.IsAny<int>())).Returns(loan);
 
-            ILoanService mockService = mockedLoanService.Object;
+            ILoanService mockService = new LoanService(mockedLoanRepository.Object);
             Loan expected = loan;
             Loan actual = mockService.GetLoanById(1);
 

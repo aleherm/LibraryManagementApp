@@ -7,6 +7,9 @@ namespace TestServices
     using System;
     using System.Collections.Generic;
     using System.IO;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using DataMapper;
     using DomainModel;
     using Moq;
     using Newtonsoft.Json;
@@ -73,10 +76,13 @@ namespace TestServices
         [Test]
         public void GetAllAuthorsValidCall()
         {
-            var mockedAuthorService = new Mock<IAuthorService>();
-            mockedAuthorService.Setup(x => x.GetAllAuthors()).Returns(GetAllSampleAuthors());
+            var mockedAuthorRepository = new Mock<IAuthorRepository>();
+            mockedAuthorRepository.Setup(x => x.Get(
+                It.IsAny<Expression<Func<Author, bool>>>(),
+                It.IsAny<Func<IQueryable<Author>, IOrderedQueryable<Author>>>(),
+                It.IsAny<string>())).Returns(GetAllSampleAuthors());
 
-            IAuthorService mockService = mockedAuthorService.Object;
+            IAuthorService mockService = new AuthorService(mockedAuthorRepository.Object);
 
             IEnumerable<Author> expected = mockService.GetAllAuthors();
             IEnumerable<Author> actual = GetAllSampleAuthors();
@@ -87,10 +93,10 @@ namespace TestServices
         [Test]
         public void GetAuthorByIdValidCall()
         {
-            var mockedAuthorService = new Mock<IAuthorService>();
-            mockedAuthorService.Setup(x => x.GetAuthorById(It.IsAny<int>())).Returns(author);
+            var mockedAuthorRepository = new Mock<IAuthorRepository>();
+            mockedAuthorRepository.Setup(x => x.GetByID(It.IsAny<int>())).Returns(author);
 
-            IAuthorService mockService = mockedAuthorService.Object;
+            IAuthorService mockService = new AuthorService(mockedAuthorRepository.Object);
             Author expected = author;
             Author actual = mockService.GetAuthorById(1);
 

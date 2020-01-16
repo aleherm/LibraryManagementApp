@@ -16,7 +16,7 @@ namespace TestServices
         /// <summary>
         /// The service instance to be tested.
         /// </summary>
-        private EditionService service;
+        private IEditionService service;
 
         /// <summary>
         /// The Edition entity based on which the tests will run.

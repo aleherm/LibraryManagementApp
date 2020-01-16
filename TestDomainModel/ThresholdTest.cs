@@ -64,6 +64,17 @@ namespace TestDomainModel
         }
 
         [Test]
+        public void MaxBooksShouldNotBeNegative()
+        {
+            threshold.MaxBooks = -1;
+            var actual = Validator.TryValidateObject(threshold, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
         public void PeriodShouldNotBeNegative()
         {
             threshold.Period = -1;

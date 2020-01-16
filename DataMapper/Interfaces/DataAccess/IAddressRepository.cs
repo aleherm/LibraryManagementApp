@@ -9,7 +9,8 @@ namespace DataMapper
     /// <summary>
     /// The Address Repository interface.
     /// </summary>
-    internal interface IAddressRepository : IRepository<Address>
+    /// <seealso cref="DataMapper.IRepository{DomainModel.Address}" />
+    public interface IAddressRepository : IRepository<Address>
     {
     }
 }

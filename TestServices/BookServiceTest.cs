@@ -6,6 +6,9 @@ namespace TestServices
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using DataMapper;
     using DomainModel;
     using Moq;
     using NUnit.Framework;
@@ -17,7 +20,7 @@ namespace TestServices
         /// <summary>
         /// The service instance to be tested.
         /// </summary>
-        private BookService service;
+        private IBookService service;
 
         /// <summary>
         /// The Book entity based on which the tests will run.
@@ -141,12 +144,15 @@ namespace TestServices
         }
 
         [Test]
-        public void GetAllBookesValidCall()
+        public void GetAllBooksValidCall()
         {
-            var mockedBookService = new Mock<IBookService>();
-            mockedBookService.Setup(x => x.GetAllBooks()).Returns(GetAllSampleBooks());
+            var mockedBookRepository = new Mock<IBookRepository>();
+            mockedBookRepository.Setup(x => x.Get(
+                It.IsAny<Expression<Func<Book, bool>>>(),
+                It.IsAny<Func<IQueryable<Book>, IOrderedQueryable<Book>>>(),
+                It.IsAny<string>())).Returns(GetAllSampleBooks());
 
-            IBookService mockService = mockedBookService.Object;
+            IBookService mockService = new BookService(mockedBookRepository.Object);
 
             IEnumerable<Book> expected = mockService.GetAllBooks();
             IEnumerable<Book> actual = GetAllSampleBooks();
@@ -157,10 +163,10 @@ namespace TestServices
         [Test]
         public void GetBookByIdValidCall()
         {
-            var mockedBookService = new Mock<IBookService>();
-            mockedBookService.Setup(x => x.GetBookById(It.IsAny<int>())).Returns(book);
+            var mockedBookRepository = new Mock<IBookRepository>();
+            mockedBookRepository.Setup(x => x.GetByID(It.IsAny<int>())).Returns(book);
 
-            IBookService mockService = mockedBookService.Object;
+            IBookService mockService = new BookService(mockedBookRepository.Object);
             Book expected = book;
             Book actual = mockService.GetBookById(1);
 

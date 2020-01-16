@@ -15,7 +15,7 @@ namespace Services
     /// </summary>
     public class BookService : Service, IBookService
     {
-        private BookRepository bookRepository;
+        private IBookRepository bookRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BookService"/> class.
@@ -23,6 +23,15 @@ namespace Services
         public BookService()
         {
             bookRepository = new BookRepository();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BookService"/> class.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        public BookService(IBookRepository repository)
+        {
+            bookRepository = repository;
         }
 
         /// <summary>

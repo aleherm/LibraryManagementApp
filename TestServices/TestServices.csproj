@@ -88,6 +88,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DataMapper\DataMapper.csproj">
+      <Project>{9FB16FDA-ECEA-4AEF-AFEA-1E2A9AC8D7F2}</Project>
+      <Name>DataMapper</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DomainModel\DomainModel.csproj">
       <Project>{A728C6F8-46A4-4D0A-9A85-B0B90B5B9710}</Project>
       <Name>DomainModel</Name>

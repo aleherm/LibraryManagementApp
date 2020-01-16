@@ -16,7 +16,7 @@ namespace Services
     /// </summary>
     public class LoanService : Service, ILoanService
     {
-        private LoanRepository loanRepository;
+        private ILoanRepository loanRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LoanService"/> class.
@@ -24,6 +24,15 @@ namespace Services
         public LoanService()
         {
             loanRepository = new LoanRepository();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="LoanService"/> class.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        public LoanService(ILoanRepository repository)
+        {
+            loanRepository = repository;
         }
 
         /// <summary>

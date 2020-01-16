@@ -256,6 +256,12 @@
             Initializes a new instance of the <see cref="T:Services.AddressService"/> class.
             </summary>
         </member>
+        <member name="M:Services.AddressService.#ctor(DataMapper.IAddressRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Services.AddressService" /> class.
+            </summary>
+            <param name="repository">The repository.</param>
+        </member>
         <member name="M:Services.AddressService.IsValidAddress(DomainModel.Address)">
             <summary>
             Validates the given Address object.
@@ -294,8 +300,14 @@
         </member>
         <member name="M:Services.AuthorService.#ctor">
             <summary>
+            Initializes a new instance of the <see cref="T:Services.AuthorService" /> class.
+            </summary>
+        </member>
+        <member name="M:Services.AuthorService.#ctor(DataMapper.IAuthorRepository)">
+            <summary>
             Initializes a new instance of the <see cref="T:Services.AuthorService"/> class.
             </summary>
+            <param name="repository">The repository.</param>
         </member>
         <member name="M:Services.AuthorService.IsValidAuthor(DomainModel.Author)">
             <summary>
@@ -393,6 +405,12 @@
             Initializes a new instance of the <see cref="T:Services.BookService"/> class.
             </summary>
         </member>
+        <member name="M:Services.BookService.#ctor(DataMapper.IBookRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Services.BookService"/> class.
+            </summary>
+            <param name="repository">The repository.</param>
+        </member>
         <member name="M:Services.BookService.IsValidBook(DomainModel.Book)">
             <summary>
             Validates the given Book object.
@@ -446,6 +464,12 @@
             Initializes a new instance of the <see cref="T:Services.BorrowerService"/> class.
             </summary>
         </member>
+        <member name="M:Services.BorrowerService.#ctor(DataMapper.IBorrowerRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Services.BorrowerService"/> class.
+            </summary>
+            <param name="repository">The repository.</param>
+        </member>
         <member name="M:Services.BorrowerService.IsValidBorrower(DomainModel.Borrower)">
             <summary>
             Validates the given data for a Borrower object.
@@ -482,6 +506,12 @@
             <summary>
             Initializes a new instance of the <see cref="T:Services.DomainService"/> class.
             </summary>
+        </member>
+        <member name="M:Services.DomainService.#ctor(DataMapper.IDomainRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Services.DomainService"/> class.
+            </summary>
+            <param name="repository">The repository.</param>
         </member>
         <member name="M:Services.DomainService.IsValidDomain(DomainModel.Domain)">
             <summary>
@@ -520,6 +550,12 @@
             Initializes a new instance of the <see cref="T:Services.EditionService"/> class.
             </summary>
         </member>
+        <member name="M:Services.EditionService.#ctor(DataMapper.IEditionRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Services.EditionService"/> class.
+            </summary>
+            <param name="repository">The repository.</param>
+        </member>
         <member name="M:Services.EditionService.IsValidEdition(DomainModel.Edition)">
             <summary>
             Validates the given Edition object.
@@ -556,6 +592,12 @@
             <summary>
             Initializes a new instance of the <see cref="T:Services.LoanService"/> class.
             </summary>
+        </member>
+        <member name="M:Services.LoanService.#ctor(DataMapper.ILoanRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Services.LoanService"/> class.
+            </summary>
+            <param name="repository">The repository.</param>
         </member>
         <member name="M:Services.LoanService.IsValidLoan(DomainModel.Loan)">
             <summary>

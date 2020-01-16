@@ -4,7 +4,11 @@
 
 namespace TestServices
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using DataMapper;
     using DomainModel;
     using Moq;
     using NUnit.Framework;
@@ -16,7 +20,7 @@ namespace TestServices
         /// <summary>
         /// The service instance to be tested.
         /// </summary>
-        private DomainService service;
+        private IDomainService service;
 
         /// <summary>
         /// The Domain entity based on which the tests will run.
@@ -71,20 +75,6 @@ namespace TestServices
         }
 
         [Test]
-        public void GetAllDomainValidCall()
-        {
-            var mockedDomainService = new Mock<IDomainService>();
-            mockedDomainService.Setup(x => x.GetAllDomains()).Returns(GetAllSampleDomain());
-
-            IDomainService mockService = mockedDomainService.Object;
-
-            IEnumerable<Domain> expected = mockService.GetAllDomains();
-            IEnumerable<Domain> actual = GetAllSampleDomain();
-
-            Assert.True(EnumerableExtensions.HasSameElementsAs<Domain>(expected, actual));
-        }
-
-        [Test]
         public void GetDomainByIdValidCall()
         {
             var mockedDomainService = new Mock<IDomainService>();
@@ -97,11 +87,41 @@ namespace TestServices
             Assert.AreEqual(expected, actual, "Expected to have the same values");
         }
 
+        [Test]
+        public void GetAllDomainsValidCall()
+        {
+            var mockedDomainRepository = new Mock<IDomainRepository>();
+            mockedDomainRepository.Setup(x => x.Get(
+                It.IsAny<Expression<Func<Domain, bool>>>(),
+                It.IsAny<Func<IQueryable<Domain>, IOrderedQueryable<Domain>>>(),
+                It.IsAny<string>())).Returns(GetAllSampleDomains());
+
+            IDomainService mockService = new DomainService(mockedDomainRepository.Object);
+
+            IEnumerable<Domain> expected = mockService.GetAllDomains();
+            IEnumerable<Domain> actual = GetAllSampleDomains();
+
+            Assert.True(EnumerableExtensions.HasSameElementsAs<Domain>(expected, actual));
+        }
+
+        [Test]
+        public void GetDomainsByIdValidCall()
+        {
+            var mockedDomainRepository = new Mock<IDomainRepository>();
+            mockedDomainRepository.Setup(x => x.GetByID(It.IsAny<int>())).Returns(domain);
+
+            IDomainService mockService = new DomainService(mockedDomainRepository.Object);
+            Domain expected = domain;
+            Domain actual = mockService.GetDomainById(1);
+
+            Assert.AreEqual(expected, actual, "Expected to have the same values");
+        }
+
         /// <summary>
         /// Gets all sample domain.
         /// </summary>
         /// <returns></returns>
-        private IEnumerable<Domain> GetAllSampleDomain()
+        private IEnumerable<Domain> GetAllSampleDomains()
         {
             List<Domain> output = new List<Domain>()
             {

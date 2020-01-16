@@ -15,7 +15,7 @@ namespace Services
     /// </summary>
     public class AddressService : Service, IAddressService
     {
-        private readonly AddressRepository addressRepository;
+        private readonly IAddressRepository addressRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AddressService"/> class.
@@ -23,6 +23,15 @@ namespace Services
         public AddressService()
         {
             addressRepository = new AddressRepository();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AddressService" /> class.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        public AddressService(IAddressRepository repository)
+        {
+            addressRepository = repository;
         }
 
         /// <summary>

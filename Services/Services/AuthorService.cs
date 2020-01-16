@@ -15,14 +15,23 @@ namespace Services
     /// </summary>
     public class AuthorService : Service, IAuthorService
     {
-        private readonly AuthorRepository authorRepository;
+        private readonly IAuthorRepository authorRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="AuthorService"/> class.
+        /// Initializes a new instance of the <see cref="AuthorService" /> class.
         /// </summary>
         public AuthorService()
         {
             authorRepository = new AuthorRepository();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AuthorService"/> class.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        public AuthorService(IAuthorRepository repository)
+        {
+            authorRepository = repository;
         }
 
         /// <summary>

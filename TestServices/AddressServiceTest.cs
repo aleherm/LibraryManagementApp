@@ -4,7 +4,11 @@
 
 namespace TestServices
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using DataMapper;
     using DomainModel;
     using Moq;
     using NUnit.Framework;
@@ -16,7 +20,7 @@ namespace TestServices
         /// <summary>
         /// The service instance to be tested.
         /// </summary>
-        private AddressService service;
+        private IAddressService service;
 
         /// <summary>
         /// The Address entity based on which the tests will run.
@@ -65,10 +69,13 @@ namespace TestServices
         [Test]
         public void GetAllAddressesValidCall()
         {
-            var mockedAddressService = new Mock<IAddressService>();
-            mockedAddressService.Setup(x => x.GetAllAddresses()).Returns(GetAllSampleAddresses());
+            var mockedAddressRepository = new Mock<IAddressRepository>();
+            mockedAddressRepository.Setup(x => x.Get(
+                It.IsAny<Expression<Func<Address, bool>>>(),
+                It.IsAny<Func<IQueryable<Address>, IOrderedQueryable<Address>>>(),
+                It.IsAny<string>())).Returns(GetAllSampleAddresses());
 
-            IAddressService mockService = mockedAddressService.Object;
+            IAddressService mockService = new AddressService(mockedAddressRepository.Object);
 
             IEnumerable<Address> expected = mockService.GetAllAddresses();
             IEnumerable<Address> actual = GetAllSampleAddresses();
@@ -79,10 +86,10 @@ namespace TestServices
         [Test]
         public void GetAddressByIdValidCall()
         {
-            var mockedAddressService = new Mock<IAddressService>();
-            mockedAddressService.Setup(x => x.GetAddressById(It.IsAny<int>())).Returns(address);
+            var mockedAddressRepository = new Mock<IAddressRepository>();
+            mockedAddressRepository.Setup(x => x.GetByID(It.IsAny<int>())).Returns(address);
 
-            IAddressService mockService = mockedAddressService.Object;
+            IAddressService mockService = new AddressService(mockedAddressRepository.Object);
             Address expected = address;
             Address actual = mockService.GetAddressById(1);
 

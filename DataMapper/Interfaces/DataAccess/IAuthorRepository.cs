@@ -9,7 +9,8 @@ namespace DataMapper
     /// <summary>
     /// The Author Repository interface.
     /// </summary>
-    internal interface IAuthorRepository : IRepository<Author>
+    /// <seealso cref="DataMapper.IRepository{DomainModel.Author}" />
+    public interface IAuthorRepository : IRepository<Author>
     {
     }
 }

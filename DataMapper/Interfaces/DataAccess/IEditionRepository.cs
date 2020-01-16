@@ -9,7 +9,8 @@ namespace DataMapper
     /// <summary>
     /// The Edition Repository interface.
     /// </summary>
-    internal interface IEditionRepository : IRepository<Edition>
+    /// <seealso cref="DataMapper.IRepository{DomainModel.Edition}" />
+    public interface IEditionRepository : IRepository<Edition>
     {
     }
 }

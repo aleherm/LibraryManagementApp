@@ -238,6 +238,26 @@ namespace TestDomainModel
         }
 
         /// <summary>
+        /// NoForLoanShouldNotBeNegative.
+        /// </summary>
+        [Test]
+        public void NoForLibraryShouldNotBeBiggerThanTotal()
+        {
+            edition.NoForLibrary = 15;
+            edition.NoTotal = 2;
+
+            var actual = Validator.TryValidateObject(edition, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.InvalidNumber, msg.ErrorMessage);
+            Assert.AreEqual(1, msg.MemberNames.Where(item => item == "NoForLoan").Count());
+        }
+
+        /// <summary>
         /// NoForLoanShouldBeValidWithPositiveValue.
         /// </summary>
         [Test]
@@ -268,6 +288,26 @@ namespace TestDomainModel
 
             var msg = validationResults[0];
             Assert.AreEqual(ErrorMessages.LoanBooksRangeNumber, msg.ErrorMessage);
+            Assert.AreEqual(1, msg.MemberNames.Where(item => item == "NoForLoan").Count());
+        }
+
+        /// <summary>
+        /// NoForLoanShouldNotBeNegative.
+        /// </summary>
+        [Test]
+        public void NoForLoanShouldNotBeBiggerThanTotal()
+        {
+            edition.NoForLoan = 15;
+            edition.NoTotal = 2;
+
+            var actual = Validator.TryValidateObject(edition, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.InvalidNumber, msg.ErrorMessage);
             Assert.AreEqual(1, msg.MemberNames.Where(item => item == "NoForLoan").Count());
         }
 

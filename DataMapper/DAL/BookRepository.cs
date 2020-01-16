@@ -9,7 +9,7 @@ namespace DataMapper
     /// <summary>
     /// Data access methods for Book.
     /// </summary>
-    public class BookRepository : BaseRepository<Book>
+    public class BookRepository : BaseRepository<Book>, IBookRepository
     {
     }
 }

@@ -62,6 +62,7 @@
     <Compile Include="DAL\LoanRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IAddressRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IAuthorRepository.cs" />
+    <Compile Include="Interfaces\DataAccess\IBookRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IBorrowerRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IDomainRepository.cs" />
     <Compile Include="Interfaces\DataAccess\IEditionRepository.cs" />

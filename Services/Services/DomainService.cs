@@ -15,7 +15,7 @@ namespace Services
     /// </summary>
     public class DomainService : Service, IDomainService
     {
-        private DomainRepository domainRepository;
+        private IDomainRepository domainRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="DomainService"/> class.
@@ -23,6 +23,15 @@ namespace Services
         public DomainService()
         {
             domainRepository = new DomainRepository();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="DomainService"/> class.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        public DomainService(IDomainRepository repository)
+        {
+            domainRepository = repository;
         }
 
         /// <summary>

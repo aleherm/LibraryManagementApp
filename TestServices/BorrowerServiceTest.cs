@@ -6,6 +6,9 @@ namespace TestServices
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using DataMapper;
     using DomainModel;
     using Moq;
     using NUnit.Framework;
@@ -17,7 +20,7 @@ namespace TestServices
         /// <summary>
         /// The service instance to be tested.
         /// </summary>
-        private BorrowerService service;
+        private IBorrowerService service;
 
         /// <summary>
         /// The Borrower entity based on which the tests will run.
@@ -70,10 +73,13 @@ namespace TestServices
         [Test]
         public void GetAllBorrowersValidCall()
         {
-            var mockedBorrowerService = new Mock<IBorrowerService>();
-            mockedBorrowerService.Setup(x => x.GetAllBorrowers()).Returns(GetAllSampleBorrowers());
+            var mockedBorrowerRepository = new Mock<IBorrowerRepository>();
+            mockedBorrowerRepository.Setup(x => x.Get(
+                It.IsAny<Expression<Func<Borrower, bool>>>(),
+                It.IsAny<Func<IQueryable<Borrower>, IOrderedQueryable<Borrower>>>(),
+                It.IsAny<string>())).Returns(GetAllSampleBorrowers());
 
-            IBorrowerService mockService = mockedBorrowerService.Object;
+            IBorrowerService mockService = new BorrowerService(mockedBorrowerRepository.Object);
 
             IEnumerable<Borrower> expected = mockService.GetAllBorrowers();
             IEnumerable<Borrower> actual = GetAllSampleBorrowers();
@@ -84,10 +90,10 @@ namespace TestServices
         [Test]
         public void GetBorrowerByIdValidCall()
         {
-            var mockedBorrowerService = new Mock<IBorrowerService>();
-            mockedBorrowerService.Setup(x => x.GetBorrowerById(It.IsAny<int>())).Returns(borrower);
+            var mockedBorrowerRepository = new Mock<IBorrowerRepository>();
+            mockedBorrowerRepository.Setup(x => x.GetByID(It.IsAny<int>())).Returns(borrower);
 
-            IBorrowerService mockService = mockedBorrowerService.Object;
+            IBorrowerService mockService = new BorrowerService(mockedBorrowerRepository.Object);
             Borrower expected = borrower;
             Borrower actual = mockService.GetBorrowerById(1);
 

@@ -18,7 +18,7 @@ namespace Services
         /// <summary>
         /// Borrower Repository.
         /// </summary>
-        private readonly BorrowerRepository borrowerRepository;
+        private readonly IBorrowerRepository borrowerRepository;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="BorrowerService"/> class.
@@ -26,6 +26,15 @@ namespace Services
         public BorrowerService()
         {
             borrowerRepository = new BorrowerRepository();
+        }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BorrowerService"/> class.
+        /// </summary>
+        /// <param name="repository">The repository.</param>
+        public BorrowerService(IBorrowerRepository repository)
+        {
+            borrowerRepository = repository;
         }
 
         /// <summary>

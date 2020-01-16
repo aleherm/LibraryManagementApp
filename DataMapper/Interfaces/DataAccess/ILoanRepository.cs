@@ -9,7 +9,8 @@ namespace DataMapper
     /// <summary>
     /// The Loan Repository interface.
     /// </summary>
-    internal interface ILoanRepository : IRepository<Loan>
+    /// <seealso cref="DataMapper.IRepository{DomainModel.Loan}" />
+    public interface ILoanRepository : IRepository<Loan>
     {
     }
 }
