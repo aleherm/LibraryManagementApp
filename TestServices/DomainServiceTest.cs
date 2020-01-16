@@ -20,7 +20,7 @@ namespace TestServices
         /// <summary>
         /// The service instance to be tested.
         /// </summary>
-        private IDomainService service;
+        private DomainService service;
 
         /// <summary>
         /// The Domain entity based on which the tests will run.

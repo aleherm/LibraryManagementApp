@@ -17,11 +17,6 @@ namespace Services
     public abstract class Service
     {
         /// <summary>
-        /// The validation errors.
-        /// </summary>
-        public readonly ErrorsHandler ErrorsHandler;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="Service"/> class.
         /// </summary>
         public Service()
@@ -33,9 +28,14 @@ namespace Services
         }
 
         /// <summary>
+        /// Gets or sets the validation errors.
+        /// </summary>
+        public ErrorsHandler ErrorsHandler { get; private set; }
+
+        /// <summary>
         /// Gets or sets the threshold.
         /// </summary>
-        protected Threshold Threshold { get; set; }
+        public Threshold Threshold { get; set; }
 
         /// <summary>
         /// Gets the threshold data needed for validation from the external JSON file.

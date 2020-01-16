@@ -15,6 +15,9 @@ namespace Services
     /// </summary>
     public class BookService : Service, IBookService
     {
+        /// <summary>
+        /// The book repository.
+        /// </summary>
         private IBookRepository bookRepository;
 
         /// <summary>

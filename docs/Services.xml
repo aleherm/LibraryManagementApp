@@ -373,14 +373,14 @@
             Base service.
             </summary>
         </member>
-        <member name="F:Services.Service.ErrorsHandler">
-            <summary>
-            The validation errors.
-            </summary>
-        </member>
         <member name="M:Services.Service.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:Services.Service"/> class.
+            </summary>
+        </member>
+        <member name="P:Services.Service.ErrorsHandler">
+            <summary>
+            Gets or sets the validation errors.
             </summary>
         </member>
         <member name="P:Services.Service.Threshold">
@@ -398,6 +398,11 @@
         <member name="T:Services.BookService">
             <summary>
             Book Service class.
+            </summary>
+        </member>
+        <member name="F:Services.BookService.bookRepository">
+            <summary>
+            The book repository.
             </summary>
         </member>
         <member name="M:Services.BookService.#ctor">

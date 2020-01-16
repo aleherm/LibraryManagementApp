@@ -20,7 +20,7 @@ namespace TestServices
         /// <summary>
         /// The service instance to be tested.
         /// </summary>
-        private IBookService service;
+        private BookService service;
 
         /// <summary>
         /// The Book entity based on which the tests will run.

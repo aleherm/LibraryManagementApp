@@ -20,7 +20,7 @@ namespace TestServices
         /// <summary>
         /// The service instance to be tested.
         /// </summary>
-        private IBorrowerService service;
+        private BorrowerService service;
 
         /// <summary>
         /// The Borrower entity based on which the tests will run.

@@ -22,7 +22,7 @@ namespace TestServices
         /// <summary>
         /// The service instance to be tested.
         /// </summary>
-        private IAuthorService service;
+        private AuthorService service;
 
         /// <summary>
         /// The Author entity based on which the tests will run.

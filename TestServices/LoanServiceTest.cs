@@ -20,7 +20,7 @@ namespace TestServices
         /// <summary>
         /// The service instance to be tested.
         /// </summary>
-        private ILoanService service;
+        private LoanService service;
 
         /// <summary>
         /// The Loan entity based on which the tests will run.
@@ -125,7 +125,7 @@ namespace TestServices
         }
 
         [Test]
-        public void GetLoanByIdValidCall()
+        public void GetLoansByIdValidCall()
         {
             var mockedLoanRepository = new Mock<ILoanRepository>();
             mockedLoanRepository.Setup(x => x.GetByID(It.IsAny<int>())).Returns(loan);

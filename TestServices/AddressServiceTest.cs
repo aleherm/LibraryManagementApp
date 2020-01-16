@@ -20,7 +20,7 @@ namespace TestServices
         /// <summary>
         /// The service instance to be tested.
         /// </summary>
-        private IAddressService service;
+        private AddressService service;
 
         /// <summary>
         /// The Address entity based on which the tests will run.

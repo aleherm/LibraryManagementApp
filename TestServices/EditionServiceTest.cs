@@ -4,7 +4,11 @@
 
 namespace TestServices
 {
+    using System;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Linq.Expressions;
+    using DataMapper;
     using DomainModel;
     using Moq;
     using NUnit.Framework;
@@ -16,7 +20,7 @@ namespace TestServices
         /// <summary>
         /// The service instance to be tested.
         /// </summary>
-        private IEditionService service;
+        private EditionService service;
 
         /// <summary>
         /// The Edition entity based on which the tests will run.
@@ -69,10 +73,13 @@ namespace TestServices
         [Test]
         public void GetAllEditionsValidCall()
         {
-            var mockedEditionService = new Mock<IEditionService>();
-            mockedEditionService.Setup(x => x.GetAllEditions()).Returns(GetAllSampleEditions());
+            var mockedEditionRepository = new Mock<IEditionRepository>();
+            mockedEditionRepository.Setup(x => x.Get(
+                It.IsAny<Expression<Func<Edition, bool>>>(),
+                It.IsAny<Func<IQueryable<Edition>, IOrderedQueryable<Edition>>>(),
+                It.IsAny<string>())).Returns(GetAllSampleEditions());
 
-            IEditionService mockService = mockedEditionService.Object;
+            IEditionService mockService = new EditionService(mockedEditionRepository.Object);
 
             IEnumerable<Edition> expected = mockService.GetAllEditions();
             IEnumerable<Edition> actual = GetAllSampleEditions();
@@ -81,12 +88,12 @@ namespace TestServices
         }
 
         [Test]
-        public void GetEditionByIdValidCall()
+        public void GetEditionsByIdValidCall()
         {
-            var mockedEditionService = new Mock<IEditionService>();
-            mockedEditionService.Setup(x => x.GetEditionById(It.IsAny<int>())).Returns(edition);
+            var mockedEditionRepository = new Mock<IEditionRepository>();
+            mockedEditionRepository.Setup(x => x.GetByID(It.IsAny<int>())).Returns(edition);
 
-            IEditionService mockService = mockedEditionService.Object;
+            IEditionService mockService = new EditionService(mockedEditionRepository.Object);
             Edition expected = edition;
             Edition actual = mockService.GetEditionById(1);
 
