@@ -385,10 +385,17 @@ namespace TestDomainModel
         }
 
         [Test]
-        public void TestToString()
+        public void TestValidToString()
         {
             string expected = "Humanitas | year 2019 | 100 pages | 2 to library + 8 to loan = 10 total ";
             Assert.AreEqual(expected, edition.ToString());
+        }
+
+        [Test]
+        public void TestInvalidToString()
+        {
+            string expected = "All | year 2010 | 100 pages | 2 to library + 8 to loan = 10 total ";
+            Assert.AreNotEqual(expected, edition.ToString());
         }
 
         [Test]

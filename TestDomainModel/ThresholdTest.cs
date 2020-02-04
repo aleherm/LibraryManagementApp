@@ -53,6 +53,16 @@ namespace TestDomainModel
         }
 
         [Test]
+        public void MaxDomainsShouldBeValidWithPositiveValue()
+        {
+            var actual = Validator.TryValidateObject(threshold, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
         public void MaxLoansShouldNotBeNegative()
         {
             threshold.MaxLoans = -1;
@@ -61,6 +71,16 @@ namespace TestDomainModel
             // Assert
             Assert.IsFalse(actual, "Expected validation to fail.");
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void MaxLoansShouldBeValidWithPositiveValue()
+        {
+            var actual = Validator.TryValidateObject(threshold, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
         }
 
         [Test]
@@ -75,6 +95,16 @@ namespace TestDomainModel
         }
 
         [Test]
+        public void MaxBooksShouldBeValidWithPositiveValue()
+        {
+            var actual = Validator.TryValidateObject(threshold, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
         public void PeriodShouldNotBeNegative()
         {
             threshold.Period = -1;
@@ -83,6 +113,16 @@ namespace TestDomainModel
             // Assert
             Assert.IsFalse(actual, "Expected validation to fail.");
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void PeriodShouldBeValidWithPositiveValue()
+        {
+            var actual = Validator.TryValidateObject(threshold, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
         }
 
         [Test]
@@ -108,6 +148,16 @@ namespace TestDomainModel
         }
 
         [Test]
+        public void NoOfMonthsShouldBeValidWithPositiveValue()
+        {
+            var actual = Validator.TryValidateObject(threshold, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
         public void LimitLoanExtensionShouldNotBeNegative()
         {
             threshold.LimitLoanExtension = -1;
@@ -116,6 +166,16 @@ namespace TestDomainModel
             // Assert
             Assert.IsFalse(actual, "Expected validation to fail.");
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void LimitLoanShouldBeValidWithPositiveValue()
+        {
+            var actual = Validator.TryValidateObject(threshold, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
         }
 
         [Test]
@@ -130,6 +190,16 @@ namespace TestDomainModel
         }
 
         [Test]
+        public void DeltaShouldBeValidWithPositiveValue()
+        {
+            var actual = Validator.TryValidateObject(threshold, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
         public void MaxLoansPerDayShouldNotBeNegative()
         {
             threshold.MaxLoansPerDay = -1;
@@ -138,6 +208,16 @@ namespace TestDomainModel
             // Assert
             Assert.IsFalse(actual, "Expected validation to fail.");
             Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+        }
+
+        [Test]
+        public void MaxLoansPerDayShouldBeValidWithPositiveValue()
+        {
+            var actual = Validator.TryValidateObject(threshold, context, validationResults, true);
+
+            // Assert
+            Assert.IsTrue(actual, "Expected validation to pass.");
+            Assert.AreEqual(0, validationResults.Count, "Unexpected number of validation errors.");
         }
 
         [Test]

@@ -128,7 +128,13 @@ namespace TestDomainModel
         }
 
         [Test]
-        public void TestToString()
+        public void TestValidToString()
+        {
+            Assert.AreEqual("Mathematics | Science |   ", domain.ToString());
+        }
+
+        [Test]
+        public void TestInvalidToString()
         {
             Assert.AreEqual("Mathematics | Science |   ", domain.ToString());
         }

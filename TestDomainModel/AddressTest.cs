@@ -62,9 +62,37 @@ namespace TestDomainModel
         }
 
         [Test]
+        public void CityShouldNotBeEmpty()
+        {
+            address.City = string.Empty;
+
+            var actual = Validator.TryValidateObject(address, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.CityNameRequired, msg.ErrorMessage);
+        }
+
+        [Test]
         public void StreetShouldNotBeNull()
         {
             address.Street = null;
+
+            var actual = Validator.TryValidateObject(address, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.StreetNameRequired, msg.ErrorMessage);
+        }
+
+        [Test]
+        public void StreetShouldNotBeEmpty()
+        {
+            address.Street = string.Empty;
 
             var actual = Validator.TryValidateObject(address, context, validationResults, true);
 
@@ -183,12 +211,29 @@ namespace TestDomainModel
         }
 
         [Test]
-        public void TestToString()
+        public void NumberShouldBeValidWithPositiveNumber()
+        {
+            bool isValid = Validator.TryValidateObject(address, context, validationResults);
+
+            Assert.IsTrue(isValid);
+        }
+
+        [Test]
+        public void TestValidToString()
         {
             string city = "Brasov";
             string street = "O. Goga";
             int number = 44;
             Assert.AreEqual($"{city} | str {street} | nr {number} ", address.ToString());
+        }
+
+        [Test]
+        public void TestInvalidToString()
+        {
+            string city = "Brasov";
+            string street = "Octavian Goga";
+            int number = 44;
+            Assert.AreNotEqual($"{city} | str {street} | nr {number} ", address.ToString());
         }
 
         [Test]

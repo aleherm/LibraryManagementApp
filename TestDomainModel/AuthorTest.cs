@@ -62,6 +62,20 @@
         }
 
         [Test]
+        public void FirstNameShouldNotBeEmpty()
+        {
+            author.FirstName = string.Empty;
+
+            var actual = Validator.TryValidateObject(author, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.FirstNameRequired, msg.ErrorMessage);
+        }
+
+        [Test]
         public void LastNameShouldNotBeNull()
         {
             author.LastName = null;
@@ -76,9 +90,37 @@
         }
 
         [Test]
+        public void LastNameShouldNotBeEmpty()
+        {
+            author.LastName = string.Empty;
+
+            var actual = Validator.TryValidateObject(author, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.LastNameRequired, msg.ErrorMessage);
+        }
+
+        [Test]
         public void LanguageShouldNotBeNull()
         {
             author.Language = null;
+
+            var actual = Validator.TryValidateObject(author, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+            var msg = validationResults[0];
+            Assert.AreEqual(ErrorMessages.LanguageRequired, msg.ErrorMessage);
+        }
+
+        [Test]
+        public void LanguageShouldNotBeEmpty()
+        {
+            author.Language = string.Empty;
 
             var actual = Validator.TryValidateObject(author, context, validationResults, true);
 
@@ -213,9 +255,15 @@
         }
 
         [Test]
-        public void TestToString()
+        public void TestValidToString()
         {
             Assert.AreEqual("John | Smith | English | 10/10/1989 | 01/01/2010 ", author.ToString());
+        }
+
+        [Test]
+        public void TestInvalidToString()
+        {
+            Assert.AreNotEqual("John | Morrow | Spanish | 10/10/1989 | 01/01/2010 ", author.ToString());
         }
 
         [Test]

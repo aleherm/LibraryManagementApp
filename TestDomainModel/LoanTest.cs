@@ -89,6 +89,8 @@ namespace TestDomainModel
         [Test]
         public void LoanDateShouldNotBeValidWithFutureDate()
         {
+            loan.ReturnDate = new DateTime(2019, 10, 10);
+            loan.ReturnDate = DateTime.Now;
             loan.LoanDate = DateTime.Now.AddDays(1);
 
             var actual = Validator.TryValidateObject(loan, context, validationResults, true);
@@ -120,6 +122,21 @@ namespace TestDomainModel
         public void ReturnDateShouldNotBeValidWithFutureDate()
         {
             loan.ReturnDate = DateTime.Now.AddDays(1);
+
+            var actual = Validator.TryValidateObject(loan, context, validationResults, true);
+
+            // Assert
+            Assert.IsFalse(actual, "Expected validation to fail.");
+            Assert.AreEqual(1, validationResults.Count, "Unexpected number of validation errors.");
+
+            var msg = validationResults[0];
+            Assert.AreEqual(1, msg.MemberNames.Where(item => item == "ReturnDate").Count());
+        }
+
+        [Test]
+        public void LoanDateShouldNotBeAfterReturnDate()
+        {
+            loan.LoanDate = DateTime.Now;
 
             var actual = Validator.TryValidateObject(loan, context, validationResults, true);
 
@@ -166,17 +183,17 @@ namespace TestDomainModel
         }
 
         [Test]
-        public void EqualsShouldBeFalse()
+        public void EqualsShouldNotBeTrue()
         {
-            Loan expected = new Loan()
+            Loan actual = new Loan()
             {
                 Id = 2,
-                LoanDate = new DateTime(2000, 1, 1),
-                DueDate = new DateTime(2001, 2, 1),
-                ReturnDate = new DateTime(2010, 1, 1),
+                LoanDate = new DateTime(2019, 1, 10),
+                DueDate = new DateTime(2019, 2, 20),
+                ReturnDate = new DateTime(2019, 2, 10),
             };
 
-            Assert.IsFalse(expected.Equals(loan));
+            Assert.IsFalse(actual.Equals(loan));
         }
     }
 }

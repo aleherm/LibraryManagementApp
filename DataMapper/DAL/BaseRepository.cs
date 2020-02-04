@@ -9,6 +9,7 @@ namespace DataMapper
     using System.Data.Entity;
     using System.Linq;
     using System.Linq.Expressions;
+    using log4net;
 
     /// <summary>
     /// Basic data access methods class.
@@ -21,6 +22,11 @@ namespace DataMapper
     public abstract class BaseRepository<T> : IRepository<T>
         where T : class
     {
+        /// <summary>
+        /// The log.
+        /// </summary>
+        protected static readonly ILog Log = LogManager.GetLogger(typeof(BaseRepository<T>));
+
         /// <summary>
         /// Gets the list of entities based on given type.
         /// </summary>
@@ -73,6 +79,8 @@ namespace DataMapper
                 dbSet.Add(entity);
 
                 ctx.SaveChanges();
+
+                Log.Info("Entity of type " + entity.GetType().ToString() + " have been successfully inserted!");
             }
         }
 
@@ -89,6 +97,8 @@ namespace DataMapper
                 ctx.Entry(item).State = EntityState.Modified;
 
                 ctx.SaveChanges();
+
+                Log.Info("Entity of type " + item.GetType().ToString() + " have been successfully updated!");
             }
         }
 
@@ -98,7 +108,10 @@ namespace DataMapper
         /// <param name="id">The ID of the entity.</param>
         public virtual void Delete(object id)
         {
-            this.Delete(this.GetByID(id));
+            T entity = GetByID(id);
+            this.Delete(entity);
+
+            Log.Info("Entity of type " + entity.GetType().ToString() + " have been successfully deleted!");
         }
 
         /// <summary>
@@ -119,6 +132,8 @@ namespace DataMapper
                 dbSet.Remove(entityToDelete);
 
                 ctx.SaveChanges();
+
+                Log.Info("Entity of type " + entityToDelete.GetType().ToString() + " have been successfully deleted!");
             }
         }
 
@@ -131,6 +146,8 @@ namespace DataMapper
         {
             using (var ctx = new LibraryDBContext())
             {
+                Log.Info("Entity with ID " + id.ToString() + " have been successfully deleted!");
+
                 return ctx.Set<T>().Find(id);
             }
         }

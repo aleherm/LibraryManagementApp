@@ -283,10 +283,17 @@ namespace TestDomainModel
         }
 
         [Test]
-        public void TestToString()
+        public void TestValidToString()
         {
             string expected = "1 | Alexandra | Hermeneanu | ale.herm@email.com | 02/07/1997 |  | str  | nr   ";
             Assert.AreEqual(expected, borrower.ToString());
+        }
+
+        [Test]
+        public void TestInvalidToString()
+        {
+            string expected = "2 | Nicoleta | Hermeneanu | ale.herm@email.com | 02/07/1997 |  | str  | nr  ";
+            Assert.AreNotEqual(expected, borrower.ToString());
         }
 
         [Test]
